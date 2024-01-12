@@ -5,23 +5,19 @@ import Sidebar from './Sidebar'
 function DefaultLayout({ children }) {
 
     return (
-        <>
-            <div className=" mx-0">
-                <div className="card ">
+        <div className="flex justify-content-between">
+            <div className='fixed' style={{ minWidth: '280px' }}>
+                <Sidebar />
+            </div>
+            <div className='w-full' style={{ marginLeft: '290px', }}>
+                <div className='fixed ' style={{ width: 'calc(100% - 300px)', }} >
                     <Header />
                 </div>
-                <div className="grid pt-3">
-                    <div className=" col-12 lg:col-2">
-                        <Sidebar />
-                    </div>
-                    <div className=" col-12 lg:col-10">
-
-                    </div>
-
-                </div>
-
+                <div className='pt-8'>{children}</div>
             </div>
-        </>
+        </div>
+
+
     )
 }
 

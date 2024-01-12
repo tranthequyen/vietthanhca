@@ -4,7 +4,6 @@ import './styles/style.css'
 import HeaderAdmin from './Header/HeaderAdmin';
 
 function AdminLayout({ children }) {
-      console.log(children);
       return (
             <div className="">
                   <HeaderAdmin />
