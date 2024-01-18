@@ -36,6 +36,30 @@ function Home() {
                             }}>The perfect soundtrack to those long nights over dinner</p>
                         </div>
                     </div>
+                    <div className='hover:surface-400 p-3 flex justify-content-center border-round-md ' style={{ minWidth: "220px" }}>
+                        <div className='' style={{ maxWidth: "200px" }} >
+                            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="200" height='200' />
+                            <h4 className='mt-2'>Dinner with friend</h4>
+                            <p style={{
+                                display: '-webkit-box',
+                                WebkitBoxOrient: 'vertical',
+                                WebkitLineClamp: '2',
+                                overflow: 'hidden'
+                            }}>The perfect soundtrack to those long nights over dinner</p>
+                        </div>
+                    </div>
+                    <div className='hover:surface-400 p-3 flex justify-content-center border-round-md ' style={{ minWidth: "220px" }}>
+                        <div className='' style={{ maxWidth: "200px" }} >
+                            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="200" height='200' />
+                            <h4 className='mt-2'>Dinner with friend</h4>
+                            <p style={{
+                                display: '-webkit-box',
+                                WebkitBoxOrient: 'vertical',
+                                WebkitLineClamp: '2',
+                                overflow: 'hidden'
+                            }}>The perfect soundtrack to those long nights over dinner</p>
+                        </div>
+                    </div>
                     <div className='hover:surface-400 p-3 flex justify-content-center border-round-md ' style={{ minWidthwidth: "220px" }}>
                         <div className='' style={{ maxWidth: "200px" }} >
                             <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="200" height='200' />
