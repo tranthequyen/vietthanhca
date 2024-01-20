@@ -3,7 +3,6 @@ import { InputText } from 'primereact/inputtext';
 
 function InputForm(props) {
       const { value, onChange, placeholder, label, id, ...otherProps } = props;
-
       return (
             <div className="mb-3 px-2 ">
                   {label && (
