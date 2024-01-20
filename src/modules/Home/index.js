@@ -1,1 +1,1 @@
-export { default as Home } from './screens/DashBoard'
+export { default as Home } from './screens/Home'
