@@ -16,8 +16,6 @@ function Header() {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const userInfo = useSelector((state) => state.user.userInfo);
-
-
     return (<>
         <SignUp visibleSignUp={visibleSignUp} setVisibleSignUp={setVisibleSignUp} />
         <Login visibleLogin={visibleLogin} setVisibleLogin={setVisibleLogin} />

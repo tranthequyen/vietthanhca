@@ -1,10 +1,10 @@
 // userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-
+const tokenFromStorage = localStorage.getItem('token');
 const initialState = {
       userInfo: null,
-      token: null,
-      isLoggedIn: false,
+      token: tokenFromStorage || null,
+      isLoggedIn: !!tokenFromStorage,
 };
 
 const userSlice = createSlice({
@@ -12,6 +12,7 @@ const userSlice = createSlice({
       initialState,
       reducers: {
             loginSuccess: (state, action) => {
+
                   state.userInfo = action.payload.userInfo;
                   state.token = action.payload.token;
                   state.isLoggedIn = true;
