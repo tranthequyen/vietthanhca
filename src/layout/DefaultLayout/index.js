@@ -1,24 +1,37 @@
-import React from 'react'
-import Header from './Header/screens'
-import Sidebar from './Sidebar'
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
+import Header from './Header/screens';
+import Partner from '@/modules/Home/screens/Partner';
+import Footer from './footer/screens/Footer';
+import AudioPlay from './AudioPlay/screens/AudioPlay';
 
 function DefaultLayout({ children }) {
+    const [sidebarOpen, setSideBarOpen] = useState(true);
+    const handleViewSidebar = () => {
+        setSideBarOpen(!sidebarOpen);
+    };
+
+    const contentClass = sidebarOpen ? "content open" : "content";
+    const headerClass = sidebarOpen ? "header open" : "header";
 
     return (
-        <div className="flex justify-content-between">
-            <div className='fixed' style={{ minWidth: '280px' }}>
-                <Sidebar />
+        <div className='flex flex-column'>
+            <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
+            <div className={headerClass}>
+                <Header onClick={handleViewSidebar} />
             </div>
-            <div className='w-full' style={{ marginLeft: '290px', }}>
-                <div className='fixed ' style={{ width: 'calc(100% - 300px)', }} >
-                    <Header />
-                </div>
-                <div className='pt-8'>{children}</div>
+            <div className={contentClass}>
+                {children}
             </div>
+            <div>
+                <Partner />
+            </div>
+            <div>
+                <Footer />
+            </div>
+            <AudioPlay />
         </div>
-
-
-    )
+    );
 }
 
-export default DefaultLayout
+export default DefaultLayout;
