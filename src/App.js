@@ -29,7 +29,7 @@ function App() {
 
     return (
         <>
-            <audio />
+
             <Router>
                 <Routes>
                     {[...publicRoutes, ...privateRoutes].map((route, index) => {
