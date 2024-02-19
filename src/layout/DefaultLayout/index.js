@@ -10,10 +10,8 @@ function DefaultLayout({ children }) {
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
     };
-
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
-
     return (
         <div className='flex flex-column'>
             <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
@@ -29,7 +27,6 @@ function DefaultLayout({ children }) {
             <div>
                 <Footer />
             </div>
-            <AudioPlay />
         </div>
     );
 }

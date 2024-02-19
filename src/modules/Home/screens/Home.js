@@ -19,9 +19,12 @@ function Home() {
     return (
         <>
 
+            <div >
+                <Banner />
+
+            </div>
             <div className="grid">
                 <div className="col-9">
-                    <Banner />
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {

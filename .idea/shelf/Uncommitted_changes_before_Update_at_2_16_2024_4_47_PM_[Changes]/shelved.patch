@@ -1,0 +1,328 @@
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { publicRoutes } from './routes';\r\nimport { BrowserRouter as Router, Routes, Route } from 'react-router-dom'\r\nimport { DefaultLayout } from './layout';\r\nimport { Fragment } from 'react';\r\n\r\n\r\nfunction App() {\r\n    return (\r\n        <Router>\r\n            <Routes>\r\n                {publicRoutes.map((route, index) => {\r\n                    const Layout = route.layout ? DefaultLayout : Fragment\r\n                    const Page = route.component\r\n                    return <Route\r\n                        key={index}\r\n                        path={route.path}\r\n                        element={\r\n                            <Layout>\r\n                                <Page />\r\n                            </Layout>\r\n                        }\r\n                    />\r\n                })}\r\n            </Routes>\r\n        </Router>\r\n    );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App.js b/src/App.js
+--- a/src/App.js	
++++ b/src/App.js	
+@@ -1,28 +1,53 @@
+-import { publicRoutes } from './routes';
++import React, { useEffect } from 'react';
+ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+-import { DefaultLayout } from './layout';
++import { publicRoutes, privateRoutes } from './routes';
++import { DefaultLayout, AdminLayout } from './layout';
+ import { Fragment } from 'react';
+ 
++import { useDispatch, useSelector } from 'react-redux';
++import { loginSuccess } from './redux/userSlice';
++import { clientApi } from './axios';
+ 
+ function App() {
++    const dispatch = useDispatch();
++    const user = useSelector(state => state.user)
++    useEffect(() => {
++        const token = localStorage.getItem('token');
++        if (token) {
++            clientApi.get('/user/profile', {
++                headers: {
++                    Authorization: `Bearer ${token}`
++                }
++            }).then(response => {
++                if (response.data?.status) dispatch(loginSuccess({ token, userInfo: response.data?.data }));
++            }).catch(error => {
++                console.error('Không thể lấy thông tin người dùng', error);
++                localStorage.removeItem('token');
++            });
++        }
++    }, []);
++
+     return (
+-        <Router>
+-            <Routes>
+-                {publicRoutes.map((route, index) => {
+-                    const Layout = route.layout ? DefaultLayout : Fragment
+-                    const Page = route.component
+-                    return <Route
+-                        key={index}
+-                        path={route.path}
+-                        element={
+-                            <Layout>
+-                                <Page />
+-                            </Layout>
+-                        }
+-                    />
+-                })}
+-            </Routes>
+-        </Router>
++        <>
++
++            <Router>
++                <Routes>
++                    {[...publicRoutes, ...privateRoutes].map((route, index) => {
++                        const Layout = route.layout === 'admin' ? AdminLayout : route.layout ? DefaultLayout : Fragment
++                        const Page = route.component
++                        return <Route
++                            key={index}
++                            path={route.path}
++                            element={
++                                <Layout>
++                                    <Page />
++                                </Layout>
++                            }
++                        />
++                    })}
++                </Routes>
++            </Router>
++        </>
+     );
+ }
+ 
+Index: src/layout/DefaultLayout/Sidebar/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react'\r\n\r\nfunction Sidebar() {\r\n    return (\r\n        <div className=''>\r\n            121414141\r\n            {/* <div className='card mb-2 '>\r\n                <div className='flex align-items-center gap-3'>\r\n                    <div>\r\n                        <i className=\"pi pi-home pt-1\"></i>\r\n                    </div>\r\n                    <div>\r\n                        <h3 className='m-0'> Trang chủ</h3>\r\n                    </div>\r\n                </div>\r\n                <div className='flex align-items-center gap-3 mt-4'>\r\n                    <div>\r\n                        <i className=\"pi pi-search pt-1\"></i>\r\n                    </div>\r\n                    <div>\r\n                        <h3 className='m-0'> Tìm kiếm</h3>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div className=\"card h-5\">Side</div> */}\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default Sidebar
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/layout/DefaultLayout/Sidebar/index.js b/src/layout/DefaultLayout/Sidebar/index.js
+--- a/src/layout/DefaultLayout/Sidebar/index.js	
++++ b/src/layout/DefaultLayout/Sidebar/index.js	
+@@ -1,28 +1,34 @@
+-import React from 'react'
++import React from 'react';
+ 
+-function Sidebar() {
++import { Link } from "react-router-dom";
++import '../../style/index.css'
++import { Divider } from 'primereact/divider';
++import logo from '@/layout/img/logo.png'
++const Sidebar = props => {
++    const sidebarClass = props.isOpen ? "sidebar open" : "sidebar";
++    const detailSideBar = [
++        { name: 'Trang chủ', route: '/', icon: 'pi pi-home' },
++        { name: 'Xếp hạng', route: '/rank', icon: 'pi pi-chart-bar' },
++        { name: 'Thư viện', route: '/libaray', icon: 'pi pi-folder' },
++        { name: 'PlayList', route: '/play_list', icon: 'pi pi-list' },
++        { name: 'Yêu thích', route: '/favourite', icon: 'pi pi-heart-fill' },
++    ]
+     return (
+-        <div className=''>
+-            121414141
+-            {/* <div className='card mb-2 '>
+-                <div className='flex align-items-center gap-3'>
+-                    <div>
+-                        <i className="pi pi-home pt-1"></i>
+-                    </div>
+-                    <div>
+-                        <h3 className='m-0'> Trang chủ</h3>
+-                    </div>
+-                </div>
+-                <div className='flex align-items-center gap-3 mt-4'>
+-                    <div>
+-                        <i className="pi pi-search pt-1"></i>
+-                    </div>
+-                    <div>
+-                        <h3 className='m-0'> Tìm kiếm</h3>
+-                    </div>
+-                </div>
++        <div className={`${sidebarClass} `}>
++            <div className='flex align-items-center justify-content-center'>
++                <img src={logo} />
++                <h2 className='m-0 text-center '> VIETTHANHCA</h2>
+             </div>
+-            <div className="card h-5">Side</div> */}
++            <Divider className='mt-0' />
++            <ul className='m-0 p-3 pt-3'>
++                {detailSideBar.map(d =>
++                    <li className='p-3 flex gap-3 text-xl text-white text_hover '>
++                        <i className={`${d.icon} text-xl`} ></i>
++                        <Link className='no-underline text-white'>{d.name}</Link>
++                    </li>
++                )}
++            </ul>
++
+         </div>
+     )
+ }
+Index: src/layout/DefaultLayout/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react'\r\nimport Header from './Header'\r\nimport Sidebar from './Sidebar'\r\n\r\nfunction DefaultLayout({ children }) {\r\n    return (\r\n        <div className='m-2'>\r\n            <Header />\r\n            <div className=\"container grid \">\r\n                <div className='col-2 card'> <Sidebar /></div>\r\n                <div className=\"content col-10\">\r\n                    {children}\r\n                </div>\r\n            </div>\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default DefaultLayout
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/layout/DefaultLayout/index.js b/src/layout/DefaultLayout/index.js
+--- a/src/layout/DefaultLayout/index.js	
++++ b/src/layout/DefaultLayout/index.js	
+@@ -1,19 +1,37 @@
+-import React from 'react'
+-import Header from './Header'
+-import Sidebar from './Sidebar'
++import React, { useState } from 'react';
++import Sidebar from './Sidebar';
++import Header from './Header/screens';
++import Partner from '@/modules/Home/screens/Partner';
++import Footer from './footer/screens/Footer';
++import AudioPlay from './AudioPlay/screens/AudioPlay';
+ 
+ function DefaultLayout({ children }) {
++    const [sidebarOpen, setSideBarOpen] = useState(true);
++    const handleViewSidebar = () => {
++        setSideBarOpen(!sidebarOpen);
++    };
++
++    const contentClass = sidebarOpen ? "content open" : "content";
++    const headerClass = sidebarOpen ? "header open" : "header";
++
+     return (
+-        <div className='m-2'>
+-            <Header />
+-            <div className="container grid ">
+-                <div className='col-2 card'> <Sidebar /></div>
+-                <div className="content col-10">
+-                    {children}
+-                </div>
++        <div className='flex flex-column'>
++            <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
++            <div className={headerClass}>
++                <Header onClick={handleViewSidebar} />
++            </div>
++            <div className={contentClass}>
++                {children}
++            </div>
++            <div>
++                <Partner />
+             </div>
++            <div>
++                <Footer />
++            </div>
++            <AudioPlay />
+         </div>
+-    )
++    );
+ }
+ 
+-export default DefaultLayout
+\ No newline at end of file
++export default DefaultLayout;
+Index: src/App.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.App {\r\n  text-align: center;\r\n}\r\n\r\n.App-logo {\r\n  height: 40vmin;\r\n  pointer-events: none;\r\n}\r\n\r\n@media (prefers-reduced-motion: no-preference) {\r\n  .App-logo {\r\n    animation: App-logo-spin infinite 20s linear;\r\n  }\r\n}\r\n\r\n.App-header {\r\n  background-color: #282c34;\r\n  min-height: 100vh;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: calc(10px + 2vmin);\r\n  color: white;\r\n}\r\n\r\n.App-link {\r\n  color: #61dafb;\r\n}\r\n\r\n@keyframes App-logo-spin {\r\n  from {\r\n    transform: rotate(0deg);\r\n  }\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App.css b/src/App.css
+--- a/src/App.css	
++++ b/src/App.css	
+@@ -1,38 +1,77 @@
+-.App {
+-  text-align: center;
++body{
++  /* background-image: linear-gradient(45deg, #000000 70%,#029D43 100%, #08FF6F 100%); */
++  background-color: #000000;
++  color: #FFFFFF;
++  margin: 0px !important;
++}
++ul{
++  list-style: none;
++}
++.p-checkbox .p-checkbox-box.p-highlight {
++  background-color: #cfd0d1;
++  border-color: #475569;
+ }
+ 
+-.App-logo {
+-  height: 40vmin;
+-  pointer-events: none;
+-}
+ 
+-@media (prefers-reduced-motion: no-preference) {
+-  .App-logo {
+-    animation: App-logo-spin infinite 20s linear;
+-  }
++.p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
++  border-color: #475569;
++}
++.card {
++  border-radius: 10px;
++  padding: 0rem !important;
+ }
++.p-card-body{
++  padding: 10px !important;
++}
++.element{
++  padding: 10px;
++  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
++}
++.p-card-header img {
++  height: 200px !important;
++  border-radius: 8px 8px 0 0 !important;
++}
++.grid {
++
+ 
+-.App-header {
+-  background-color: #282c34;
+-  min-height: 100vh;
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: center;
+-  font-size: calc(10px + 2vmin);
+-  color: white;
++  margin: 0 !important;
+ }
++/* .p-button {
++  background-color: #30F274;
++  border: none;
++} */
+ 
+-.App-link {
+-  color: #61dafb;
++
++.trend_regular {
++  background-color: rgba(10, 144, 66, 0.14);
++  box-shadow: inset 0 0 30px rgba(40, 245, 111, 1),
++              inset 0 0 12px rgba(48, 242, 116, 0.3),
++              inset 0 0 16px rgba(48, 242, 116, 0.1);
++}
++.p-card-title{
++    font-size: 1.2rem;
++}
++.p-card-subtitle{
++  font-size: 1rem;
++}
++.partner{
++  background: linear-gradient(to right, rgba(171, 171, 171, 0.3) 45%, rgba(161, 161, 161, 0.3) 55%);
+ }
+ 
+-@keyframes App-logo-spin {
+-  from {
+-    transform: rotate(0deg);
+-  }
+-  to {
+-    transform: rotate(360deg);
+-  }
++.footer{
++  background-color: #0C4223;
++}
++a{
++  text-decoration: none !important;
++}
++.p-progressbar-value {
++  background-color: #03CE58 !important; /* Thay đổi màu này theo ý muốn */
+ }
++.p-button.p-button-outlined {
++  background-color: transparent;
++  color: #03CE58;
++  border: 1px solid;
++}
++.w-30rem {
++  width: 40rem !important;
++}
+\ No newline at end of file
