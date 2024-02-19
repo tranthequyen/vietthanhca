@@ -3,6 +3,7 @@ body{
   background-color: #000000;
   color: #FFFFFF;
   margin: 0px !important;
+  padding-bottom: 6rem;
 }
 ul{
   list-style: none;
@@ -64,8 +65,23 @@ ul{
 a{
   text-decoration: none !important;
 }
-.p-progressbar-value {
-  background-color: #03CE58 !important; /* Thay đổi màu này theo ý muốn */
+
+.p-slider .p-slider-range {
+  background-color: #03CE58 !important;
+
+}
+.p-carousel-indicators {
+display: none !important;
+}
+.p-slider:not(.p-disabled) .p-slider-handle:hover {
+  background-color: #03CE58 !important;
+
+  border-color: #03CE58 !important;
+}
+.p-slider:not(.p-disabled) .p-slider-handle {
+  background-color: #03CE58 !important;
+
+  border-color: #03CE58 !important;
 }
 .p-button.p-button-outlined {
   background-color: transparent;
@@ -74,4 +90,20 @@ a{
 }
 .w-30rem {
   width: 40rem !important;
+}
+.p-toast .p-toast-message-success {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-warn {
+
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-error {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-info {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message {
+  opacity: 1 !important;
 }
