@@ -9,7 +9,7 @@ import TrackAudio from "./TrackAudio";
 import RelationBanner from "./RelationBanner";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
-
+import '../index.css'
 
 function Track() {
   const[spin,setSpin] = useState(false)

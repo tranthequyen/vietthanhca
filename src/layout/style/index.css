@@ -105,22 +105,3 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
-.image_spin {
-    animation: spin 15s infinite linear;
-    animation-play-state: running;
-  }
-  .image_spin.paused{
-    animation-play-state: paused;
-  }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-.button:hover{
-    background-color: #029D43;
-    color: #000000;
-}
