@@ -13,7 +13,7 @@ const Sidebar = props => {
         { name: 'PlayList', route: '/play_list', icon: 'pi pi-list' },
         { name: 'Yêu thích', route: '/favourite', icon: 'pi pi-heart-fill' },
         { name: 'Mới nghe', route: '/favourite', icon: 'pi pi-history' },
-        { name: 'Tải về', route: '/favourite', icon: 'pi-download' },
+        { name: 'Tải về', route: '/favourite', icon: 'pi pi-download' },
     ]
     return (
         <div className={`${sidebarClass} `}>

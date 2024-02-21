@@ -3,7 +3,7 @@ import logo from '@/layout/img/logo.png'
 import { Link } from 'react-router-dom'
 function Footer() {
       return (
-            <div className='footer grid'>
+            <div className='footer grid  ' >
                   <div className="col-6 pl-8">
                         <div className='flex'>
                               <img width="88px" src={logo} alt="" />

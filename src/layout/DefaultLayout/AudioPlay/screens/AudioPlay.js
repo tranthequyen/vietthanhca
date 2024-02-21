@@ -81,7 +81,7 @@ const AudioPlay = () => {
       };
 
       return (
-            <div style={{ position: 'fixed', bottom: 0, background: '#989898' }} className='w-full h-6rem z-5' >
+            <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
                   <audio ref={audioRef}>
                         <source src="https://firebasestorage.googleapis.com/v0/b/nodejs-9c5e8.appspot.com/o/songs%2F1Phut-Andiez-7632303.mp3?alt=media&token=4a162195-a4f6-4fa4-a095-12ec3561f0f1" type="audio/mpeg" />
                         Trình duyệt của bạn không hỗ trợ thẻ audio.
