@@ -4,7 +4,7 @@ import Title from "@/components/Title"
 
 function Relation({title}){
     return(
-        <div className="col-9" style={{margin:"0 auto"}}>
+        <div className="col-11" style={{margin:"0 auto"}}>
                     <Title title={title} icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {
