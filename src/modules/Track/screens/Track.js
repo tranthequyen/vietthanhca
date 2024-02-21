@@ -35,7 +35,7 @@ function Track() {
                className='button mr-4'
                style={{borderRadius:"50%",aspectRatio:'1/1',color:'white',border:'2px solid white'}}
            > 
-               <span className="pi pi-spin pi-cog"></span>
+               <span className="pi pi-cog"></span>
            </Button>
            <Button
                text

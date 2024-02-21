@@ -19,7 +19,7 @@ function ListTrack() {
                                 className='mr-4'
                                 style={{borderRadius:"50%",aspectRatio:'1/1'}}
                             > 
-                                <span className="pi pi-spin pi-replay"></span>
+                                <span className="pi pi-replay"></span>
                             </Button>
                             <Button
                                 severity='success'
