@@ -1,8 +1,9 @@
 body{
-  /* background-image: linear-gradient(45deg, #000000 70%,#029D43 100%, #08FF6F 100%); */
-  background-color: #000000;
+  background-image: linear-gradient(45deg, #000000 90%,#029D43 100%, #08FF6F 100%);
+  /* background-color: #000000; */
   color: #FFFFFF;
   margin: 0px !important;
+  padding-bottom: 6rem;
 }
 ul{
   list-style: none;
@@ -55,7 +56,7 @@ ul{
   font-size: 1rem;
 }
 .partner{
-  background: linear-gradient(to right, rgba(171, 171, 171, 0.3) 45%, rgba(161, 161, 161, 0.3) 55%);
+  background: linear-gradient(to right, rgba(243, 243, 243, 0.3) 45%, rgba(215, 215, 215, 0.3) 55%);
 }
 
 .footer{
@@ -64,8 +65,23 @@ ul{
 a{
   text-decoration: none !important;
 }
-.p-progressbar-value {
-  background-color: #03CE58 !important; /* Thay đổi màu này theo ý muốn */
+
+.p-slider .p-slider-range {
+  background-color: #03CE58 !important; 
+
+}
+.p-carousel-indicators {
+display: none !important;
+}
+.p-slider:not(.p-disabled) .p-slider-handle:hover {
+  background-color: #03CE58 !important; 
+
+  border-color: #03CE58 !important;
+}
+.p-slider:not(.p-disabled) .p-slider-handle {
+  background-color: #03CE58 !important; 
+
+  border-color: #03CE58 !important;
 }
 .p-button.p-button-outlined {
   background-color: transparent;
@@ -75,3 +91,62 @@ a{
 .w-30rem {
   width: 40rem !important;
 }
+<<<<<<< HEAD
+=======
+.p-toast .p-toast-message-success {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-warn {
+
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-error {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message-info {
+  background-color: #ffffff;
+}
+.p-toast .p-toast-message {
+  opacity: 1 !important;
+}
+.bg-ads::before ,.bg-ads::after {
+  content: '';
+  position: absolute;
+  background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
+  border-radius: 50%;
+  z-index: -1;
+  box-shadow: 
+  rgb(13, 133, 7) 50px 22px 150px 130px; 
+  top: 300px;
+  left: 120px;
+}
+.bg-adsv2 {
+  content: '';
+  position: absolute;
+top: 350px;
+  left: 70%;
+  background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
+  border-radius: 50%;
+  z-index: -1;
+  box-shadow: 
+  rgb(155, 209, 30) 50px 22px 130px 150px; 
+
+}
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #323232 !important; 
+  cursor: pointer;
+}
+
+
+.p-datatable .p-column-header-content {
+  display: flex;
+  align-items: center !important;
+  justify-content: space-evenly;
+}
+.p-datatable-tbody tr {
+  background: #000000 !important;
+}
+.p-datatable .p-datatable-tbody > tr {
+  background: gray
+}
+>>>>>>> 57e6f999c5b5cb21630e906e0dcd7ab626136c3d

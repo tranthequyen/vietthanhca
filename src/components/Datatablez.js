@@ -2,8 +2,11 @@ import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-
-const DataTablez = ({ value, children }) => {
+export const Columnz = (props) => {
+      const { ...prop } = props
+      return <Column className='text-center' {...prop} />
+}
+const DataTablez = ({ value, children, noAction }) => {
       const actionBodyTemplate = (rowData) => {
             return (
                   <div className='flex gap-2'>
@@ -14,14 +17,16 @@ const DataTablez = ({ value, children }) => {
       };
 
       const indexBodyTemplate = (rowData, row) => {
-            return row.rowIndex + 1;
+            return <span className='text-white'> {row.rowIndex + 1}</span>
       };
-
       const newChildren = [
-            <Column key="stt" body={indexBodyTemplate} header="STT"></Column>,
+            <Columnz key="stt" body={indexBodyTemplate} header="STT" className="text-center"></Columnz>,
             ...React.Children.toArray(children),
-            <Column key="action" body={actionBodyTemplate} header="Hành động"></Column>
+
       ];
+      if (!noAction) {
+            newChildren.push(<Columnz key="action" body={actionBodyTemplate} header="Hành động"></Columnz>);
+      }
 
       return (
             <DataTable value={value}>
