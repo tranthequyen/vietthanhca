@@ -4,13 +4,15 @@ import Header from './Header/screens';
 import Partner from '@/modules/Home/screens/Partner';
 import Footer from './footer/screens/Footer';
 import AudioPlay from './AudioPlay/screens/AudioPlay';
+import { useLocation } from 'react-router-dom';
 
 function DefaultLayout({ children }) {
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
     };
-
+    const location = useLocation()
+    console.log(location);
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
 
@@ -23,9 +25,10 @@ function DefaultLayout({ children }) {
             <div className={contentClass}>
                 {children}
             </div>
-            <div>
+            {location.pathname === '/' && <div>
                 <Partner />
-            </div>
+            </div>}
+
             <div>
                 <Footer />
             </div>
