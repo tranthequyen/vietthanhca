@@ -1,5 +1,6 @@
 import { Button } from "primereact/button";
 import { ProgressBar } from "primereact/progressbar";
+import { Slider } from "primereact/slider";
 import React, { useEffect, useRef, useState } from "react";
 
 const AudioSong = () => {
@@ -9,6 +10,7 @@ const AudioSong = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(50);
 
   const toggleAudio = () => {
     if (isPlaying) {
@@ -18,6 +20,12 @@ const AudioSong = () => {
     }
     setIsPlaying(!isPlaying);
   };
+  const onSliderChange = (e) => {
+    const newTime = (e.value / 100) * audioRef.current.duration;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
   useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => {
@@ -48,9 +56,38 @@ const AudioSong = () => {
     audioRef.current.currentTime = clickedValue;
   };
   const [isClicked, setIsClicked] = useState(false);
+  const [volumeSound, setVolumeSound] = useState(true);
+  const [savedVolume, setSavedVolume] = useState(50);
 
   const handleClick = () => {
     setIsClicked(!isClicked);
+  };
+
+  const handleClickHeart = () => {
+    setIsClicked(!isClicked);
+  };
+
+  useEffect(() => {
+    // Cập nhật âm lượng của phần tử audio khi volume thay đổi
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
+
+  const handleClickVolume = () => {
+    setVolumeSound(!volumeSound); // Đảo trạng thái âm lượng
+    if (!volumeSound) {
+      // Nếu đang tắt âm lượng, phục hồi âm lượng từ savedVolume
+      setVolume(savedVolume);
+    } else {
+      // Nếu đang bật âm lượng, lưu giá trị hiện tại và đặt về 0
+      setSavedVolume(volume);
+      setVolume(0);
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.value / 100;
+    audioRef.current.volume = newVolume;
+    setVolume(e.value);
   };
 
   return (
@@ -71,10 +108,16 @@ const AudioSong = () => {
         <div className="flex justify-content-center gap-3">
           <div>{formatTime(currentTime)}</div>
           <div ref={progressBarContainerRef} onClick={handleProgressBarClick}>
-            <ProgressBar
+            {/* <Slider
               value={progress}
               className="w-30rem h-1rem"
               showValue={false}
+            /> */}
+            <Slider
+              style={{ width: "50rem" }}
+              value={progress}
+              onChange={onSliderChange}
+              onSlideEnd={() => setIsPlaying(true)}
             />
           </div>
           <div>{formatTime(duration - currentTime)}</div>
@@ -89,10 +132,10 @@ const AudioSong = () => {
           className="px-5"
           style={
             isClicked
-              ? { border: "none", background: "#03CE58" }
-              : { border: "none", background: "transparent" }
+              ? { background: "#03CE58", border: "none" }
+              : { background: "transparent", border: "none" }
           }
-          onClick={handleClick}
+          onClick={handleClickHeart}
         >
           <i
             style={{
@@ -100,7 +143,7 @@ const AudioSong = () => {
               width: "1.5rem",
               height: "1.5rem",
             }}
-            className={isClicked ? "" : "pi pi-heart"}
+            className={isClicked ? "pi pi-heart" : "pi pi-heart"}
           ></i>
         </Button>{" "}
         <Button
@@ -152,12 +195,20 @@ const AudioSong = () => {
         <Button
           className="px-5"
           style={{ border: "none", background: "transparent" }}
+          onClick={handleClickVolume}
         >
           <i
             style={{ fontSize: "1.5rem", width: "1.5rem", height: "1.5rem" }}
-            className="pi pi-volume-off"
+            className={volumeSound ? "pi pi-volume-up" : "pi  pi-volume-off"}
           ></i>
         </Button>
+        {/* <Slider
+          style={{ width: "14rem" }}
+          value={volume}
+          onChange={handleVolumeChange}
+          showValue={false}
+          className="mt-4"
+        /> */}
       </div>
     </div>
   );

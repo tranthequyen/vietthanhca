@@ -10,6 +10,7 @@ import Playlist from "./Playlist";
 import ImageSong from "./ImageSong";
 import AudioPlay from "@/layout/DefaultLayout/AudioPlay/screens/AudioPlay";
 import AudioSong from "./AudioSong";
+import ImageSongs from "./ImageSongs";
 
 function SongPlayer() {
   return (
@@ -17,25 +18,70 @@ function SongPlayer() {
       <div class="grid">
         <div class="col-3">
           <Button
-            icon="pi pi-arrow-left"
-            className="text-white-alpha-80 border-none border-circle ml-8 w-4rem h-4rem"
-            style={{ background: "#03CE58" }}
-          />
+            className="text-white-alpha-80 border-circle border-white ml-8 w-4rem h-4rem"
+            style={{
+              background: "transparent",
+              fontWeight: "bold", // In đậm viền và icon
+            }}
+          >
+            <i
+              style={{
+                fontSize: "1.5rem",
+                width: "1.5rem",
+                height: "1.5rem",
+                fontWeight: "bolder", // In đậm icon
+              }}
+              className="pi pi-arrow-left"
+            ></i>
+          </Button>{" "}
           <Button
-            icon="pi pi-cog"
-            className="text-white-alpha-80 border-none border-circle ml-5 w-4rem h-4rem"
-            style={{ background: "#03CE58" }}
-          />
+            className="text-white-alpha-80 border-circle border-white ml-5 w-4rem h-4rem"
+            style={{
+              background: "transparent",
+            }}
+          >
+            <i
+              style={{
+                fontSize: "1.5rem",
+                width: "1.5rem",
+                height: "1.5rem",
+                fontWeight: "bolder",
+              }}
+              className="pi pi-cog"
+            ></i>
+          </Button>{" "}
           <Button
-            icon="pi pi-language"
-            className="text-white-alpha-80 border-none border-circle ml-5 w-4rem h-4rem"
-            style={{ background: "#03CE58" }}
-          />
+            className="text-white-alpha-80 border-circle border-white ml-5 w-4rem h-4rem"
+            style={{
+              background: "transparent",
+            }}
+          >
+            <i
+              style={{
+                fontSize: "1.5rem",
+                width: "1.5rem",
+                height: "1.5rem",
+                fontWeight: "bolder",
+              }}
+              className="pi pi-language"
+            ></i>
+          </Button>{" "}
           <Button
-            icon="pi pi-window-maximize"
-            className="text-white-alpha-80 border-none border-circle ml-5 w-4rem h-4rem"
-            style={{ background: "#03CE58" }}
-          />
+            className="text-white-alpha-80 border-circle border-white ml-5 w-4rem h-4rem"
+            style={{
+              background: "transparent",
+            }}
+          >
+            <i
+              style={{
+                fontSize: "1.5rem",
+                width: "1.5rem",
+                height: "1.5rem",
+                fontWeight: "bolder",
+              }}
+              className="pi pi-window-maximize"
+            ></i>
+          </Button>{" "}
           <ImageSong />
         </div>
 
@@ -100,7 +146,7 @@ function SongPlayer() {
           </div>
         </div>
       </div>
-      <Images />
+      <ImageSongs />
       <div className="grid">
         <div className="col-9">
           <Title
