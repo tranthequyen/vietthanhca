@@ -12,6 +12,8 @@ const Sidebar = props => {
         { name: 'Thư viện', route: '/libaray', icon: 'pi pi-folder' },
         { name: 'PlayList', route: '/play_list', icon: 'pi pi-list' },
         { name: 'Yêu thích', route: '/favourite', icon: 'pi pi-heart-fill' },
+        { name: 'Mới nghe', route: '/favourite', icon: 'pi pi-history' },
+        { name: 'Tải về', route: '/favourite', icon: 'pi pi-download' },
     ]
     return (
         <div className={`${sidebarClass} `}>
@@ -19,7 +21,7 @@ const Sidebar = props => {
                 <img src={logo} />
                 <h2 className='m-0 text-center '> VIETTHANHCA</h2>
             </div>
-            <Divider className='mt-0' />
+            {/* <Divider className='mt-0' /> */}
             <ul className='m-0 p-3 pt-3'>
                 {detailSideBar.map(d =>
                     <li className='p-3 flex gap-3 text-xl text-white text_hover '>

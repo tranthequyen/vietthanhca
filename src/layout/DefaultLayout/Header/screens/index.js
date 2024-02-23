@@ -44,7 +44,6 @@ const Header = props => {
                 {
                     label: 'Đăng xuất',
                     icon: 'pi pi-sign-out'
-
                 }
             ]
         }

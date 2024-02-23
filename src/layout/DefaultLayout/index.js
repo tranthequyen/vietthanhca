@@ -12,7 +12,7 @@ function DefaultLayout({ children }) {
         setSideBarOpen(!sidebarOpen);
     };
     const location = useLocation()
-    console.log(location);
+
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
 

@@ -4,12 +4,14 @@ import { Home } from "@/modules/Home"
 import { HomeAdmin } from "@/modules/HomeAdmin"
 import { ListSong } from "@/modules/ListSong"
 import { ListUser } from "@/modules/ListUser"
+import Song from "@/modules/Songs/screens/Song"
 import { Track } from "@/modules/Track"
 
 
 const publicRoutes = [
     { path: '/', component: Home, layout: 'user' },
-    {path:'/track',component:Track,layout:'user'}
+    { path: '/track', component: Track, layout: 'user' },
+    { path: '/song', component: Song, layout: 'user' }
 ]
 const privateRoutes = [
 
