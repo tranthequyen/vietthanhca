@@ -9,7 +9,7 @@ function Partner() {
                         {
                               test.slice(0, 12).map(d =>
                                     <div className="col-2">
-                                          <img src="https://picsum.photos/200/300" className='w-full h-8rem border-round-sm' alt="" />
+                                          <img src="https://picsum.photos/200/300" style={{width:'100%',aspectRatio:"1.75"}} className='border-round-sm' alt="" />
                                     </div>
                               )
                         }

@@ -38,7 +38,8 @@ ul{
   margin: 0 !important;
 }
 
-p{}
+p{
+}
 
 .trend_regular {
   background-color: rgba(10, 144, 66, 0.14);
@@ -103,4 +104,15 @@ display: none !important;
 }
 .p-toast .p-toast-message {
   opacity: 1 !important;
+}
+@media screen and (min-width: 1400px) {
+  .is_mobile{
+      display: none;
+  }
+
+}
+@media screen and (max-width: 1400px) {
+  .is_pc{
+      display: none;
+  }
 }

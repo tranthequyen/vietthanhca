@@ -82,8 +82,9 @@ function TrackAudio({ handleSpin, spin }){
             audioRef.current.volume = newVolume;
             setVolume(e.value);
       };
+
     return(
-        <div className=" col-9 flex flex-column" style={{margin:'0 auto'}}>
+        <div className=" col-12 flex flex-column" style={{margin:'0 auto'}}>
             <h3 className="text-center text-xl pb-2" >Trong tình yêu mẹ - <strong style={{color:'green'}}>Diệu Hiền</strong></h3>
             <div className="flex justify-content-center align-items-center  gap-3"   >
             <audio ref={audioRef}>
@@ -92,7 +93,7 @@ function TrackAudio({ handleSpin, spin }){
                   </audio>
                                 <div style={{fontSize:'2vh'}}> 
                                 {formatTime(currentTime)}</div>
-                                    <Slider style={{ width: '100vh' }}
+                                    <Slider style={{ width: '60%' }}
                                           value={progress}
                                           onChange={onSliderChange}
                                           onSlideEnd={() => setIsPlaying(true)}
@@ -100,47 +101,49 @@ function TrackAudio({ handleSpin, spin }){
                                 <div style={{fontSize:'2vh'}}> 
                                 {formatTime(duration - currentTime)}</div>
             </div>
-            <div className="flex flex-row" style={{margin:'0 auto'}}>
-            <Button className='mt-3' style={{ background: 'none', border: 'none',height:'5vh'}}>
+            <div className="flex flex-row " style={{margin:'0 auto',marginTop:'10px',position:'relative'}} >
+            <Button className='audio_button' >
                   {isClicked?(
-                  <span className="pi pi-heart-fill " style={{fontSize:'2.8vh',cursor:"pointer",color:'#03CE58'}} onClick={handleClickHeart}></span>
+                  <span className="pi pi-heart-fill " style={{cursor:"pointer",color:'#03CE58'}} onClick={handleClickHeart}></span>
                   ):(
-                  <span className="pi pi-heart " style={{fontSize:'2.8vh',cursor:"pointer"}} onClick={handleClickHeart}></span>
+                  <span className="pi pi-heart " style={{cursor:"pointer"}} onClick={handleClickHeart}></span>
                   )}
             </Button>
-            <Button className='mt-3' style={{ background: 'none', border: 'none',height:'5vh'}}>
-                  <span className="pi pi-sort-alt" style={{fontSize:'2.8vh',transform: 'rotate(90deg)'}}></span>
+            <Button className='audio_button' >
+                  <span className="pi pi-sort-alt" style={{transform: 'rotate(90deg)'}}></span>
             </Button>
-            <Button className='mt-3' style={{ background: 'none', border: 'none',height:'5vh'}}>
-                  <span className="pi pi-step-backward-alt" style={{fontSize:'2.8vh'}}></span>
+            <Button className='audio_button' >
+                  <span className="pi pi-step-backward-alt"></span>
             </Button>
-            <Button className='mt-3' style={{ background: 'none', border: 'none',height:'5vh'}} onClick={toggleAudio}>
+            <Button className='audio_button'  onClick={toggleAudio}>
             {isPlaying ? (
-                <span className='pi pi-pause' style={{fontSize:'2.8vh'}}></span>
+                <span className='pi pi-pause' ></span>
             ) : (
-                <span className='pi pi-play' style={{fontSize:'2.8vh'}}></span>
+                <span className='pi pi-play' ></span>
             )}
             </Button>
-            <Button className='mt-3'style={{ background: 'none', border: 'none',height:'5vh'}}>
-                  <span className="pi pi-step-forward-alt" style={{fontSize:'2.8vh'}}></span>
+            <Button className='audio_button'>
+                  <span className="pi pi-step-forward-alt"></span>
             </Button>
             
-            <Button className='mt-3'style={{ background: 'none', border: 'none',height:'5vh'}} onClick={handleClickAudio}>
-                  <span className="pi pi pi-sync" style={{fontSize:'2.8vh'}}></span>
+            <Button className='audio_button' onClick={handleClickAudio}>
+                  <span className="pi pi pi-sync" ></span>
             </Button>
-            <Button className='mt-3' style={{ background: 'none', border: 'none',height:'5vh'}}  onClick={handleClickVolume}>
+            <Button className='audio_button' onClick={handleClickVolume}  >
                 {volumeSound ? (
-                    <span className='pi pi-volume-up' style={{fontSize:'2.8vh'}}></span>
+                    <span className='pi pi-volume-up'></span>
                 ):(
-                    <span className='pi pi-volume-off' style={{fontSize:'2.8vh'}}></span>
+                    <span className='pi pi-volume-off'></span>
                 )}
 
             </Button>
             <Slider
-                style={{ width: '10rem',margin:'3.6vh 0 0 2vh' }}
-                value={volume}
-                onChange={handleVolumeChange}
-                showValue={false}
+            style={{ margin: '20px 0 0 2vh',aspectRatio:'2',position:'absolute'}}
+            orientation="vertical"
+            value={volume}
+            onChange={handleVolumeChange}
+            showValue={false}
+            className="volume_bar"
             />
             </div>                            
         </div>

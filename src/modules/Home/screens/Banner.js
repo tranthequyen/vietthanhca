@@ -11,10 +11,10 @@ function Banner() {
       return (
 
             <div className='grid' >
-                  <div className="col-3 ">
+                  <div className="xl:col-3 hidden xl:block">
                         <img className='border-round-lg' src="https://picsum.photos/200/300" style={{ width: '100%', height: '300px' }} />
                   </div>
-                  <div className="col-9">
+                  <div className="col-12 xl:col-9">
                         <Carousel value={test.slice(0, 3).map(d => d.url)} itemTemplate={itemTemplate}></Carousel>
 
                   </div>

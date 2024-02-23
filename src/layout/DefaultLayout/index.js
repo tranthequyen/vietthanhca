@@ -5,22 +5,32 @@ import Partner from '@/modules/Home/screens/Partner';
 import Footer from './footer/screens/Footer';
 import AudioPlay from './AudioPlay/screens/AudioPlay';
 
-function DefaultLayout({ children }) {
-    const [sidebarOpen, setSideBarOpen] = useState(true);
+function DefaultLayout({ children,status}) {
+    const [sidebarOpen, setSideBarOpen] = useState(status);
+    const [isOverlayVisible, setOverlayVisible] = useState(true);
+    const [show, setShow] = useState(true);
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
+        setShow(!show)
+        setOverlayVisible(!isOverlayVisible)
     };
 
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
 
     return (
-        <div className='flex flex-column'>
-            <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
+    <>
+             {isOverlayVisible ?(
+                <></>
+             ):(
+                <div className="over_lay"></div>
+             )}
+            <div className='flex flex-column'>
+                <Sidebar onClick={handleViewSidebar} isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} showButton={!show}/>
             <div className={headerClass}>
-                <Header onClick={handleViewSidebar} />
+                <Header onClick={handleViewSidebar} showButton={show}/>
             </div>
-            <div className={contentClass}>
+            <div className={contentClass} style={{paddingTop:'2rem'}}>
                 {children}
             </div>
             <div>
@@ -31,6 +41,7 @@ function DefaultLayout({ children }) {
             </div>
             <AudioPlay />
         </div>
+    </>
     );
 }
 

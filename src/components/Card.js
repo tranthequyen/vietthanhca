@@ -7,7 +7,7 @@ function Cardz({ src, song, sing, link }) {
 
       const header = (
             <div class="container">
-                  <img alt="Card" className='h-3 image_overlay' src={src} />
+                  <img alt="Card" className='h-3 image_overlay' src={src} style={{marginLeft:'10px'}}/>
                   <div class="overlay">
                   </div>
                   <div className="play child">
@@ -23,11 +23,8 @@ function Cardz({ src, song, sing, link }) {
       return (
             <div >
 
-                  <Card className='card_hover' title={song} header={header} subTitle={subTitle}>
+                  <Card style={{width:'90%'}} className='card_hover' title={song} header={header} subTitle={subTitle}>
                   </Card>
-
-
-
             </div >
       )
 }

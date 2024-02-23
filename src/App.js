@@ -39,9 +39,19 @@ function App() {
                             key={index}
                             path={route.path}
                             element={
-                                <Layout>
-                                    <Page />
-                                </Layout>
+                            <>
+                                <div className="is_pc">
+                                    <Layout status={true}>
+                                            <Page />
+                                    </Layout>
+                                </div>
+                                <div className="is_mobile">
+                                    <Layout status={false}>
+                                            <Page />
+                                    </Layout>
+                                </div>
+                            </>
+                                
                             }
                         />
                     })}

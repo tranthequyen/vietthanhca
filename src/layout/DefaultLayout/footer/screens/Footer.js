@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 function Footer() {
       return (
             <div className='footer grid'>
-                  <div className="col-6 pl-8">
-                        <div className='flex'>
-                              <img width="88px" src={logo} alt="" />
+                  <div className="col-6" style={{paddingLeft:'5%'}}>
+                        <div className='flex footer_logo'>
+                              <img src={logo} alt="" />
                               <h1>VIETTHANHCA</h1>
                         </div>
                         <div className=''>
@@ -50,15 +50,15 @@ function Footer() {
                   </div>
                   <div className="col-2">
                         <h3 style={{ color: '#03CE58' }}>Hỗ trợ</h3>
-                        <p className='text-xl'>
+                        <p className='text'>
                               Để biết các cập nhật và tin tức gần đây, hãy theo dõi nguồn cấp dữ liệu truyền thông xã hội của chúng tôi
                         </p>
-                        <div className="flex gap-3">
-                              <i className="pi pi-youtube" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
-                              <i className="pi pi-instagram" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
-                              <i className="pi pi-facebook" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
-                              <i className="pi pi-twitter" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
-                              <i className="pi pi-envelope" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
+                        <div className="d-none d-xl-flex gap-3" >
+                              <i className="pi pi-youtube m-2" style={{ fontSize: '2rem', color: '#03CE58'}}></i>
+                              <i className="pi pi-instagram m-2" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
+                              <i className="pi pi-facebook m-2" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
+                              <i className="pi pi-twitter m-2" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
+                              <i className="pi pi-envelope m-2" style={{ fontSize: '2rem', color: '#03CE58' }}></i>
                         </div>
                   </div>
             </div>

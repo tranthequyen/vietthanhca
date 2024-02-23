@@ -4,12 +4,12 @@ import Title from "@/components/Title"
 
 function Relation({title}){
     return(
-        <div className="col-11" style={{margin:"0 auto"}}>
+        <div className="col-12" style={{margin:"0 auto"}}>
                     <Title title={title} icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {
                             test.slice(0, 6).map(d =>
-                                <div className="col-2">
+                                <div className="col-6 lg:col-4 xl:col-2">
                                     <Cardz song="Cảm mến ân tình" src="https://picsum.photos/200/300" sing="Thế Quyền" />
                                 </div>
                             )
