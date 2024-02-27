@@ -16,7 +16,6 @@ const HeaderAdmin = props => {
                               <Button icon='pi pi-sign-out' />
                         </div>
                   </div>
-
             </div>
       )
 }

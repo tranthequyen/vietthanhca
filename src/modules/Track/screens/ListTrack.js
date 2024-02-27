@@ -19,7 +19,7 @@ function ListTrack() {
                                 className='mr-4'
                                 style={{borderRadius:"50%",aspectRatio:'1/1'}}
                             > 
-                                <span className="pi pi-spin pi-replay"></span>
+                                <span className="pi pi-replay"></span>
                             </Button>
                             <Button
                                 severity='success'
@@ -31,7 +31,7 @@ function ListTrack() {
                         </div>
                               <h3 className='text-left px-3'>Tiếp theo<br/><strong style={{color:'green'}}>Từ playlist </strong>Nhạc thánh ca dâng mẹ Maria</h3>
                               {
-                                    test.slice(0, 5).map(d =>
+                                    test.slice(0, 4).map(d =>
 
                                           <li className='flex align-items-center px-3'>
                                                 <img src="https://picsum.photos/200/300" alt="" width="70px" height="70px" className='border-round-lg' />

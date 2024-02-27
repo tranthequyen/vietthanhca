@@ -1,6 +1,6 @@
 .header_bar {
-      /* background-color: #1e1d1d; */
-  
+    background-color: #1e1d1d;
+    height: 5rem;
 }
 .sidebar {
     height: 100vh;
@@ -13,8 +13,18 @@
     transition: left 0.3s ease-in-out;
     border-bottom-right-radius: 15px;
   }
+
   .sidebar.open {
+    display:block;
+    height: 100vh;
+    background-color: #1e1d1d;
+    border-right: 1px #7C7272 solid ;
+    position: absolute;
     left: 0;
+    height: 100%;
+    width: 15vw;
+    transition: left 0.3s ease-in-out;
+    border-bottom-right-radius: 15px;
   }
   .content.open {
     left: 15vw;
@@ -79,8 +89,7 @@
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #76e19b;
- 
+    background-color: #30F274;
 }
 
 .play {

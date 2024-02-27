@@ -44,6 +44,7 @@ const Header = props => {
                 {
                     label: 'Đăng xuất',
                     icon: 'pi pi-sign-out'
+
                 }
             ]
         }
@@ -52,12 +53,19 @@ const Header = props => {
         <div className={`header`}>
             <SignUp visibleSignUp={visibleSignUp} setVisibleSignUp={setVisibleSignUp} />
             <Login visibleLogin={visibleLogin} setVisibleLogin={setVisibleLogin} />
-            <div className="card h-5rem header_bar ">
+            <div className="card header_bar ">
                 <div className=" flex justify-content-between p-3">
-                    <Button onClick={props.onClick} icon="pi pi-align-justify" />
-                    <div className="w-6 flex gap-2 ">
+                    <div className="pc_button">
+                        <Button  onClick={props.onClick} icon="pi pi-align-justify" />
+                    </div>
+                    <div className="mobile_button">
+                    <Button  onClick={props.onClick} icon="pi pi-align-justify" />
+                    </div>
+                    <div className="w-6  flex gap-2 search ">
                         <InputText type="text" placeholder="Bạn muốn nghe gì ?" className='w-full' />
-                        <Button icon="pi pi-search" label='Tìm kiếm' className='text-black-alpha-80 bg-white w-3 border-none' />
+                        <Button label='Tìm kiếm' className='text-black-alpha-80 bg-white border-none label-hide search_button '>
+                        <i className="pi pi-search" style={{ margin: 'auto' }}></i>
+                        </Button>
                     </div>
                     {isLoggedIn ?
                         <>
@@ -72,10 +80,12 @@ const Header = props => {
                             </div>
                         </>
                         :
-                        <div className="flex gap-3">
-                            <Button icon="pi pi-user-plus" label='Đăng ký' className='text-black-alpha-80 bg-white border-none' rounded onClick={() => setVisibleSignUp(true)} />
-                            <Button icon="pi pi-sign-in" label='Đăng nhập' className='text-black-alpha-80 bg-white border-none' rounded onClick={() => setVisibleLogin(true)} />
-                        </div>
+                        <>
+                            <div className="flex gap-2 login_button">
+                                <Button icon="pi pi-user-plus " label='Đăng ký' className='text-black-alpha-80 bg-white border-none label-hide p-3'  onClick={() => setVisibleSignUp(true)} />
+                                <Button icon="pi pi-sign-in " label='Đăng nhập' className='text-black-alpha-80 bg-white border-none label-hide p-3'  onClick={() => setVisibleLogin(true)} />
+                            </div>
+                        </>
                     }
                 </div>
             </div>

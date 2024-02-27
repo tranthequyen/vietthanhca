@@ -113,8 +113,8 @@ display: none !important;
   background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
   border-radius: 50%;
   z-index: -1;
-  box-shadow: 
-  rgb(13, 133, 7) 50px 22px 150px 130px; 
+  box-shadow:
+  rgb(13, 133, 7) 50px 22px 150px 130px;
   top: 300px;
   left: 120px;
 }
@@ -126,12 +126,12 @@ top: 350px;
   background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
   border-radius: 50%;
   z-index: -1;
-  box-shadow: 
-  rgb(155, 209, 30) 50px 22px 130px 150px; 
+  box-shadow:
+  rgb(155, 209, 30) 50px 22px 130px 150px;
 
 }
 .p-datatable .p-datatable-tbody > tr:hover {
-  background-color: #323232 !important; 
+  background-color: #323232 !important;
   cursor: pointer;
 }
 
@@ -146,4 +146,15 @@ top: 350px;
 }
 .p-datatable .p-datatable-tbody > tr {
   background: gray
+}
+@media screen and (min-width: 1400px) {
+  .is_mobile{
+    display: none;
+  }
+
+}
+@media screen and (max-width: 1400px) {
+  .is_pc{
+    display: none;
+  }
 }

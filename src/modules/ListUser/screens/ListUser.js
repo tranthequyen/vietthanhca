@@ -8,15 +8,15 @@ import InputForm from '@/components/Form';
 const Header = () => {
       return (
             <>
-                  <div className='grid border-1  border-round-xl shadow-3' style={{ border: "1px solid #76e19b" }}>
+                  <div className='grid '>
                         <div className="col-3">
-                              <InputForm className="w-full" label=" Người dùng" />
+                              <InputForm label="Lọc theo người dùng" />
                         </div>
                         <div className="col-3">
-                              <InputForm className="w-full" label=" Email" />
+                              <InputForm label="Lọc theo email" />
                         </div>
                         <div className="col-3">
-                              <InputForm className="w-full" label="Chức vụ" />
+                              <InputForm label="Lọc theo chức vụ" />
                         </div>
                   </div>
             </>
