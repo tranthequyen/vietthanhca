@@ -4,11 +4,12 @@ import Header from './Header/screens';
 import Partner from '@/modules/Home/screens/Partner';
 import Footer from './footer/screens/Footer';
 import AudioPlay from './AudioPlay/screens/AudioPlay';
-
+import { useLocation } from 'react-router-dom';
 function DefaultLayout({ children,status}) {
     const [sidebarOpen, setSideBarOpen] = useState(status);
     const [isOverlayVisible, setOverlayVisible] = useState(true);
     const [show, setShow] = useState(true);
+    const location = useLocation()
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
         setShow(!show)
@@ -33,9 +34,9 @@ function DefaultLayout({ children,status}) {
             <div className={contentClass} style={{paddingTop:'2rem'}}>
                 {children}
             </div>
-            <div>
-                <Partner />
-            </div>
+                {location.pathname === '/' && <div>
+                    <Partner />
+                </div>}
             <div>
                 <Footer />
             </div>

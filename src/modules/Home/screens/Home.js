@@ -54,6 +54,8 @@ function Home() {
                     </div >
                 </div>
                 <div className="xl:col-3 relative hidden xl:block">
+                    <div className="bg-ads"></div>
+                    <div className="bg-adsv2"></div>
                     <img src={ads} width={'100%'} alt="" className='absolute right-0' />
                 </div>
             </div>

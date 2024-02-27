@@ -36,7 +36,7 @@ const Sidebar = props => {
                 <li
                 className='p-3 flex gap-3 text-xl text-white'
                 onClick={() => handleLinkClick(d.route)}
-                style={{backgroundImage: 'linear-gradient(to right, #029D43 ,#1e1d1d)'}}
+                style={{backgroundImage: 'linear-gradient(to right, #029D43 ,#1e1d1d)', borderLeft: '5px  #30F274 solid'}}
               >
                 <i className={`${d.icon} text-xl`}></i>
                 <div className='no-underline text-white'>{d.name}</div>
