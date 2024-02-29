@@ -26,11 +26,11 @@ function Home() {
             <div className="grid">
                 <div className="col-12 xl:col-9">
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
-                    <div className="grid">
+                    <div className="grid ">
                         {
                             test.slice(0, 8).map(d =>
-                                <div className="col-6 md:col-4 lg:col-3">
-                                    <Cardz song="Cảm mến ân tình" src="https://picsum.photos/200/300" sing="Thế Quyền" />
+                                <div className="col-6 md:col-4 lg:col-3 ">
+                                    <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }
@@ -40,14 +40,14 @@ function Home() {
                     <TrendRegular />
                 </div>
             </div>
-            <div className="grid">
+            <div className="grid ">
                 <div className=" col-12 xl:col-9">
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {
                             test.slice(0, 8).map(d =>
                                 <div className="col-6 md:col-4 lg:col-3">
-                                    <Cardz song="Cảm mến ân tình" src="https://picsum.photos/200/300" sing="Thế Quyền" />
+                                    <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }
@@ -56,19 +56,20 @@ function Home() {
                 <div className="xl:col-3 relative hidden xl:block">
                     <div className="bg-ads"></div>
                     <div className="bg-adsv2"></div>
-                    <img src={ads} width={'100%'} alt="" className='absolute right-0' />
+                    <img src={ads} width={'100%'} alt="" className='absolute' style={{ right: "20px", top: "0", maxWidth: "calc(100% - 20px)", maxHeight: "100%" }} />
                 </div>
+
             </div>
             <NewRelease />
             <Images />
             <div className="grid">
-                <div className="col-12 xl:col-9" style={{margin:'0 auto'}}>
+                <div className="col-12 xl:col-9" style={{ margin: '0 auto' }}>
                     <Title title="Bài đọc" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {
                             test.slice(0, 8).map(d =>
                                 <div className="col-6 lg:col-3">
-                                    <Cardz song="Cảm mến ân tình" src="https://picsum.photos/200/300" sing="Thế Quyền" />
+                                    <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }

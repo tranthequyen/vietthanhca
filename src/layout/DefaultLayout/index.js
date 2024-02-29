@@ -5,7 +5,7 @@ import Partner from '@/modules/Home/screens/Partner';
 import Footer from './footer/screens/Footer';
 import AudioPlay from './AudioPlay/screens/AudioPlay';
 import { useLocation } from 'react-router-dom';
-function DefaultLayout({ children,status}) {
+function DefaultLayout({ children, status }) {
     const [sidebarOpen, setSideBarOpen] = useState(status);
     const [isOverlayVisible, setOverlayVisible] = useState(true);
     const [show, setShow] = useState(true);
@@ -20,29 +20,29 @@ function DefaultLayout({ children,status}) {
     const headerClass = sidebarOpen ? "header open" : "header";
 
     return (
-    <>
-             {isOverlayVisible ?(
+        <>
+            {isOverlayVisible ? (
                 <></>
-             ):(
+            ) : (
                 <div className="over_lay"></div>
-             )}
+            )}
             <div className='flex flex-column'>
-                <Sidebar onClick={handleViewSidebar} isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} showButton={!show}/>
-            <div className={headerClass}>
-                <Header onClick={handleViewSidebar} showButton={show}/>
-            </div>
-            <div className={contentClass} style={{paddingTop:'2rem'}}>
-                {children}
-            </div>
+                <Sidebar onClick={handleViewSidebar} isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} showButton={!show} />
+                <div className={headerClass}>
+                    <Header onClick={handleViewSidebar} showButton={show} />
+                </div>
+                <div className={contentClass} style={{ padding: '2rem 1rem' }}>
+                    {children}
+                </div>
                 {location.pathname === '/' && <div>
                     <Partner />
                 </div>}
-            <div>
-                <Footer />
+                <div>
+                    <Footer />
+                </div>
+                <AudioPlay />
             </div>
-            <AudioPlay />
-        </div>
-    </>
+        </>
     );
 }
 

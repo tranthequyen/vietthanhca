@@ -4,56 +4,56 @@ export const test = [
             "albumId": 1,
             "id": 1,
             "title": "accusamus beatae ad facilis cum similique qui sunt",
-            "url": "https://via.placeholder.com/600/92c952",
+            "url": "https://hinhconggiao.com/images/tranh-cong-giao-khac/JK-34.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/92c952"
       },
       {
             "albumId": 1,
             "id": 2,
             "title": "reprehenderit est deserunt velit ipsam",
-            "url": "https://via.placeholder.com/600/771796",
+            "url": "https://hinhconggiao.com/images/hinh-gia-dinh-thanh-gia/gdt-02.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/771796"
       },
       {
             "albumId": 1,
             "id": 3,
             "title": "officia porro iure quia iusto qui ipsa ut modi",
-            "url": "https://via.placeholder.com/600/24f355",
+            "url": "https://hinhconggiao.com/images/hinh-thanh-giuse/giuse-04.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/24f355"
       },
       {
             "albumId": 1,
             "id": 4,
             "title": "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
-            "url": "https://via.placeholder.com/600/d32776",
+            "url": "https://hinhconggiao.com/images/hinh-thanh-giuse/giuse-08.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/d32776"
       },
       {
             "albumId": 1,
             "id": 5,
             "title": "natus nisi omnis corporis facere molestiae rerum in",
-            "url": "https://via.placeholder.com/600/f66b97",
+            "url": "https://hinhconggiao.com/images/tranh-chua-jesus/GIESU-03.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/f66b97"
       },
       {
             "albumId": 1,
             "id": 6,
             "title": "accusamus ea aliquid et amet sequi nemo",
-            "url": "https://via.placeholder.com/600/56a8c2",
+            "url": "https://hinhconggiao.com/images/tranh-chua-jesus/GIESU-10.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/56a8c2"
       },
       {
             "albumId": 1,
             "id": 7,
             "title": "officia delectus consequatur vero aut veniam explicabo molestias",
-            "url": "https://via.placeholder.com/600/b0f7cc",
+            "url": "https://hinhconggiao.com/images/tranh-chua-jesus/GIESU-21B.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/b0f7cc"
       },
       {
             "albumId": 1,
             "id": 8,
             "title": "aut porro officiis laborum odit ea laudantium corporis",
-            "url": "https://via.placeholder.com/600/54176f",
+            "url": "https://hinhconggiao.com/images/tranh-me-maria/maria-04.jpg",
             "thumbnailUrl": "https://via.placeholder.com/150/54176f"
       },
       {
