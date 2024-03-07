@@ -46,11 +46,11 @@ function Song() {
       return (
             <div className='px-3'>
                   <DataTablez noAction value={test.slice(0, 17)}>
-                        <Columnz header="Tên bài hát" body={(e) => (
+                        <Columnz header="Bài hát" style={{ width: '40%' }} body={(e) => (
                               <li className='flex align-items-center px-3'>
                                     <img src="https://picsum.photos/200/300" alt="" width="80px" height="80px" className='border-round-lg' />
-                                    <div className='  flex flex-column justify-content-center p-3 gap-2'>
-                                          <Link to="" className='text-white no-underline text-xl'>{e.title}</Link>
+                                    <div className='flex flex-column justify-content-center p-3 gap-2'>
+                                          <Link to="" style={{ color: "#03CE58" }} className='no-underline text-xl'>{e.title}</Link>
                                           <Link to="" className=' text-white no-underline'>Thế Quyền</Link>
                                     </div>
                               </li>
@@ -60,6 +60,7 @@ function Song() {
                                     <span className='text-white '>4:30</span>
                               </>
                         } />
+                        <Columnz header="Người nghe" />
                         <Columnz header="Tùy chọn" body={
                               <div className='flex gap-3 justify-content-center text-white' >
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Title({ title, SubTitle, subTitle, href, icon }) {
       return (
             <div
-                  className=" flex align-items-center mb-2 justify-content-between"
+                  className=" flex align-items-center mb-2 justify-content-between "
                   style={{ height: '50px', }}
             >
                   <b className="text-3xl p-0">{title}</b>

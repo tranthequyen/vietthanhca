@@ -23,30 +23,43 @@ function Home() {
             <div >
                 <Banner />
             </div>
-            <div className="grid">
-                <div className="col-12 xl:col-9">
+
+            <div className='grid   py-3'>
+                <div className="col-12 lg:col-9">
+                    <div className='hidden xl:block'>
+                        <Title title="Nghệ sỹ tiêu biểu" icon='pi-angle-double-right' subTitle="Xem thêm" />
+                        <div className="flex justify-content-between  ">
+                            {test.slice(0, 6).map(d =>
+                                <img src={d.url} width='150px' height="150px" style={{ borderRadius: '50%' }} />
+                            )}
+                        </div>
+                    </div>
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid ">
                         {
                             test.slice(0, 8).map(d =>
-                                <div className="col-6 md:col-4 lg:col-3 ">
-                                    <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
+                                <div className="col-6 md:col-4 lg:col-3 p-3 p-3 ">
+                                    <Cardz song="Cảm mến ân tình 2" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }
                     </div >
                 </div>
-                <div className=" xl:col-3 hidden xl:block">
-                    <TrendRegular />
+                <div className="col-12 lg:col-3">
+                    <div className="  hidden xl:block">
+                        <TrendRegular />
+                    </div>
                 </div>
+
             </div>
+
             <div className="grid ">
                 <div className=" col-12 xl:col-9">
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid">
                         {
                             test.slice(0, 8).map(d =>
-                                <div className="col-6 md:col-4 lg:col-3">
+                                <div className="col-6 md:col-4 lg:col-3 p-3">
                                     <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
@@ -68,11 +81,12 @@ function Home() {
                     <div className="grid">
                         {
                             test.slice(0, 8).map(d =>
-                                <div className="col-6 lg:col-3">
+                                <div className="col-6 lg:col-3 p-3">
                                     <Cardz song="Cảm mến ân tình" src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }
+
                     </div >
                 </div>
                 <div className="xl:col-3 hidden xl:block">

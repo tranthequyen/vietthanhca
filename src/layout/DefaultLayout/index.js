@@ -34,7 +34,7 @@ function DefaultLayout({ children, status }) {
                 <div className={contentClass} style={{ padding: '2rem 1rem' }}>
                     {children}
                 </div>
-                {location.pathname === '/' && <div>
+                {location.pathname === '/' && <div className='pb-3'>
                     <Partner />
                 </div>}
                 <div>
