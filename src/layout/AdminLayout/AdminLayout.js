@@ -1,19 +1,26 @@
-import React from 'react'
+
 import SideBarAdmin from './SideBar/SideBarAdmin'
 import '../style/index.css'
 import HeaderAdmin from './Header/HeaderAdmin';
+import React, { useEffect, useRef } from 'react';
 
 function AdminLayout({ children }) {
+      const [sidebarOpen, setSideBarOpen] = React(true);
+      const handleViewSidebar = () => {
+            setSideBarOpen(!sidebarOpen);
+      };
+
+      const contentClass = sidebarOpen ? "content open" : "content";
+      const headerClass = sidebarOpen ? "header open" : "header";
       return (
-            <div className="">
-                  <HeaderAdmin />
-                  <div className="grid p-2">
-                        <div className="col-2 pl-0 ">
-                              <SideBarAdmin />
-                        </div>
-                        <div className="col-10">
-                              {children}
-                        </div>
+            <div className='flex flex-column'>
+
+                  <SideBarAdmin isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
+                  <div className={headerClass}>
+                        <HeaderAdmin onClick={handleViewSidebar} />
+                  </div>
+                  <div className={contentClass}>
+                        {children}
                   </div>
 
             </div >

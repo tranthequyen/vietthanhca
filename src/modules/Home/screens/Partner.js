@@ -12,7 +12,8 @@ function Partner() {
           <div className="col-2">
             <img
               src="https://picsum.photos/200/300"
-              className="w-full h-8rem border-round-sm"
+              style={{ width: "100%", aspectRatio: "1.75" }}
+              className="border-round-sm"
               alt=""
             />
           </div>

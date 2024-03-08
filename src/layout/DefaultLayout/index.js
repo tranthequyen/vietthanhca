@@ -5,35 +5,44 @@ import Partner from '@/modules/Home/screens/Partner';
 import Footer from './footer/screens/Footer';
 import AudioPlay from './AudioPlay/screens/AudioPlay';
 import { useLocation } from 'react-router-dom';
-
-function DefaultLayout({ children }) {
-    const [sidebarOpen, setSideBarOpen] = useState(true);
+function DefaultLayout({ children, status }) {
+    const [sidebarOpen, setSideBarOpen] = useState(status);
+    const [isOverlayVisible, setOverlayVisible] = useState(true);
+    const [show, setShow] = useState(true);
+    const location = useLocation()
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
+        setShow(!show)
+        setOverlayVisible(!isOverlayVisible)
     };
-    const location = useLocation()
-    console.log(location);
+
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
 
     return (
-        <div className='flex flex-column'>
-            <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
-            <div className={headerClass}>
-                <Header onClick={handleViewSidebar} />
+        <>
+            {isOverlayVisible ? (
+                <></>
+            ) : (
+                <div className="over_lay"></div>
+            )}
+            <div className='flex flex-column'>
+                <Sidebar onClick={handleViewSidebar} isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} showButton={!show} />
+                <div className={headerClass}>
+                    <Header onClick={handleViewSidebar} showButton={show} />
+                </div>
+                <div className={contentClass} style={{ padding: '2rem 1rem' }}>
+                    {children}
+                </div>
+                {location.pathname === '/' && <div className='pb-3'>
+                    <Partner />
+                </div>}
+                <div>
+                    <Footer />
+                </div>
+                <AudioPlay />
             </div>
-            <div className={contentClass}>
-                {children}
-            </div>
-            {location.pathname === '/' && <div>
-                <Partner />
-            </div>}
-
-            <div>
-                <Footer />
-            </div>
-            <AudioPlay />
-        </div>
+        </>
     );
 }
 
