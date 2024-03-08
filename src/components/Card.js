@@ -13,6 +13,7 @@ function Cardz({ src, song, sing, link }) {
       </div>
     </div>
   );
+
   const subTitle = () => {
     return (
       <a style={{ color: "#656565", textDecoration: "none" }} href={link}>
