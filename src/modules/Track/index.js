@@ -1,1 +1,1 @@
-export { default as Track } from './screens/Track'
+export { default as Track } from "./screens/Track";
