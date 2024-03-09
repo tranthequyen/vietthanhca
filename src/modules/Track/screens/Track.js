@@ -25,98 +25,107 @@ function Track() {
 
   return (
     <>
-      <div className="flex flex-column">
-        <div className="grid">
-          <div
-            className="col-12 xl:col-4 flex flex-row p-3"
-            style={{ justifyContent: "center", alignItems: "center" }}
-          >
-            <Link to={"/"}>
+      <div className="flex flex-row">
+        <div className="col-12 xl:col-8 flex flex-column">
+          <div className="grid">
+            <div
+              className="col-12 xl:col-6 flex flex-row p-3"
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Link to={"/"}>
+                <Button
+                  icon="pi pi-arrow-left"
+                  text
+                  className="button mr-4"
+                  style={{
+                    borderRadius: "50%",
+                    aspectRatio: "1/1",
+                    border: "2px solid white",
+                    color: "white",
+                  }}
+                ></Button>
+              </Link>
               <Button
-                icon="pi pi-arrow-left"
+                icon="pi pi-cog"
                 text
                 className="button mr-4"
                 style={{
                   borderRadius: "50%",
                   aspectRatio: "1/1",
-                  border: "2px solid white",
                   color: "white",
+                  border: "2px solid white",
                 }}
               ></Button>
-            </Link>
-            <Button
-              icon="pi pi-cog"
-              text
-              className="button mr-4"
-              style={{
-                borderRadius: "50%",
-                aspectRatio: "1/1",
-                color: "white",
-                border: "2px solid white",
-              }}
-            ></Button>
-            <Button
-              icon="pi pi-star-fill"
-              text
-              className="button mr-4"
-              style={{
-                borderRadius: "50%",
-                aspectRatio: "1/1",
-                color: "white",
-                border: "2px solid white",
-              }}
-            ></Button>
-            <Button
-              icon="pi pi-arrows-v"
-              text
-              className="button mr-4"
-              style={{
-                borderRadius: "50%",
-                aspectRatio: "1/1",
-                color: "white",
-                border: "2px solid white",
-              }}
-            ></Button>
-          </div>
-          <div className="xl:col-4 hidden xl:block">
-            <Button
-              label="Lời bài hát"
-              severity="success"
-              className="mt-4"
-              style={{ borderRadius: "10vh", width: "95%" }}
-            />
-          </div>
-        </div>
-        <div className="xl:col-12 hidden xl:flex">
-          <div
-            className="col-4 text-center flex flex-column"
-            style={{ display: "flex", alignItems: "center", margin: "0 auto" }}
-          >
-            <div className="flex" style={{ marginTop: "5vh" }}>
-              <img
-                className={`image_spin ${spin ? "" : "paused"}`}
-                src="https://picsum.photos/350/350"
+              <Button
+                icon="pi pi-star-fill"
+                text
+                className="button mr-4"
                 style={{
                   borderRadius: "50%",
-                  aspectRatio: "1",
-                  width: "90%",
-                  border: "5px solid #30F274",
+                  aspectRatio: "1/1",
+                  color: "white",
+                  border: "2px solid white",
                 }}
-                alt="Avatar"
+              ></Button>
+              <Button
+                icon="pi pi-arrows-v"
+                text
+                className="button mr-4"
+                style={{
+                  borderRadius: "50%",
+                  aspectRatio: "1/1",
+                  color: "white",
+                  border: "2px solid white",
+                }}
+              ></Button>
+            </div>
+            <div className="xl:col-6 hidden xl:block">
+              <Button
+                label="Lời bài hát"
+                severity="success"
+                className="mt-4"
+                style={{ borderRadius: "10vh", width: "95%" }}
               />
             </div>
           </div>
-          <div className="col-4 text-center" style={{ margin: "0 auto" }}>
-            <h1>HHHHHHHHHHHHH</h1>
-            <h1>HHHHHHHHHHHHH</h1>
-            <h1>HHHHHHHHHHHHH</h1>
-            <h1>HHHHHHHHHHHH</h1>
-            <h1>HHHHHHHHHHHH</h1>
-            <h1>HHHHHHHHHHHH</h1>
+          <div className="xl:col-12 hidden xl:flex">
+            <div
+              className="col-4 text-center flex flex-column"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "0 auto",
+              }}
+            >
+              <div className="flex" style={{ marginTop: "5vh" }}>
+                <img
+                  className={`image_spin ${spin ? "" : "paused"}`}
+                  src="https://picsum.photos/350/350"
+                  style={{
+                    borderRadius: "50%",
+                    aspectRatio: "1",
+                    width: "100%",
+                    border: "5px solid #30F274",
+                  }}
+                  alt="Avatar"
+                />
+              </div>
+            </div>
+            <div
+              className="col-4 text-center"
+              style={{ margin: "0 auto", marginTop: "2vh" }}
+            >
+              <h1>HHHHHHHHHHHHH</h1>
+              <h1>HHHHHHHHHHHHH</h1>
+              <h1>HHHHHHHHHHHHH</h1>
+              <h1>HHHHHHHHHHHH</h1>
+              <h1>HHHHHHHHHHHH</h1>
+              <h1>HHHHHHHHHHHH</h1>
+            </div>
           </div>
-          <div className="xl:col-4 hidden xl:block">
-            <ListTrack />
-          </div>
+        </div>
+        <div className="xl:col-4 hidden xl:block" style={{ marginTop: "3vh" }}>
+          <ListTrack />
         </div>
       </div>
       {/* Ver Mobile*/}

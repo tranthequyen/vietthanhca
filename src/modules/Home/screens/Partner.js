@@ -3,7 +3,7 @@ import React from "react";
 
 function Partner() {
   return (
-    <div className="partner mr-2 px-2">
+    <div className="partner px-2">
       <h1 className="text-center m-0 p-4" style={{ color: "#03CE58" }}>
         Các đối tác âm nhạc
       </h1>
