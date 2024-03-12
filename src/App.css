@@ -29,7 +29,7 @@ ul{
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 .p-card-header img {
-  height: 200px !important;
+  height: 250px !important;
   border-radius: 8px 8px 0 0 !important;
 }
 .grid {
@@ -157,4 +157,42 @@ top: 350px;
   .is_pc{
     display: none;
   }
+}
+
+.col-3 {
+  flex: 0 0 auto;
+  padding: 1.5rem;
+  width: 25%;
+}
+.album{
+  background: linear-gradient(#077436 0%, #2EFA82 50%, #077436 100%);
+border-radius: 30px;
+}
+
+.bgr_playlist{
+  background-image: url('https://hinhconggiao.com/images/hinh-bua-tiec-ly/BTL-08.jpg') ;
+  background-size: auto;
+}
+.p-button {
+  color: #ffffff;
+
+  /* border: none !important; */
+ 
+}
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: #000000;
+  color: #ffffff;
+}
+/* Hiển thị đường kẻ ở hàng header đầu tiên */
+.p-datatable .p-datatable-thead > tr:first-child > th {
+  border-bottom: 1px solid #ffffff; /* Thay đổi màu sắc nếu cần */
+}
+
+/* Ẩn đường kẻ ở các hàng header sau */
+.p-datatable .p-datatable-thead > tr:not(:first-child) > th {
+  border: none !important;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+ 
+  padding: 0.5rem 0.5rem;
 }

@@ -11,36 +11,40 @@ function TrendRegular() {
                                     test.slice(0, 3).map(d =>
 
                                           <li className='flex align-items-center px-3'>
-                                                <img src="https://picsum.photos/200/300" alt="" width="80px" height="80px" className='border-round-lg' />
-                                                <div className='flex flex-column justify-content-center p-3 gap-2'>
-                                                      <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
-                                                      <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                <img src={d.url} alt="" width="60px" height="60px" className='border-round-lg' />
+                                                <div className="flex align-items-center ">
+                                                      <div className='flex flex-column justify-content-center p-3 gap-2'>
+                                                            <Link to="" className='text-white no-underline text-lg' >Con đường Chúa đã đi</Link>
+                                                            <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                      </div>
+                                                      {/* <Button icon="pi " /> */}
+                                                      <span className="pi pi-ellipsis-v"></span>
                                                 </div>
-                                                {/* <Button icon="pi " /> */}
-                                                <span className="pi pi-ellipsis-v"></span>
-                                          </li>
+                                          </li >
                                     )
                               }
-                              <h3 className='px-3'>Thịnh hành</h3>
+                              <h3 className='px-3 m-0'>Thịnh hành</h3>
                               {
                                     test.slice(0, 3).map(d =>
 
                                           <li className='flex align-items-center px-3'>
-                                                <img src="https://picsum.photos/200/300" alt="" width="80px" height="80px" className='border-round-lg' />
-                                                <div className='flex flex-column justify-content-center p-3 gap-2'>
-                                                      <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
-                                                      <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                <img src={d.url} alt="" width="60px" height="60px" className='border-round-lg' />
+                                                <div className="flex align-items-center ">
+                                                      <div className='flex flex-column justify-content-center p-3 gap-2'>
+                                                            <Link to="" className='text-white no-underline text-lg' >Con đường Chúa đã đi</Link>
+                                                            <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                      </div>
+                                                      {/* <Button icon="pi " /> */}
+                                                      <span className="pi pi-ellipsis-v"></span>
                                                 </div>
-                                                {/* <Button icon="pi " /> */}
-                                                <span className="pi pi-ellipsis-v"></span>
-                                          </li>
+                                          </li >
 
                                     )
                               }
-                        </div>
+                        </div >
 
-                  </ul>
-            </div>
+                  </ul >
+            </div >
       )
 }
 

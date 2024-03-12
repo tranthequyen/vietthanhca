@@ -5,30 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0db62ab-cec0-4e7d-88f5-c3362e6cf7cd" name="Changes" comment="qqq">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM_[Changes]1/ads.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM_[Changes]1/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM_[Changes]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_2024_4_47_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/AdminLayout/Header/HeaderAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/AdminLayout/Header/HeaderAdmin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/axios/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/axios/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Datatablez.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Datatablez.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Title.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Title.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/DefaultLayout/AudioPlay/screens/AudioPlay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/DefaultLayout/AudioPlay/screens/AudioPlay.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/DefaultLayout/Header/screens/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/DefaultLayout/Header/screens/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/DefaultLayout/Sidebar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/DefaultLayout/Sidebar/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/DefaultLayout/footer/screens/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/DefaultLayout/footer/screens/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/style/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/style/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/DefaultLayout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/DefaultLayout/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/Banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/Banner.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/Images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/NewRelease.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/NewRelease.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/Partner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/Partner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/ListUser/screens/ListUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ListUser/screens/ListUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Track/screens/ListTrack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Track/screens/ListTrack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Track/screens/Relation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Track/screens/Relation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Track/screens/RelationBanner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Track/screens/RelationBanner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Track/screens/Track.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Track/screens/Track.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Track/screens/TrackAudio.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Track/screens/TrackAudio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/Home/screens/TrendRegular.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Home/screens/TrendRegular.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/PlayList/PlayList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/PlayList/PlayList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/Songs/screens/Song.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Songs/screens/Song.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

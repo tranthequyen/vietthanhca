@@ -92,7 +92,7 @@ const AudioPlay = () => {
                                     <div className='flex  gap-2 flex-column px-2'>
                                           <li className='grid align-items-center'>
                                                 <div className="col-5 xl:col-3">
-                                                <img src="https://picsum.photos/200/300" alt="" style={{width:'70px',aspectRatio:'1',marginBottom:'5px'}} className='border-round-lg' />
+                                                      <img src="https://picsum.photos/200/300" alt="" style={{ width: '70px', aspectRatio: '1', marginBottom: '5px' }} className='border-round-lg' />
                                                 </div>
                                                 <div className='xl:col-9 hidden xl:flex flex-column justify-content-center p-3 gap-2'>
                                                       <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
@@ -103,23 +103,24 @@ const AudioPlay = () => {
                               </ul>
                         </div>
                         <div className="col-10 xl:col-2 pl-4 flex flex-column">
-                              <div className="xl:hidden flex" style={{margin:"0 auto",marginBottom:"10px"}}>
+                              <div className="xl:hidden flex" style={{ margin: "0 auto", marginBottom: "10px" }}>
                                     <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
                               </div>
-                              <div className='flex gap-3' style={{margin:'0 auto'}}>
+                              <div className='flex gap-3' style={{ margin: '0 auto' }}>
                                     <Button
                                           icon="pi pi-heart"
                                           className={isClicked ? '' : 'p-button-outlined'}
-                                          style={isClicked ? { background: '#03CE58', border: 'none',width:'2rem',height:'2rem' } : {width:'2rem',height:'2rem'}}
+                                          style={isClicked ? { background: '#03CE58', border: 'none', } : {}}
                                           onClick={handleClickHeart}
+                                          rounded
                                     />
-                                    <Button style={{ background: '#03CE58', border: 'none',width:'2rem',height:'2rem' }} icon="pi pi-step-backward-alt" />
-                                    <Button style={{ background: '#03CE58', border: 'none',width:'2rem',height:'2rem' }} icon={isPlaying ? "pi pi-pause" : "pi pi-play"} onClick={toggleAudio} />
-                                    <Button style={{ background: '#03CE58', border: 'none',width:'2rem',height:'2rem' }} icon="pi pi-step-forward-alt" />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-backward-alt" />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon={isPlaying ? "pi pi-pause" : "pi pi-play"} onClick={toggleAudio} />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-forward-alt" />
                               </div>
                         </div>
                         <div className="xl:col-5 hidden xl:flex gap-3">
-                              <div className="flex justify-content-center align-items-center  gap-3" style={{width:"70%"}}>
+                              <div className="flex justify-content-center align-items-center  gap-3" style={{ width: "70%" }}>
                                     <div> {formatTime(currentTime)}</div>
                                     <Slider style={{ width: '80%' }}
                                           value={progress}
@@ -128,8 +129,8 @@ const AudioPlay = () => {
                                     />
                                     <div> {formatTime(duration - currentTime)}</div>
                               </div>
-                              <div className="flex align-items-center gap-3" style={{width:"30%"}}>
-                                    <Button style={{ background: '#03CE58', border: 'none' }} icon={volumeSound ? 'pi pi-volume-up' : 'pi  pi-volume-off'}
+                              <div className="flex align-items-center gap-3" style={{ width: "30%" }}>
+                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon={volumeSound ? 'pi pi-volume-up' : 'pi  pi-volume-off'}
                                           onClick={handleClickVolume} />
                                     <Slider style={{ width: '80%' }}
                                           value={volume}
@@ -139,9 +140,9 @@ const AudioPlay = () => {
                               </div>
                         </div>
                         <div className="xl:col-2 hidden xl:flex gap-3 justify-content-center">
-                              <Button style={{ background: '#03CE58', border: 'none' }} icon="pi pi-question-circle" />
-                              <Button style={{ background: '#03CE58', border: 'none' }} icon="pi pi-sync" />
-                              <Button style={{ background: '#03CE58', border: 'none' }} icon="pi pi-list" />
+                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-question-circle" />
+                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-sync" />
+                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-list" />
                         </div>
 
                   </div>

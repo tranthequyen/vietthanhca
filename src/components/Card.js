@@ -7,11 +7,11 @@ function Cardz({ src, song, sing, link }) {
 
       const header = (
             <div class="container">
-                  <img alt="Card" className='h-3 image_overlay' src={src} />
+                  <img alt="Card" height='300px' className=' image_overlay' src={src} />
                   <div class="overlay">
                   </div>
                   <div className="play child">
-                        <Avatar className='' icon="pi pi-play" size="xlarge" style={{ color: '#000000' }} />
+                        <Avatar className='' icon="pi pi-play" style={{ color: '#000000', }} />
                   </div>
             </div>
       );

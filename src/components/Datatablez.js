@@ -20,9 +20,8 @@ const DataTablez = ({ value, children, noAction }) => {
             return <span className='text-white'> {row.rowIndex + 1}</span>
       };
       const newChildren = [
-            <Columnz key="stt" body={indexBodyTemplate} header="STT" className="text-center"></Columnz>,
+            <Columnz key="stt" body={indexBodyTemplate} header="STT" className="text-center" style={{ width: '5%' }}></Columnz>, // Đặt chiều rộng thành 7%
             ...React.Children.toArray(children),
-
       ];
       if (!noAction) {
             newChildren.push(<Columnz key="action" body={actionBodyTemplate} header="Hành động"></Columnz>);
