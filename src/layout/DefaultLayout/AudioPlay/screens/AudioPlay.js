@@ -6,81 +6,69 @@ import { Slider } from 'primereact/slider';
 import { useSelector } from 'react-redux';
 
 const AudioPlay = () => {
-      const audioRef = useRef();
 
-      const [isPlaying, setIsPlaying] = useState(false);
       const [currentTime, setCurrentTime] = useState(0);
-      const [duration, setDuration] = useState(0);
+
       const [progress, setProgress] = useState(0);
+      const [volumeSound, setVolumeSound] = useState(true)
       const [volume, setVolume] = useState(50);
+      const [duration, setDuration] = useState(0);
+      const [savedVolume, setSavedVolume] = useState(50);
       const currentSong = useSelector((state) => state.currentSong);
+      const [isPlaying, setIsPlaying] = useState(true);
+      const audioRef = useRef(null);
 
-      const toggleAudio = () => {
-            if (isPlaying) {
-                  audioRef.current.pause();
-            } else {
-                  audioRef.current.play();
-            }
+      const togglePlay = () => {
             setIsPlaying(!isPlaying);
-      }
-      // useEffect(() => {
-      //       const playAudio = async () => {
-      //             try {
-      //                   await audioRef.current.play();
-      //             } catch (error) {
-      //                   console.log(error);
-      //             }
-      //       };
-
-      //       if (currentSong) {
-      //             playAudio();
-      //       }
-      // }, [currentSong]);
-      const onSliderChange = (e) => {
-            const newTime = (e.value / 100) * audioRef.current.duration;
-            audioRef.current.currentTime = newTime;
-            setCurrentTime(newTime);
       };
+
+      const playAudio = async () => {
+            try {
+                  await audioRef.current.play();
+                  console.log(isPlaying);
+            } catch (error) {
+                  console.log(error);
+            }
+      };
+      useEffect(() => {
+            if (isPlaying && audioRef.current) {
+                  const playAudio = async () => {
+                        try {
+                              await audioRef.current.play();
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  };
+                  playAudio();
+            }
+      }, [isPlaying]);
 
       useEffect(() => {
-            if (currentSong) {
-                  const audio = audioRef.current;
-                  const updateProgress = () => {
-                        const progress = (audio.currentTime / audio.duration) * 100;
-                        setProgress(progress);
-                        setCurrentTime(audio.currentTime);
-                  };
-                  const setAudioDuration = () => {
-                        setDuration(audio.duration);
-                  };
-
-                  audio.addEventListener('timeupdate', updateProgress);
-                  audio.addEventListener('loadedmetadata', setAudioDuration);
-
-                  return () => {
-                        audio.removeEventListener('timeupdate', updateProgress);
-                        audio.removeEventListener('loadedmetadata', setAudioDuration);
-                  };
+            if (!isPlaying && audioRef.current) {
+                  audioRef.current.pause();
             }
-      }, []);
+      }, [isPlaying]);
 
-      const formatTime = (timeInSeconds) => {
-            const minutes = Math.floor(timeInSeconds / 60);
-            const seconds = Math.floor(timeInSeconds % 60);
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-      };
+
+
+
+
+
+
+
+
+
+
+
       const [isClicked, setIsClicked] = useState(false);
-      const [volumeSound, setVolumeSound] = useState(true)
-      const [savedVolume, setSavedVolume] = useState(50);
       const handleClickHeart = () => {
             setIsClicked(!isClicked);
       }
-      useEffect(() => {
-            if (currentSong) {
-                  audioRef.current.volume = volume / 100;
-            }
-      }, [volume]);
-
+      const handleVolumeChange = (e) => {
+            const newVolume = e.value / 100;
+            audioRef.current.volume = newVolume;
+            setVolume(e.value);
+      };
       const handleClickVolume = () => {
             setVolumeSound(!volumeSound);
             if (!volumeSound) {
@@ -90,18 +78,24 @@ const AudioPlay = () => {
                   setVolume(0);
             }
       };
-      const handleVolumeChange = (e) => {
-            const newVolume = e.value / 100;
-            audioRef.current.volume = newVolume;
-            setVolume(e.value);
+
+      const formatTime = (timeInSeconds) => {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = Math.floor(timeInSeconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
       };
-      console.log(currentSong);
+
+      const onSliderChange = (e) => {
+            const newTime = (e.value / 100) * audioRef.current.duration;
+            audioRef.current.currentTime = newTime;
+
+            setCurrentTime(newTime);
+      };
       return (
             <>
                   {currentSong && <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
-                        <audio ref={audioRef}>
-                              <source src="https://firebasestorage.googleapis.com/v0/b/nodejs-9c5e8.appspot.com/o/songs%2F1Phut-Andiez-7632303.mp3?alt=media&token=4a162195-a4f6-4fa4-a095-12ec3561f0f1" type="audio/mpeg" />
-                              Trình duyệt của bạn không hỗ trợ thẻ audio.
+                        <audio ref={audioRef} src={currentSong.song}>
+
                         </audio>
                         <div className="grid align-items-center">
                               <div className="col-2 xl:col-3">
@@ -112,8 +106,8 @@ const AudioPlay = () => {
                                                             <img src={currentSong?.url} alt="" style={{ width: '70px', aspectRatio: '1', marginBottom: '5px', height: '70px' }} className='border-round-lg' />
                                                       </div>
                                                       <div className='lg:col-10 hidden xl:flex flex-column justify-content-center p-3 gap-2'>
-                                                            <Link to="" className='text-white no-underline text-xl w-full'>{currentSong?.title}</Link>
-                                                            <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                            <Link to="" className='text-white no-underline text-xl w-full'>{currentSong?.name}</Link>
+                                                            <Link to="" className='text-white no-underline'>{currentSong?.singer}</Link>
                                                       </div>
                                                 </li>
                                           </div>
@@ -132,7 +126,12 @@ const AudioPlay = () => {
                                                 rounded
                                           />
                                           <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-backward-alt" />
-                                          <Button rounded style={{ background: '#03CE58', border: 'none', }} icon={isPlaying ? "pi pi-pause" : "pi pi-play"} onClick={toggleAudio} />
+                                          <Button
+                                                rounded
+                                                style={{ background: '#03CE58', border: 'none' }}
+                                                icon={isPlaying ? "pi pi-pause" : "pi pi-play"}
+                                                onClick={togglePlay}
+                                          />
                                           <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-forward-alt" />
                                     </div>
                               </div>

@@ -17,15 +17,22 @@ import Partner from './Partner'
 import '../index.css'
 import { useDispatch } from 'react-redux'
 import { setCurrentSong } from '@/redux/currentSong'
+import { useGetApi } from '@/hook/useGetApi'
+import { getlistSongHome } from '../api'
+import { useGetParams } from '@/hook/useGetParams'
+import { useListSongHome } from '../utils'
 
 
 function Home() {
     const dispatch = useDispatch();
-
+    const initParam = useGetParams()
+    const [params, setParams] = useState(initParam)
     const handleSongClick = (song) => {
         dispatch(setCurrentSong(song));
         console.log(song);
     };
+    // const data = useGetApi(getlistSongHome, { ...params, first: undefined, }, [])
+    const data = useListSongHome({ ...params, first: undefined, })
     return (
         <>
 
@@ -46,9 +53,9 @@ function Home() {
                     <Title title="Mùa chay" icon='pi-angle-double-right' subTitle="Xem thêm" />
                     <div className="grid ">
                         {
-                            test.slice(0, 8).map(d =>
+                            data.slice(0, 8).map(d =>
                                 <div className="col-6 md:col-4 lg:col-3 p-3 p-3 " onClick={() => handleSongClick(d)}>
-                                    <Cardz song={d.title} src={d.url} sing="Thế Quyền" />
+                                    <Cardz song={d.name} src="https://hinhconggiao.com/images/tranh-cong-giao-khac/JK-34.jpg" sing={d.composed} />
                                 </div>
                             )
                         }
