@@ -10,13 +10,14 @@ import { clientApi } from './axios';
 import { Toast } from 'primereact/toast';
 import { hideToast } from './redux/toast';
 import AudioPlay from './layout/DefaultLayout/AudioPlay/screens/AudioPlay';
+// import { fetchSongs } from './firstLoading/firstLoading';
 function App() {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.user)
     const toast = useRef(null)
     const toastOptions = useSelector((state) => state.toast)
-
+    // fetchSongs()
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -56,18 +57,18 @@ function App() {
                             key={index}
                             path={route.path}
                             element={
-                            <>
-                                <div className="is_pc">
-                                    <Layout status={true}>
+                                <>
+                                    <div className="is_pc">
+                                        <Layout status={true}>
                                             <Page />
-                                    </Layout>
-                                </div>
-                                <div className="is_mobile">
-                                    <Layout status={false}>
+                                        </Layout>
+                                    </div>
+                                    <div className="is_mobile">
+                                        <Layout status={false}>
                                             <Page />
-                                    </Layout>
-                                </div>
-                            </>
+                                        </Layout>
+                                    </div>
+                                </>
 
                             }
                         />

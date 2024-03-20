@@ -2,10 +2,10 @@
 import SideBarAdmin from './SideBar/SideBarAdmin'
 import '../style/index.css'
 import HeaderAdmin from './Header/HeaderAdmin';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function AdminLayout({ children }) {
-      const [sidebarOpen, setSideBarOpen] = React(true);
+      const [sidebarOpen, setSideBarOpen] = useState(true);
       const handleViewSidebar = () => {
             setSideBarOpen(!sidebarOpen);
       };

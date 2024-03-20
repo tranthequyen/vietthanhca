@@ -15,8 +15,17 @@ import NewRelease from './NewRelease'
 import Images from './Images'
 import Partner from './Partner'
 import '../index.css'
+import { useDispatch } from 'react-redux'
+import { setCurrentSong } from '@/redux/currentSong'
+
 
 function Home() {
+    const dispatch = useDispatch();
+
+    const handleSongClick = (song) => {
+        dispatch(setCurrentSong(song));
+        console.log(song);
+    };
     return (
         <>
 
@@ -38,8 +47,8 @@ function Home() {
                     <div className="grid ">
                         {
                             test.slice(0, 8).map(d =>
-                                <div className="col-6 md:col-4 lg:col-3 p-3 p-3 ">
-                                    <Cardz song="Cảm mến ân tình 2" src={d.url} sing="Thế Quyền" />
+                                <div className="col-6 md:col-4 lg:col-3 p-3 p-3 " onClick={() => handleSongClick(d)}>
+                                    <Cardz song={d.title} src={d.url} sing="Thế Quyền" />
                                 </div>
                             )
                         }

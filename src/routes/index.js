@@ -23,7 +23,7 @@ const publicRoutes = [
 ]
 const privateRoutes = [
 
-    { path: '/admin', component: HomeAdmin, layout: 'admin' },
+    { path: '/admin', component: AdminLayout, layout: 'admin' },
     { path: '/list_user', component: ListUser, layout: 'admin' },
     { path: '/list_song', component: ListSong, layout: 'admin' },
 

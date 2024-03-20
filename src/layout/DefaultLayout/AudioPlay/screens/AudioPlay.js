@@ -3,6 +3,7 @@ import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Link } from 'react-router-dom';
 import { Slider } from 'primereact/slider';
+import { useSelector } from 'react-redux';
 
 const AudioPlay = () => {
       const audioRef = useRef();
@@ -12,6 +13,8 @@ const AudioPlay = () => {
       const [duration, setDuration] = useState(0);
       const [progress, setProgress] = useState(0);
       const [volume, setVolume] = useState(50);
+      const currentSong = useSelector((state) => state.currentSong);
+
       const toggleAudio = () => {
             if (isPlaying) {
                   audioRef.current.pause();
@@ -20,7 +23,19 @@ const AudioPlay = () => {
             }
             setIsPlaying(!isPlaying);
       }
+      // useEffect(() => {
+      //       const playAudio = async () => {
+      //             try {
+      //                   await audioRef.current.play();
+      //             } catch (error) {
+      //                   console.log(error);
+      //             }
+      //       };
 
+      //       if (currentSong) {
+      //             playAudio();
+      //       }
+      // }, [currentSong]);
       const onSliderChange = (e) => {
             const newTime = (e.value / 100) * audioRef.current.duration;
             audioRef.current.currentTime = newTime;
@@ -28,23 +43,25 @@ const AudioPlay = () => {
       };
 
       useEffect(() => {
-            const audio = audioRef.current;
-            const updateProgress = () => {
-                  const progress = (audio.currentTime / audio.duration) * 100;
-                  setProgress(progress);
-                  setCurrentTime(audio.currentTime);
-            };
-            const setAudioDuration = () => {
-                  setDuration(audio.duration);
-            };
+            if (currentSong) {
+                  const audio = audioRef.current;
+                  const updateProgress = () => {
+                        const progress = (audio.currentTime / audio.duration) * 100;
+                        setProgress(progress);
+                        setCurrentTime(audio.currentTime);
+                  };
+                  const setAudioDuration = () => {
+                        setDuration(audio.duration);
+                  };
 
-            audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('loadedmetadata', setAudioDuration);
+                  audio.addEventListener('timeupdate', updateProgress);
+                  audio.addEventListener('loadedmetadata', setAudioDuration);
 
-            return () => {
-                  audio.removeEventListener('timeupdate', updateProgress);
-                  audio.removeEventListener('loadedmetadata', setAudioDuration);
-            };
+                  return () => {
+                        audio.removeEventListener('timeupdate', updateProgress);
+                        audio.removeEventListener('loadedmetadata', setAudioDuration);
+                  };
+            }
       }, []);
 
       const formatTime = (timeInSeconds) => {
@@ -59,17 +76,16 @@ const AudioPlay = () => {
             setIsClicked(!isClicked);
       }
       useEffect(() => {
-            // Cập nhật âm lượng của phần tử audio khi volume thay đổi
-            audioRef.current.volume = volume / 100;
+            if (currentSong) {
+                  audioRef.current.volume = volume / 100;
+            }
       }, [volume]);
 
       const handleClickVolume = () => {
-            setVolumeSound(!volumeSound); // Đảo trạng thái âm lượng
+            setVolumeSound(!volumeSound);
             if (!volumeSound) {
-                  // Nếu đang tắt âm lượng, phục hồi âm lượng từ savedVolume
                   setVolume(savedVolume);
             } else {
-                  // Nếu đang bật âm lượng, lưu giá trị hiện tại và đặt về 0
                   setSavedVolume(volume);
                   setVolume(0);
             }
@@ -79,74 +95,76 @@ const AudioPlay = () => {
             audioRef.current.volume = newVolume;
             setVolume(e.value);
       };
-
+      console.log(currentSong);
       return (
-            <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
-                  <audio ref={audioRef}>
-                        <source src="https://firebasestorage.googleapis.com/v0/b/nodejs-9c5e8.appspot.com/o/songs%2F1Phut-Andiez-7632303.mp3?alt=media&token=4a162195-a4f6-4fa4-a095-12ec3561f0f1" type="audio/mpeg" />
-                        Trình duyệt của bạn không hỗ trợ thẻ audio.
-                  </audio>
-                  <div className="grid align-items-center">
-                        <div className="col-2 xl:col-3">
-                              <ul className='p-0 m-0 flex  '>
-                                    <div className='flex  gap-2 flex-column px-2'>
-                                          <li className='grid align-items-center'>
-                                                <div className="col-5 xl:col-3">
-                                                      <img src="https://picsum.photos/200/300" alt="" style={{ width: '70px', aspectRatio: '1', marginBottom: '5px' }} className='border-round-lg' />
-                                                </div>
-                                                <div className='xl:col-9 hidden xl:flex flex-column justify-content-center p-3 gap-2'>
-                                                      <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
-                                                      <Link to="" className='text-white no-underline'>Thế Quyền</Link>
-                                                </div>
-                                          </li>
+            <>
+                  {currentSong && <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
+                        <audio ref={audioRef}>
+                              <source src="https://firebasestorage.googleapis.com/v0/b/nodejs-9c5e8.appspot.com/o/songs%2F1Phut-Andiez-7632303.mp3?alt=media&token=4a162195-a4f6-4fa4-a095-12ec3561f0f1" type="audio/mpeg" />
+                              Trình duyệt của bạn không hỗ trợ thẻ audio.
+                        </audio>
+                        <div className="grid align-items-center">
+                              <div className="col-2 xl:col-3">
+                                    <ul className='p-0 m-0   '>
+                                          <div className='flex  gap-2 flex-column px-2'>
+                                                <li className='grid align-items-center'>
+                                                      <div className=" lg:col-2">
+                                                            <img src={currentSong?.url} alt="" style={{ width: '70px', aspectRatio: '1', marginBottom: '5px', height: '70px' }} className='border-round-lg' />
+                                                      </div>
+                                                      <div className='lg:col-10 hidden xl:flex flex-column justify-content-center p-3 gap-2'>
+                                                            <Link to="" className='text-white no-underline text-xl w-full'>{currentSong?.title}</Link>
+                                                            <Link to="" className='text-white no-underline'>Thế Quyền</Link>
+                                                      </div>
+                                                </li>
+                                          </div>
+                                    </ul>
+                              </div>
+                              <div className="col-10 xl:col-2 pl-4 flex flex-column">
+                                    <div className="xl:hidden flex" style={{ margin: "0 auto", marginBottom: "10px" }}>
+                                          <Link to="" className='text-white no-underline text-xl'>{currentSong?.title}</Link>
                                     </div>
-                              </ul>
-                        </div>
-                        <div className="col-10 xl:col-2 pl-4 flex flex-column">
-                              <div className="xl:hidden flex" style={{ margin: "0 auto", marginBottom: "10px" }}>
-                                    <Link to="" className='text-white no-underline text-xl'>Con đường Chúa đã đi</Link>
+                                    <div className='flex gap-3' style={{ margin: '0 auto' }}>
+                                          <Button
+                                                icon="pi pi-heart"
+                                                className={isClicked ? '' : 'p-button-outlined'}
+                                                style={isClicked ? { background: '#03CE58', border: 'none', } : {}}
+                                                onClick={handleClickHeart}
+                                                rounded
+                                          />
+                                          <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-backward-alt" />
+                                          <Button rounded style={{ background: '#03CE58', border: 'none', }} icon={isPlaying ? "pi pi-pause" : "pi pi-play"} onClick={toggleAudio} />
+                                          <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-forward-alt" />
+                                    </div>
                               </div>
-                              <div className='flex gap-3' style={{ margin: '0 auto' }}>
-                                    <Button
-                                          icon="pi pi-heart"
-                                          className={isClicked ? '' : 'p-button-outlined'}
-                                          style={isClicked ? { background: '#03CE58', border: 'none', } : {}}
-                                          onClick={handleClickHeart}
-                                          rounded
-                                    />
-                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-backward-alt" />
-                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon={isPlaying ? "pi pi-pause" : "pi pi-play"} onClick={toggleAudio} />
-                                    <Button rounded style={{ background: '#03CE58', border: 'none', }} icon="pi pi-step-forward-alt" />
+                              <div className="xl:col-5 hidden xl:flex gap-3">
+                                    <div className="flex justify-content-center align-items-center  gap-3" style={{ width: "70%" }}>
+                                          <div> {formatTime(currentTime)}</div>
+                                          <Slider style={{ width: '80%' }}
+                                                value={progress}
+                                                onChange={onSliderChange}
+                                                onSlideEnd={() => setIsPlaying(true)}
+                                          />
+                                          <div> {formatTime(duration - currentTime)}</div>
+                                    </div>
+                                    <div className="flex align-items-center gap-3" style={{ width: "30%" }}>
+                                          <Button rounded style={{ background: '#03CE58', border: 'none' }} icon={volumeSound ? 'pi pi-volume-up' : 'pi  pi-volume-off'}
+                                                onClick={handleClickVolume} />
+                                          <Slider style={{ width: '80%' }}
+                                                value={volume}
+                                                onChange={handleVolumeChange}
+                                                showValue={false}
+                                          />
+                                    </div>
                               </div>
-                        </div>
-                        <div className="xl:col-5 hidden xl:flex gap-3">
-                              <div className="flex justify-content-center align-items-center  gap-3" style={{ width: "70%" }}>
-                                    <div> {formatTime(currentTime)}</div>
-                                    <Slider style={{ width: '80%' }}
-                                          value={progress}
-                                          onChange={onSliderChange}
-                                          onSlideEnd={() => setIsPlaying(true)}
-                                    />
-                                    <div> {formatTime(duration - currentTime)}</div>
+                              <div className="xl:col-2 hidden xl:flex gap-3 justify-content-center">
+                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-question-circle" />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-sync" />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-list" />
                               </div>
-                              <div className="flex align-items-center gap-3" style={{ width: "30%" }}>
-                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon={volumeSound ? 'pi pi-volume-up' : 'pi  pi-volume-off'}
-                                          onClick={handleClickVolume} />
-                                    <Slider style={{ width: '80%' }}
-                                          value={volume}
-                                          onChange={handleVolumeChange}
-                                          showValue={false}
-                                    />
-                              </div>
-                        </div>
-                        <div className="xl:col-2 hidden xl:flex gap-3 justify-content-center">
-                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-question-circle" />
-                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-sync" />
-                              <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-list" />
-                        </div>
 
-                  </div>
-            </div>
+                        </div>
+                  </div>}
+            </>
       );
 };
 
