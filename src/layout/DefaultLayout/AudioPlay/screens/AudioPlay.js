@@ -7,34 +7,58 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSongState } from '@/redux/currentSong';
 
 const AudioPlay = () => {
-
-
-
-
       const currentSong = useSelector((state) => state.currentSong.currentSong);
       const isPlaying = useSelector((state) => state.currentSong.isPlaying);
       const dispatch = useDispatch()
-      console.log(isPlaying);
       const audioRef = useRef(null);
+
+
+      const [currentTime, setCurrentTime] = useState(0);
+      const [duration, setDuration] = useState(null);
+
       const togglePlay = () => {
             dispatch(setSongState(!isPlaying));
       }
+
+
       useEffect(() => {
             if (currentSong && isPlaying) {
                   audioRef.current.play();
+                  setDuration(audioRef?.current?.duration)
             } else {
-                  audioRef.current.pause();
+                  audioRef.current?.pause();
+            }
+            if (isPlaying && audioRef.current) {
+                  const interval = setInterval(() => {
+                        setCurrentTime(audioRef.current.currentTime);
+                  }, 1000);
+                  return () => clearInterval(interval);
             }
       }, [currentSong, isPlaying]);
 
 
-
+      const formatTime = (seconds) => {
+            seconds = Math.round(seconds);
+            const minutes = Math.floor(seconds / 60);
+            seconds %= 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      };
 
 
       return (
             <>
                   {currentSong && <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
-                        <audio ref={audioRef} src={currentSong?.song} />
+                        <audio ref={audioRef} src={currentSong?.song} onLoadedMetadata={e => setDuration(e.target.duration)} />
+                        <div> {formatTime(currentTime)}</div>
+                        <Slider style={{ width: '80%' }} value={currentTime} max={duration} onChange={(e) => {
+                              setCurrentTime(e.value);
+                              if (audioRef.current) {
+
+                                    audioRef.current.currentTime = e.value;
+                              }
+                        }} />
+
+                        <div> {formatTime(audioRef?.current?.duration)}</div>
                         <div className="grid align-items-center">
                               <div className="col-2 xl:col-3">
                                     <ul className='p-0 m-0   '>
