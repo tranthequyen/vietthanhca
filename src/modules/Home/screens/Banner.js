@@ -4,7 +4,7 @@ import { Carousel } from 'primereact/carousel';
 import React, { useEffect, useState } from 'react'
 function Banner() {
       const itemTemplate = (item) => {
-            console.log(item);
+            // console.log(item);
             return (
                   <img className='border-round-lg' src={item} alt={item.alt} style={{ width: '100%', height: '300px' }} />
             );

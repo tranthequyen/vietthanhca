@@ -16,7 +16,7 @@ import Images from './Images'
 import Partner from './Partner'
 import '../index.css'
 import { useDispatch } from 'react-redux'
-import { setCurrentSong } from '@/redux/currentSong'
+import { setCurrentSong, setSongState } from '@/redux/currentSong'
 import { useGetApi } from '@/hook/useGetApi'
 import { getlistSongHome } from '../api'
 import { useGetParams } from '@/hook/useGetParams'
@@ -29,9 +29,9 @@ function Home() {
     const [params, setParams] = useState(initParam)
     const handleSongClick = (song) => {
         dispatch(setCurrentSong(song));
-        console.log(song);
+        dispatch(setSongState(true));
     };
-    // const data = useGetApi(getlistSongHome, { ...params, first: undefined, }, [])
+
     const data = useListSongHome({ ...params, first: undefined, })
     return (
         <>
