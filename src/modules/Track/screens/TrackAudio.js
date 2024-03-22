@@ -3,31 +3,53 @@ import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Link } from 'react-router-dom';
 import { Slider } from 'primereact/slider';
-function TrackAudio({ handleSpin, spin, data }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { setSongState } from '@/redux/currentSong';
+function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
       const audioRef = useRef();
-      console.log(data);
-      const [isPlaying, setIsPlaying] = useState(false);
+      const dispatch = useDispatch();
+      const isPlaying = useSelector((state) => state.currentSong.isPlaying);
+
+      // const [isPlaying, setIsPlaying] = useState(false);
       const [currentTime, setCurrentTime] = useState(0);
       const [duration, setDuration] = useState(0);
       const [progress, setProgress] = useState(0);
       const [volume, setVolume] = useState(50);
+
       const toggleAudio = () => {
-            if (isPlaying) {
-                  audioRef.current.pause();
-            } else {
-                  audioRef.current.play();
-            }
-            setIsPlaying(!isPlaying);
+
+            let newIsPlaying = isPlaying
+            dispatch(setSongState(!newIsPlaying))
             handleSpin()
       }
       const handleClickAudio = () => {
             audioRef.current.currentTime = 0;
       }
+
       const onSliderChange = (e) => {
             const newTime = (e.value / 100) * audioRef.current.duration;
             audioRef.current.currentTime = newTime;
             setCurrentTime(newTime);
       };
+      useEffect(() => {
+
+            if (data && isPlaying) {
+                  audioRef.current.currentTime = currentTimeSong
+                  if (currentTimeSong) {
+                        audioRef.current.play();
+                        setDuration(audioRef?.current?.duration);
+                  }
+            } else if (data && !isPlaying) {
+                  audioRef.current?.pause();
+
+            }
+            console.log(isPlaying);
+      }, [data, currentTimeSong])
+
+
+
+
+
 
       useEffect(() => {
             const audio = audioRef.current;
@@ -95,7 +117,8 @@ function TrackAudio({ handleSpin, spin, data }) {
                         <Slider style={{ width: '60%' }}
                               value={progress}
                               onChange={onSliderChange}
-                              onSlideEnd={() => setIsPlaying(true)}
+                              onSlideEnd={() => dispatch(setSongState(true))
+                              }
                         />
                         <div style={{ fontSize: '2vh' }}>
                               {formatTime(duration - currentTime)}</div>

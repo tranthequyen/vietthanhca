@@ -1,24 +1,24 @@
-import Cardz from "@/components/Card";
-import Title from "@/components/Title";
-import TrendRegular from "@/modules/Home/screens/TrendRegular";
+
 import ListTrack from "./ListTrack";
 import { useState } from "react";
-import { Slider } from "primereact/slider";
+
 import Relation from "./Relation";
 import TrackAudio from "./TrackAudio";
 import RelationBanner from "./RelationBanner";
 import { Button } from "primereact/button";
 import { Link, useParams } from "react-router-dom";
 import '../index.css'
-import { Carousel } from "primereact/carousel";
+
 import AudioCarousel from "./AudioCarousel";
 import { useDetailSong } from "../utils";
+import { useSelector } from "react-redux";
 
 function Track() {
   const { id } = useParams()
-  let _id = id
+
   const data = useDetailSong(id)
-  console.log(data);
+  const currentTimeSong = useSelector((state) => state.currentSong.currentTimeSong);
+
   const [spin, setSpin] = useState(false)
   const handleSpin = () => {
     setSpin(!spin)
@@ -100,7 +100,7 @@ function Track() {
       </div>
 
       <div className="grid">
-        <TrackAudio data={data} handleSpin={handleSpin} spin={spin} />
+        <TrackAudio data={data} handleSpin={handleSpin} spin={spin} currentTimeSong={currentTimeSong} />
       </div>
       {showMore ? (
         <>

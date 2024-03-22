@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header/screens';
 import Partner from '@/modules/Home/screens/Partner';
@@ -9,6 +9,7 @@ function DefaultLayout({ children, status }) {
     const [sidebarOpen, setSideBarOpen] = useState(status);
     const [isOverlayVisible, setOverlayVisible] = useState(true);
     const [show, setShow] = useState(true);
+    const [showz, setShowz] = useState(true);
     const location = useLocation()
     const handleViewSidebar = () => {
         setSideBarOpen(!sidebarOpen);
@@ -18,6 +19,17 @@ function DefaultLayout({ children, status }) {
 
     const contentClass = sidebarOpen ? "content open" : "content";
     const headerClass = sidebarOpen ? "header open" : "header";
+
+
+
+    // console.log(showz);
+
+
+
+    useEffect(() => {
+        if (location.pathname.includes('/song/detail/')) setShowz(true)
+        else setShowz(false)
+    }, [location.pathname])
 
     return (
         <>
@@ -40,7 +52,10 @@ function DefaultLayout({ children, status }) {
                 <div>
                     <Footer />
                 </div>
-                <AudioPlay />
+                {
+                    showz ? <></> : <AudioPlay />
+                }
+
             </div>
         </>
     );
