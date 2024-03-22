@@ -54,7 +54,7 @@ function App() {
       <Toast ref={toast} />
 
       <Router>
-        <AudioPlay />
+        {/* <AudioPlay /> */}
 
         <Routes>
           {[...publicRoutes, ...privateRoutes].map((route, index) => {
