@@ -3,9 +3,9 @@ import { Button } from "primereact/button";
 import { ProgressBar } from "primereact/progressbar";
 import { Link } from "react-router-dom";
 import { Slider } from "primereact/slider";
-function TrackAudio({ handleSpin, spin }) {
+function TrackAudio({ handleSpin, spin, data }) {
   const audioRef = useRef();
-
+  console.log(data);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -61,17 +61,14 @@ function TrackAudio({ handleSpin, spin }) {
     setIsClicked(!isClicked);
   };
   useEffect(() => {
-    // Cập nhật âm lượng của phần tử audio khi volume thay đổi
     audioRef.current.volume = volume / 100;
   }, [volume]);
 
   const handleClickVolume = () => {
-    setVolumeSound(!volumeSound); // Đảo trạng thái âm lượng
+    setVolumeSound(!volumeSound);
     if (!volumeSound) {
-      // Nếu đang tắt âm lượng, phục hồi âm lượng từ savedVolume
       setVolume(savedVolume);
     } else {
-      // Nếu đang bật âm lượng, lưu giá trị hiện tại và đặt về 0
       setSavedVolume(volume);
       setVolume(0);
     }
@@ -86,17 +83,10 @@ function TrackAudio({ handleSpin, spin }) {
   return (
     <div className=" col-12 flex flex-column" style={{ margin: "0 auto" }}>
       <h3 className="text-center text-xl pb-2">
-        Trong tình yêu mẹ -{" "}
-        <strong style={{ color: "green" }}>Diệu Hiền</strong>
+        {data.name} - <strong style={{ color: "green" }}>{data.singer}</strong>
       </h3>
       <div className="flex justify-content-center align-items-center  gap-3">
-        <audio ref={audioRef}>
-          <source
-            src="https://firebasestorage.googleapis.com/v0/b/nodejs-9c5e8.appspot.com/o/songs%2F1Phut-Andiez-7632303.mp3?alt=media&token=4a162195-a4f6-4fa4-a095-12ec3561f0f1"
-            type="audio/mpeg"
-          />
-          Trình duyệt của bạn không hỗ trợ thẻ audio.
-        </audio>
+        <audio ref={audioRef} src={data.song}></audio>
         <div style={{ fontSize: "2vh" }}>{formatTime(currentTime)}</div>
         <Slider
           style={{ width: "60%" }}

@@ -5,10 +5,15 @@ import InputForm from "@/components/Form";
 import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { clientApi } from "@/axios";
+import { listToast } from "@/constants/main";
+import { setToast } from "@/redux/toast";
+import { useDispatch } from "react-redux";
 
 function SignUp(props) {
   const { visibleSignUp, setVisibleSignUp, setVisibleLogin } = props;
   const [checked, setChecked] = useState(false);
+
+  const dispatch = useDispatch();
 
   const [infos, setInfos] = useState({
     username: "",
@@ -20,6 +25,7 @@ function SignUp(props) {
       await clientApi.post("/user/signup", infos);
       setVisibleSignUp(false);
       setVisibleLogin(true);
+      dispatch(setToast({ ...listToast[0], detail: "Đăng ký thành công" }));
     } catch (error) {
       console.error(error);
     }

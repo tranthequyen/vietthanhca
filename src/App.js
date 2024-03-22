@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./routes";
 import { DefaultLayout, AdminLayout } from "./layout";
@@ -10,8 +10,12 @@ import { clientApi } from "./axios";
 import { Toast } from "primereact/toast";
 import { hideToast } from "./redux/toast";
 import AudioPlay from "./layout/DefaultLayout/AudioPlay/screens/AudioPlay";
+
+import { useFetchAllSongs } from "./getAPIredux/utils";
 function App() {
+  useFetchAllSongs();
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
   const toast = useRef(null);
   const toastOptions = useSelector((state) => state.toast);
@@ -35,6 +39,7 @@ function App() {
         });
     }
   }, []);
+
   useEffect(() => {
     if (toastOptions.severity) {
       const show = () => {

@@ -12,7 +12,7 @@ import { Track } from "@/modules/Track";
 
 const publicRoutes = [
   { path: "/", component: Home, layout: "user" },
-  { path: "/track", component: Track, layout: "user" },
+  { path: "/song/detail/:id", component: Track, layout: "user" },
   { path: "/rank", component: Rank, layout: "user" },
   { path: "/library", component: Library, layout: "user" },
   { path: "/play_list", component: PlayList, layout: "user" },
@@ -20,7 +20,7 @@ const publicRoutes = [
   { path: "/song", component: Song, layout: "user" },
 ];
 const privateRoutes = [
-  { path: "/admin", component: HomeAdmin, layout: "admin" },
+  { path: "/admin", component: AdminLayout, layout: "admin" },
   { path: "/list_user", component: ListUser, layout: "admin" },
   { path: "/list_song", component: ListSong, layout: "admin" },
 ];

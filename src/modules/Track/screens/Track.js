@@ -8,12 +8,17 @@ import Relation from "./Relation";
 import TrackAudio from "./TrackAudio";
 import RelationBanner from "./RelationBanner";
 import { Button } from "primereact/button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../index.css";
 import { Carousel } from "primereact/carousel";
 import AudioCarousel from "./AudioCarousel";
+import { useDetailSong } from "../utils";
 
 function Track() {
+  const { id } = useParams();
+  let _id = id;
+  const data = useDetailSong(id);
+  console.log(data);
   const [spin, setSpin] = useState(false);
   const handleSpin = () => {
     setSpin(!spin);
@@ -139,7 +144,7 @@ function Track() {
       </div>
 
       <div className="grid">
-        <TrackAudio handleSpin={handleSpin} spin={spin} />
+        <TrackAudio data={data} handleSpin={handleSpin} spin={spin} />
       </div>
       {showMore ? (
         <>

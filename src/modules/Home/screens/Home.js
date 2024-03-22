@@ -9,14 +9,38 @@ import React, { useEffect, useState } from "react";
 import Banner from "./Banner";
 import TrendRegular from "./TrendRegular";
 
-import ads from "../../../Image Thanh Ca/anhh.png";
+import ads from "@/layout/img/ads.png";
 import NewRelease from "./NewRelease";
 import Images from "./Images";
 import Partner from "./Partner";
 import "../index.css";
-import { musician } from "@/axios/musician";
-
+import { useDispatch } from "react-redux";
+import {
+  setCurrentSong,
+  setSongActive,
+  setSongState,
+} from "@/redux/currentSong";
+import { useGetApi } from "@/hook/useGetApi";
+import { getlistSongHome } from "../api";
+import { useGetParams } from "@/hook/useGetParams";
+import { useListSongHome } from "../utils";
+import { setAllSongs } from "@/redux/allSong";
+import { useFetchAllSongs } from "@/getAPIredux/utils";
 function Home() {
+  const dispatch = useDispatch();
+  const initParam = useGetParams();
+  const [params, setParams] = useState(initParam);
+  const handleSongClick = (song) => {
+    dispatch(setCurrentSong(song));
+    dispatch(setSongState(true));
+    dispatch(setSongActive(true));
+  };
+  useFetchAllSongs();
+
+  const data = useListSongHome();
+  useEffect(() => {
+    dispatch(setAllSongs(data));
+  }, [data, dispatch]);
   return (
     <>
       <div className="grid">
@@ -33,7 +57,10 @@ function Home() {
             />
             <div className="grid ">
               {test.slice(0, 4).map((d) => (
-                <div className="col-6 md:col-4 lg:col-3 p-3 p-3 ">
+                <div
+                  className="col-6 md:col-4 lg:col-3 p-3 p-3 "
+                  onClick={() => handleSongClick(d)}
+                >
                   <Cardz
                     song="Cảm mến ân tình 2"
                     src={d.url}
@@ -51,7 +78,10 @@ function Home() {
             />
             <div className="grid ">
               {test.slice(0, 8).map((d) => (
-                <div className="col-6 md:col-4 lg:col-3 p-3 p-3 ">
+                <div
+                  className="col-6 md:col-4 lg:col-3 p-3 p-3 "
+                  onClick={() => handleSongClick(d)}
+                >
                   <Cardz
                     song="Cảm mến ân tình 2"
                     src={d.url}
@@ -98,7 +128,10 @@ function Home() {
               />
               <div className="grid">
                 {test.slice(0, 8).map((d) => (
-                  <div className="col-6 md:col-4 lg:col-3 p-3">
+                  <div
+                    className="col-6 md:col-4 lg:col-3 p-3"
+                    onClick={() => handleSongClick(d)}
+                  >
                     <Cardz
                       song="Cảm mến ân tình"
                       src={d.url}
