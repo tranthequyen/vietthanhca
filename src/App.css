@@ -1,14 +1,8 @@
 body {
-  background-image: linear-gradient(
-    45deg,
-    #000000 90%,
-    #029d43 100%,
-    #08ff6f 100%
-  );
+  background-image: linear-gradient(45deg, #000000 90%, #000000 100%);
   /* background-color: #000000; */
   color: #ffffff;
   margin: 0px !important;
-  padding-bottom: 6rem;
 }
 ul {
   list-style: none;
@@ -34,7 +28,7 @@ ul {
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 .p-card-header img {
-  height: 250px !important;
+  aspect-ratio: 0.8 !important ;
   border-radius: 8px 8px 0 0 !important;
 }
 .grid {
@@ -56,13 +50,6 @@ ul {
 }
 .p-card-subtitle {
   font-size: 1rem;
-}
-.partner {
-  background: linear-gradient(
-    to right,
-    rgba(243, 243, 243, 0.3) 45%,
-    rgba(215, 215, 215, 0.3) 55%
-  );
 }
 
 .footer {
@@ -134,11 +121,13 @@ a {
   left: 120px;
 }
 .bg-adsv2 {
+  height: 100px;
+  width: 100px;
   content: "";
   position: absolute;
   top: 350px;
   left: 70%;
-  background-image: linear-gradient(
+  background: linear-gradient(
     180deg,
     rgba(2, 157, 67, 1) 0%,
     rgba(255, 199, 0, 1) 100%
@@ -158,7 +147,7 @@ a {
   justify-content: space-evenly;
 }
 .p-datatable-tbody tr {
-  background: #000000 !important;
+  background: transparent !important;
 }
 .p-datatable .p-datatable-tbody > tr {
   background: gray;
@@ -180,21 +169,22 @@ a {
   width: 25%;
 }
 .album {
-  background: linear-gradient(#077436 0%, #2efa82 50%, #077436 100%);
+  background: linear-gradient(
+    #07622d 0%,
+    #2efa82 50%,
+    #077436 85%,
+    #086b32 100%
+  );
   border-radius: 30px;
 }
 
-.bgr_playlist {
-  background-image: url("https://hinhconggiao.com/images/hinh-bua-tiec-ly/BTL-08.jpg");
-  background-size: auto;
-}
 .p-button {
   color: #ffffff;
 
   /* border: none !important; */
 }
 .p-datatable .p-datatable-thead > tr > th {
-  background-color: #000000;
+  background-color: transparent;
   color: #ffffff;
 }
 /* Hiển thị đường kẻ ở hàng header đầu tiên */

@@ -17,15 +17,23 @@ const DataTablez = ({ value, children, noAction }) => {
   };
 
   const indexBodyTemplate = (rowData, row) => {
-    return <span className="text-white"> {row.rowIndex + 1}</span>;
+    return (
+      <span
+        className="text"
+        style={{ fontWeight: "bold", fontSize: "3vh", color: "	#686868" }}
+      >
+        {" "}
+        {row.rowIndex + 1}
+      </span>
+    );
   };
   const newChildren = [
     <Columnz
       key="stt"
       body={indexBodyTemplate}
-      header="STT"
+      header="#"
       className="text-center"
-      style={{ width: "5%" }}
+      style={{ width: "7%", padding: "2vh" }}
     ></Columnz>, // Đặt chiều rộng thành 7%
     ...React.Children.toArray(children),
   ];

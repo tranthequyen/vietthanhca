@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import { ProgressBar } from "primereact/progressbar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Slider } from "primereact/slider";
 
 const AudioPlay = () => {
   const audioRef = useRef();
-
+  const location = useLocation().pathname;
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -82,8 +82,14 @@ const AudioPlay = () => {
 
   return (
     <div
-      style={{ position: "fixed", bottom: 0, background: "#171717" }}
-      className="w-full h-6rem z-5"
+      style={{
+        position: "fixed",
+        bottom: 0,
+        background: "#171717",
+      }}
+      className={
+        location === "/track" ? "w-full h-6rem z-5 hidden" : "w-full h-6rem z-5"
+      }
     >
       <audio ref={audioRef}>
         <source

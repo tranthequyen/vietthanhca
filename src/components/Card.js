@@ -6,10 +6,42 @@ import { Avatar } from "primereact/avatar";
 function Cardz({ src, song, sing, link }) {
   const header = (
     <div class="container">
-      <img alt="Card" height="300px" className=" image_overlay" src={src} />
+      <img
+        alt="Card"
+        style={{ width: "95%" }}
+        className=" image_overlay"
+        src={src}
+      />
       <div class="overlay"></div>
       <div className="play child">
-        <Avatar className="" icon="pi pi-play" style={{ color: "#000000" }} />
+        {/* <Avatar
+          className=""
+          icon="pi pi-play"
+          style={{ color: "#000000", fontSize: "30px" }}
+        /> */}
+        <span
+          className="pi pi-heart "
+          style={{
+            fontSize: "25px",
+            marginRight: "35px",
+          }}
+        ></span>
+        <span
+          className="pi pi-play"
+          style={{
+            fontSize: "30px",
+            border: "2px solid white",
+            padding: "10px 10px 10px 12px",
+            borderRadius: "50%",
+          }}
+        ></span>
+        <span
+          className="pi pi-ellipsis-h "
+          style={{
+            fontSize: "25px",
+            marginLeft: "35px",
+          }}
+        ></span>
       </div>
     </div>
   );
@@ -27,6 +59,7 @@ function Cardz({ src, song, sing, link }) {
         title={song}
         header={header}
         subTitle={subTitle}
+        style={{ backgroundColor: "#111111" }}
       ></Card>
     </div>
   );

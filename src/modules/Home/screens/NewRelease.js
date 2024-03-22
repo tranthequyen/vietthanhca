@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function NewRelease() {
   return (
     <div>
-      <div className="grid">
+      <div className="grid p-5">
         <div className="col-12 xl:col-9" style={{ margin: "0 auto" }}>
           <Title
             title="Mới phát hành"
@@ -17,7 +17,13 @@ function NewRelease() {
             {test.slice(0, 3).map((d) => (
               <div className="grid justify-content-center align-items-center text-center">
                 <div className=" col-5 sm:col-3 md:col-2">
-                  <img src={d.url} width="100px" height="100px" alt="" />
+                  <img
+                    src={d.url}
+                    width="100px"
+                    height="100px"
+                    alt=""
+                    style={{ borderRadius: "20px" }}
+                  />
                 </div>
                 <div className="col-7 xl:col-5">
                   <Link

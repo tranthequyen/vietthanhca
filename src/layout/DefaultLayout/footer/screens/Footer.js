@@ -12,13 +12,17 @@ function Footer() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "7%",
             }}
           >
             <img
-              className="logo"
+              className="logo hidden lg:block"
               src={logo}
-              style={{ width: "120px", height: "120px" }}
+              style={{ width: "200px", height: "200px" }}
+            />
+            <img
+              className="logo block lg:hidden"
+              src={logo}
+              style={{ width: "140px", height: "140px" }}
             />
             <h1>VIETTHANHCA</h1>
           </div>
@@ -79,10 +83,6 @@ function Footer() {
                 ></i>
                 <i
                   className="pi pi-facebook m-2"
-                  style={{ fontSize: "1.7rem", color: "#03CE58" }}
-                ></i>
-                <i
-                  className="pi pi-twitter m-2"
                   style={{ fontSize: "1.7rem", color: "#03CE58" }}
                 ></i>
                 <i

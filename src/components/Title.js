@@ -8,7 +8,11 @@ function Title({ title, SubTitle, subTitle, href, icon }) {
       style={{ height: "50px" }}
     >
       <b className="text-3xl p-0">{title}</b>
-      <Link className="text-xl text-white no-underline pr-2" to={href}>
+      <Link
+        className="text-xl text-white no-underline pr-2"
+        to={href}
+        style={{ fontWeight: "250" }}
+      >
         {subTitle} <i className={`pi ${icon}`}></i>
       </Link>
       {SubTitle && <SubTitle />}

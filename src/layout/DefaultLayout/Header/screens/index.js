@@ -55,30 +55,36 @@ const Header = (props) => {
         setVisibleSignUp={setVisibleSignUp}
       />
       <Login visibleLogin={visibleLogin} setVisibleLogin={setVisibleLogin} />
-      <div className="card header_bar ">
-        <div className=" flex justify-content-between p-3">
+      <div
+        className="header_bar "
+        style={{
+          background:
+            "linear-gradient(90deg, #1e402b 0%, #252525 15%,#252525 100%)",
+        }}
+      >
+        <div className=" flex justify-content-between py-4 px-5">
           <div className="pc_button">
             <Button
               onClick={props.onClick}
               icon="pi pi-align-justify"
-              className="bar_button"
+              className="bar_button ml-4 hidden xl:block"
             />
+            {/* <Button
+              onClick={props.onClick}
+              icon="pi pi-align-justify"
+              className="bar_button block xl:hidden"
+            /> */}
           </div>
           <div className="mobile_button">
             <Button onClick={props.onClick} icon="pi pi-align-justify" />
           </div>
-          <div className="w-6  flex gap-2 search ">
+          <div className="w-4  flex gap-2 search ">
             <InputText
               type="text"
               placeholder="Bạn muốn nghe gì ?"
               className="w-full input_search"
+              style={{ background: "transparent" }}
             />
-            <Button
-              label="Tìm kiếm"
-              className="text-black-alpha-80 bg-white border-none label-hide search_button "
-            >
-              <i className="pi pi-search" style={{ margin: "auto" }}></i>
-            </Button>
           </div>
           {isLoggedIn ? (
             <>

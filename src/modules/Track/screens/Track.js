@@ -105,7 +105,7 @@ function Track() {
                     borderRadius: "50%",
                     aspectRatio: "1",
                     width: "100%",
-                    border: "5px solid #30F274",
+                    border: "8px solid #0d3d22",
                   }}
                   alt="Avatar"
                 />
