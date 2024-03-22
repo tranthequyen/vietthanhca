@@ -4,7 +4,11 @@ import { ProgressBar } from "primereact/progressbar";
 import { Link, useNavigate } from "react-router-dom";
 import { Slider } from "primereact/slider";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentSong, setSongState } from "@/redux/currentSong";
+import {
+  setCurrentSong,
+  setCurrentTimeSong,
+  setSongState,
+} from "@/redux/currentSong";
 
 const AudioPlay = () => {
   const currentSong = useSelector((state) => state.currentSong.currentSong);
@@ -54,10 +58,15 @@ const AudioPlay = () => {
   useEffect(() => {
     if (currentSong && isPlaying) {
       audioRef.current.play();
-
       setDuration(audioRef?.current?.duration);
+      // dispatch(setSongState(!newIsActive));
+      // let newIsActive = isActive;
+      // console.log(isPlaying);
     } else {
       audioRef.current?.pause();
+      let newIsActive = !isActive;
+      dispatch(setSongState(newIsActive));
+      // console.log(newIsActive);
     }
     if (isPlaying && audioRef.current) {
       const interval = setInterval(() => {
@@ -66,10 +75,13 @@ const AudioPlay = () => {
       return () => clearInterval(interval);
     }
   }, [currentSong, isPlaying]);
-  const [replay, setReplay] = useState(true);
-  const handleReplaySong = () => {
-    setReplay(!replay);
-    console.log(replay);
+
+  const handleReplaySong = () => {};
+
+  const handleClickDetail = () => {
+    navigate(`/song/detail/${currentSong._id}`);
+    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
+    audioRef.current?.pause();
   };
   return (
     <>
@@ -201,7 +213,7 @@ const AudioPlay = () => {
                 rounded
                 style={{ background: "#03CE58", border: "none" }}
                 icon="pi pi-info-circle"
-                onClick={() => navigate(`/song/detail/${currentSong._id}`)}
+                onClick={handleClickDetail}
               />
             </div>
           </div>
