@@ -45,9 +45,6 @@ const AudioPlay = () => {
             return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       };
 
-
-
-
       useEffect(() => {
             if (currentSong && isPlaying) {
                   audioRef.current.play();
@@ -63,11 +60,14 @@ const AudioPlay = () => {
                   return () => clearInterval(interval);
             }
       }, [currentSong, isPlaying]);
-      const [replay, setReplay] = useState(true)
+      // const [replay, setReplay] = useState(true)
       const handleReplaySong = () => {
-            setReplay(!replay)
-            console.log(replay);
+            // setReplay(!replay)
+            // console.log(replay);
       };
+      const handleClickDetail = () => {
+            navigate(`/song/detail/${currentSong._id}`)
+      }
       return (
             <>
                   {currentSong && <div style={{ position: 'fixed', bottom: 0, background: '#171717' }} className='w-full h-6rem z-5' >
@@ -133,7 +133,7 @@ const AudioPlay = () => {
                                     <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-question-circle" />
                                     <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-sync" onClick={handleReplaySong} />
                                     <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-list" />
-                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-info-circle" onClick={() => navigate(`/song/detail/${currentSong._id}`)} />
+                                    <Button rounded style={{ background: '#03CE58', border: 'none' }} icon="pi pi-info-circle" onClick={handleClickDetail} />
                               </div>
 
                         </div>
