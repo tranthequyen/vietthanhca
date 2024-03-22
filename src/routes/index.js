@@ -14,7 +14,7 @@ import { Track } from "@/modules/Track"
 
 const publicRoutes = [
     { path: '/', component: Home, layout: 'user' },
-    { path: '/track', component: Track, layout: 'user' },
+    { path: '/song/detail/:id', component: Track, layout: 'user' },
     { path: '/rank', component: Rank, layout: 'user' },
     { path: '/library', component: Library, layout: 'user' },
     { path: '/play_list', component: PlayList, layout: 'user' },

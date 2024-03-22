@@ -16,11 +16,13 @@ import Images from './Images'
 import Partner from './Partner'
 import '../index.css'
 import { useDispatch } from 'react-redux'
-import { setCurrentSong, setSongState } from '@/redux/currentSong'
+import { setCurrentSong, setSongActive, setSongState } from '@/redux/currentSong'
 import { useGetApi } from '@/hook/useGetApi'
 import { getlistSongHome } from '../api'
 import { useGetParams } from '@/hook/useGetParams'
 import { useListSongHome } from '../utils'
+import { setAllSongs } from '@/redux/allSong'
+import { useFetchAllSongs } from '@/getAPIredux/utils'
 
 
 function Home() {
@@ -30,9 +32,15 @@ function Home() {
     const handleSongClick = (song) => {
         dispatch(setCurrentSong(song));
         dispatch(setSongState(true));
-    };
+        dispatch(setSongActive(true));
 
-    const data = useListSongHome({ ...params, first: undefined, })
+    };
+    useFetchAllSongs()
+
+    const data = useListSongHome()
+    useEffect(() => {
+        dispatch(setAllSongs(data));
+    }, [data, dispatch]);
     return (
         <>
 
