@@ -4,24 +4,39 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Link } from 'react-router-dom';
 import { Slider } from 'primereact/slider';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSongState } from '@/redux/currentSong';
+import { setCurrentSong, setSongState } from '@/redux/currentSong';
 function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
       const audioRef = useRef();
       const dispatch = useDispatch();
       const isPlaying = useSelector((state) => state.currentSong.isPlaying);
-
-      // const [isPlaying, setIsPlaying] = useState(false);
       const [currentTime, setCurrentTime] = useState(0);
+      const [save, setSave] = useState(null);
       const [duration, setDuration] = useState(0);
-      const [progress, setProgress] = useState(0);
-      const [volume, setVolume] = useState(50);
+      const allSong = useSelector((state) => state.allSong);
 
       const toggleAudio = () => {
-
             let newIsPlaying = isPlaying
             dispatch(setSongState(!newIsPlaying))
             handleSpin()
+            setSave(audioRef.current.currentTime)
+            console.log(save);
       }
+      useEffect(() => {
+            if (data && isPlaying) {
+                  audioRef.current.play();
+                  setDuration(audioRef?.current?.duration);
+
+            } else if (data && !isPlaying) {
+                  audioRef.current?.pause();
+            }
+      }, [data, isPlaying])
+
+      useEffect(() => {
+            audioRef.current.currentTime = currentTimeSong
+      }, [currentTimeSong])
+
+      const [progress, setProgress] = useState(0);
+      const [volume, setVolume] = useState(50);
       const handleClickAudio = () => {
             audioRef.current.currentTime = 0;
       }
@@ -31,24 +46,6 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
             audioRef.current.currentTime = newTime;
             setCurrentTime(newTime);
       };
-      useEffect(() => {
-
-            if (data && isPlaying) {
-                  audioRef.current.currentTime = currentTimeSong
-                  if (currentTimeSong) {
-                        audioRef.current.play();
-                        setDuration(audioRef?.current?.duration);
-                  }
-            } else if (data && !isPlaying) {
-                  audioRef.current?.pause();
-
-            }
-            console.log(isPlaying);
-      }, [data, currentTimeSong])
-
-
-
-
 
 
       useEffect(() => {
@@ -58,16 +55,14 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
                   setProgress(progress);
                   setCurrentTime(audio.currentTime);
             };
-            const setAudioDuration = () => {
-                  setDuration(audio.duration);
-            };
+
 
             audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('loadedmetadata', setAudioDuration);
+
 
             return () => {
                   audio.removeEventListener('timeupdate', updateProgress);
-                  audio.removeEventListener('loadedmetadata', setAudioDuration);
+
             };
       }, []);
 
@@ -104,7 +99,14 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
             audioRef.current.volume = newVolume;
             setVolume(e.value);
       };
+      // const [currentSongIndex, setCurrentSongIndex] = useState(0);
+      const handleNextSong = () => {
 
+      };
+
+      const handlePrevSong = () => {
+
+      };
       return (
             <div className=" col-12 flex flex-column" style={{ margin: '0 auto' }}>
                   <h3 className="text-center text-xl pb-2" >{data.name} - <strong style={{ color: 'green' }}>{data.singer}</strong></h3>
@@ -121,7 +123,7 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
                               }
                         />
                         <div style={{ fontSize: '2vh' }}>
-                              {formatTime(duration - currentTime)}</div>
+                              {formatTime(duration)}</div>
                   </div>
                   <div className="flex flex-row " style={{ margin: '0 auto', marginTop: '10px', position: 'relative' }} >
                         <Button className='audio_button' >
@@ -134,9 +136,8 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
                         <Button className='audio_button' >
                               <span className="pi pi-sort-alt" style={{ transform: 'rotate(90deg)' }}></span>
                         </Button>
-                        <Button className='audio_button' >
-                              <span className="pi pi-step-backward-alt"></span>
-                        </Button>
+                        <Button className='audio_button' icon="pi pi-step-backward-alt" onClick={handlePrevSong} />
+
                         <Button className='audio_button' onClick={toggleAudio}>
                               {isPlaying ? (
                                     <span className='pi pi-pause' ></span>
@@ -144,9 +145,9 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
                                     <span className='pi pi-play' ></span>
                               )}
                         </Button>
-                        <Button className='audio_button'>
-                              <span className="pi pi-step-forward-alt"></span>
-                        </Button>
+                        <Button className='audio_button' icon="pi pi-step-forward-alt" onClick={handleNextSong} />
+
+
 
                         <Button className='audio_button' onClick={handleClickAudio}>
                               <span className="pi pi pi-sync" ></span>

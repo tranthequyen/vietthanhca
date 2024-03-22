@@ -33,11 +33,8 @@ function Home() {
         dispatch(setCurrentSong(song));
         dispatch(setSongState(true));
         dispatch(setSongActive(true));
-
-
     };
     useFetchAllSongs()
-
     const data = useListSongHome()
     useEffect(() => {
         dispatch(setAllSongs(data));
@@ -49,7 +46,7 @@ function Home() {
                 <Banner />
             </div>
 
-            <div className='grid   py-3'>
+            <div className='grid py-3'>
                 <div className="col-12 lg:col-9">
                     <div className='hidden xl:block'>
                         <Title title="Nghệ sỹ tiêu biểu" icon='pi-angle-double-right' subTitle="Xem thêm" />
