@@ -8,7 +8,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Banner from "./Banner";
 import TrendRegular from "./TrendRegular";
-
+import { musician } from "@/axios/musician";
 import ads from "@/layout/img/ads.png";
 import NewRelease from "./NewRelease";
 import Images from "./Images";
