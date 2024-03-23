@@ -18,6 +18,7 @@ const publicRoutes = [
   { path: "/play_list", component: PlayList, layout: "user" },
   { path: "/favourite", component: Favourite, layout: "user" },
   { path: "/song", component: Song, layout: "user" },
+  { path: "/track", component: Track, layout: "user" },
 ];
 const privateRoutes = [
   { path: "/admin", component: AdminLayout, layout: "admin" },
