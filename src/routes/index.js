@@ -7,7 +7,6 @@ import { ListSong } from "@/modules/ListSong";
 import { ListUser } from "@/modules/ListUser";
 import PlayList from "@/modules/PlayList/PlayList";
 import Rank from "@/modules/Rank/Rank";
-import Song from "@/modules/Songs/screens/Song";
 import { Track } from "@/modules/Track";
 
 const publicRoutes = [
@@ -17,7 +16,6 @@ const publicRoutes = [
   { path: "/library", component: Library, layout: "user" },
   { path: "/play_list", component: PlayList, layout: "user" },
   { path: "/favourite", component: Favourite, layout: "user" },
-  { path: "/song", component: Song, layout: "user" },
   { path: "/track", component: Track, layout: "user" },
 ];
 const privateRoutes = [
