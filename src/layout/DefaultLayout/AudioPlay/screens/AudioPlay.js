@@ -23,7 +23,6 @@ const AudioPlay = () => {
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
-
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
       (song) => song._id === currentSong._id
@@ -59,14 +58,10 @@ const AudioPlay = () => {
     if (currentSong && isPlaying) {
       audioRef.current.play();
       setDuration(audioRef?.current?.duration);
-      // dispatch(setSongState(!newIsActive));
-      // let newIsActive = isActive;
-      // console.log(isPlaying);
     } else {
       audioRef.current?.pause();
       let newIsActive = !isActive;
       dispatch(setSongState(newIsActive));
-      // console.log(newIsActive);
     }
     if (isPlaying && audioRef.current) {
       const interval = setInterval(() => {
@@ -77,6 +72,14 @@ const AudioPlay = () => {
   }, [currentSong, isPlaying]);
 
   const handleReplaySong = () => {};
+  const [mute, setMute] = useState(false);
+
+  const handleMuteVolumn = () => {
+    setMute(!mute);
+    if (audioRef.current && mute) {
+      audioRef.current.muted = !audioRef.current.muted;
+    }
+  };
 
   const handleClickDetail = () => {
     navigate(`/song/detail/${currentSong._id}`);
@@ -186,8 +189,8 @@ const AudioPlay = () => {
                 <Button
                   rounded
                   style={{ background: "#03CE58", border: "none" }}
-                  icon={"pi  pi-volume-off"}
-                  // onClick={handleVolume}
+                  icon={mute ? "pi  pi-volume-up" : "pi pi-volume-off"}
+                  onClick={handleMuteVolumn}
                 />
                 <Slider style={{ width: "80%" }} showValue={false} />
               </div>
