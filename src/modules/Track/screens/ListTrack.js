@@ -6,7 +6,7 @@ function ListTrack() {
   return (
     <div
       className="trend_regular "
-      style={{ borderRadius: "4vh", width: "90%" }}
+      style={{ borderRadius: "4vh", width: "85%" }}
     >
       <ul className="p-0 m-0 flex py-3 justify-content-center">
         <div className="flex  gap-2 flex-column ">
@@ -35,17 +35,14 @@ function ListTrack() {
               <span className="pi pi-ellipsis-h"></span>
             </Button>
           </div>
-          <h3
-            className="text-left px-5"
-            style={{ fontWeight: "400", fontSize: "15px" }}
-          >
+          <h3 className="text-left px-3">
             Tiếp theo
             <br />
             <strong style={{ color: "green" }}>Từ playlist </strong>Nhạc thánh
             ca dâng mẹ Maria
           </h3>
-          {test.slice(0, 4).map((d) => (
-            <li className="flex align-items-center px-5">
+          {test.slice(0, 3).map((d) => (
+            <li className="flex align-items-center px-3">
               <img
                 src="https://picsum.photos/200/300"
                 alt=""
@@ -56,13 +53,13 @@ function ListTrack() {
               <div className="flex flex-column justify-content-center p-3 gap-2">
                 <Link
                   to=""
-                  className="text-white no-underline text-sm font-semibold"
+                  className="text-white no-underline text-lg font-semibold"
                 >
                   Con đường Chúa đã đi
                 </Link>
                 <Link
                   to=""
-                  className="text-left no-underline text-sm"
+                  className="text-left no-underline text-md"
                   style={{ color: "lightgrey" }}
                 >
                   Thế Quyền

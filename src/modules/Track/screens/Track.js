@@ -12,13 +12,12 @@ import AudioCarousel from "./AudioCarousel";
 import { useDetailSong } from "../utils";
 import { useSelector } from "react-redux";
 import { InputText } from "primereact/inputtext";
-import anh1 from "../../../Image Thanh Ca/421826174_1341861439848446_3497682106586253765_n.png";
-import anh5 from "../../../Image Thanh Ca/420647413_888641202709305_1876205483034809311_n.png";
-import anh6 from "../../../Image Thanh Ca/420035607_733817608699894_3506576374518450027_n.png";
+
 function Track() {
   const { id } = useParams();
-
   const data = useDetailSong(id);
+  const allSong = useSelector((state) => state.allSong);
+  const indexSong = allSong.findIndex((d, index) => d.id === data.id);
   const currentTimeSong = useSelector(
     (state) => state.currentSong.currentTimeSong
   );
@@ -31,13 +30,13 @@ function Track() {
   const handleClickShow = () => {
     setShowMore(!showMore);
   };
-  console.log(spin);
+
   return (
     <>
       <div className="flex flex-column">
         <div className="grid">
           <div
-            className="col-12 xl:col-3 flex flex-row p-3 mt-3"
+            className="col-12 xl:col-4 flex flex-row p-3 mt-3"
             style={{ justifyContent: "center", alignItems: "center" }}
           >
             <Link to={"/"}>
@@ -87,15 +86,15 @@ function Track() {
               }}
             ></Button>
           </div>
-          <div className="xl:col-6 hidden xl:flex">
+          <div className="xl:col-4 hidden xl:block">
             <Button
               label="Lời bài hát"
               severity="success"
               className="mt-4"
-              style={{ borderRadius: "10vh", width: "80%", margin: "0 auto" }}
+              style={{ borderRadius: "10vh", width: "95%" }}
             />
           </div>
-          <div className="xl:col-3 hidden xl:flex">
+          <div className="xl:col-4 hidden xl:flex">
             <InputText
               type="text"
               placeholder=" Bạn muốn nghe gì ?"
@@ -111,55 +110,32 @@ function Track() {
         </div>
         <div className="xl:col-12 hidden xl:flex">
           <div
-            className="col-3 text-center flex flex-column"
+            className="col-4 text-center flex flex-column"
             style={{ display: "flex", alignItems: "center", margin: "0 auto" }}
           >
-            <div className="flex px-4" style={{ marginTop: "5vh" }}>
+            <div className="flex" style={{ marginTop: "5vh" }}>
               <img
                 className={`image_spin ${spin ? "" : "paused"}`}
-                src="https://i.pinimg.com/736x/71/62/f2/7162f25b5e4ba89c8f6fb22342656209.jpg"
+                src="https://picsum.photos/350/350"
                 style={{
                   borderRadius: "50%",
                   aspectRatio: "1",
                   width: "90%",
-                  maxWidth: "400px",
                   border: "5px solid #30F274",
                 }}
                 alt="Avatar"
               />
             </div>
           </div>
-          <div
-            className="col-6 text-center px-6 py-4"
-            style={{ margin: "0 auto", textAlign: "left" }}
-          >
-            <p
-              style={{
-                fontSize: "5.5vh",
-                justifyContent: "start",
-                fontWeight: "bold",
-                width: "90%",
-                margin: "0 auto",
-                textAlign: "center",
-              }}
-            >
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-              Ôi Tình уêu Thiên Ϲhúa
-              <br />
-            </p>
+          <div className="col-4 text-center" style={{ margin: "0 auto" }}>
+            <h1>HHHHHHHHHHHHH</h1>
+            <h1>HHHHHHHHHHHHH</h1>
+            <h1>HHHHHHHHHHHHH</h1>
+            <h1>HHHHHHHHHHHH</h1>
+            <h1>HHHHHHHHHHHH</h1>
+            <h1>HHHHHHHHHHHH</h1>
           </div>
-          <div className="xl:col-3 hidden xl:block">
+          <div className="xl:col-4 hidden xl:block">
             <ListTrack />
           </div>
         </div>
@@ -217,11 +193,11 @@ function Track() {
               style={{ background: "none", border: "solid 1px white" }}
             ></Button>
           </div>
-          <div className="flex flex-column col-9 " style={{ margin: "0 auto" }}>
-            <Relation title="Dành cho bạn" src={anh1} />
-            <Relation title="Album Kinh thánh 100 tuần" src={anh6} />
+          <div className="flex flex-column">
+            <Relation title="Dành cho bạn" />
+            <Relation title="Album Kinh thánh 100 tuần" />
             <RelationBanner />
-            <Relation title="Album Kinh thánh 100 tuần" src={anh5} />
+            <Relation title="Album Kinh thánh 100 tuần" />
           </div>
         </>
       )}

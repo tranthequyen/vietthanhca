@@ -1,6 +1,7 @@
 import { clientApi } from "@/axios";
 import { test } from "@/axios/test";
-import Card, { Cardz } from "@/components/Card";
+import Cardz from "@/components/Card";
+import Card from "@/components/Card";
 import Title from "@/components/Title";
 import axios from "axios";
 
@@ -15,8 +16,10 @@ import Images from "./Images";
 import Partner from "./Partner";
 import "../index.css";
 import { useDispatch } from "react-redux";
-import {
+import currentSong, {
+  setCurrentIndexSong,
   setCurrentSong,
+  setListMySong,
   setSongActive,
   setSongState,
 } from "@/redux/currentSong";
@@ -31,16 +34,20 @@ function Home() {
   const dispatch = useDispatch();
   const initParam = useGetParams();
   const [params, setParams] = useState(initParam);
+  const data = useListSongHome();
+
   const handleSongClick = (song) => {
     dispatch(setCurrentSong(song));
     dispatch(setSongState(true));
     dispatch(setSongActive(true));
+    dispatch(setListMySong(data));
+    dispatch(setCurrentIndexSong(data.findIndex((d) => d._id === song._id)));
   };
+
   useFetchAllSongs();
-  const data = useListSongHome();
   useEffect(() => {
     dispatch(setAllSongs(data));
-  }, [data, dispatch]);
+  }, [data]);
   return (
     <>
       <div className="grid">
@@ -110,7 +117,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="col-12 lg:col-3 p-2">
+        <div className="col-12 lg:col-3 ">
           <div className="  hidden xl:block pr-4">
             <TrendRegular />
           </div>

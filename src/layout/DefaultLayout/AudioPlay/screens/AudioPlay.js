@@ -20,10 +20,100 @@ const AudioPlay = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(null);
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
+
+  const onSliderChange = (e) => {
+    const newTime = (e.value / 100) * audioRef.current.duration;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  // useEffect(() => {
+  //   const audio = audioRef.current;
+  //   const updateProgress = () => {
+  //     const progress = (audio.currentTime / audio.duration) * 100;
+  //     setProgress(progress);
+  //     setCurrentTime(audio.currentTime);
+  //   };
+  //   const setAudioDuration = () => {
+  //     setDuration(audio.duration);
+  //   };
+
+  //   audio.addEventListener('timeupdate', updateProgress);
+  //   audio.addEventListener('loadedmetadata', setAudioDuration);
+
+  //   return () => {
+  //     audio.removeEventListener('timeupdate', updateProgress);
+  //     audio.removeEventListener('loadedmetadata', setAudioDuration);
+  //   };
+  // }, []);
+  useEffect(() => {
+    if (currentSong && isPlaying) {
+      audioRef.current.play();
+      setDuration(audioRef?.current?.duration);
+    } else {
+      audioRef.current?.pause();
+      let newIsActive = !isActive;
+      dispatch(setSongState(newIsActive));
+    }
+    const audio = audioRef.current;
+    if (audio) {
+      const updateProgress = () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        setProgress(progress);
+        setCurrentTime(audio.currentTime);
+      };
+      const setAudioDuration = () => {
+        setDuration(audio.duration);
+      };
+      audio.addEventListener("timeupdate", updateProgress);
+      audio.addEventListener("loadedmetadata", setAudioDuration);
+
+      return () => {
+        audio.removeEventListener("timeupdate", updateProgress);
+        audio.removeEventListener("loadedmetadata", setAudioDuration);
+      };
+    }
+  }, [currentSong, isPlaying]);
+
+  const handleReplaySong = () => {};
+  const handleClickDetail = () => {
+    navigate(`/song/detail/${currentSong._id}`);
+    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
+    audioRef.current?.pause();
+  };
   const [volume, setVolume] = useState(0);
+
+  const [volumeSound, setVolumeSound] = useState(true);
+  const [savedVolume, setSavedVolume] = useState(50);
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [audioRef.current?.volume]);
+
+  const handleClickVolume = () => {
+    if (isPlaying) {
+      setVolume(50);
+      setVolumeSound(!volumeSound);
+      if (!volumeSound) {
+        setVolume(savedVolume);
+      } else {
+        setSavedVolume(volume);
+        setVolume(0);
+      }
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.value / 100;
+    audioRef.current.volume = newVolume;
+    setVolume(e.value);
+  };
+
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
       (song) => song._id === currentSong._id
@@ -53,53 +143,6 @@ const AudioPlay = () => {
     return `${minutes.toString().padStart(2, "0")}:${seconds
       .toString()
       .padStart(2, "0")}`;
-  };
-
-  useEffect(() => {
-    if (currentSong && isPlaying) {
-      audioRef.current.play();
-      setDuration(audioRef?.current?.duration);
-    } else {
-      audioRef.current?.pause();
-      let newIsActive = !isActive;
-      dispatch(setSongState(newIsActive));
-    }
-    if (isPlaying && audioRef.current) {
-      const interval = setInterval(() => {
-        setCurrentTime(audioRef.current.currentTime);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [currentSong, isPlaying]);
-
-  const handleReplaySong = () => {};
-
-  const handleClickDetail = () => {
-    navigate(`/song/detail/${currentSong._id}`);
-    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
-    audioRef.current?.pause();
-  };
-  const [volumeSound, setVolumeSound] = useState(true);
-  const [savedVolume, setSavedVolume] = useState(50);
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume / 100;
-    }
-  }, [audioRef.current?.volume]);
-
-  const handleClickVolume = () => {
-    setVolumeSound(!volumeSound);
-    if (!volumeSound) {
-      setVolume(savedVolume);
-    } else {
-      setSavedVolume(volume);
-      setVolume(0);
-    }
-  };
-  const handleVolumeChange = (e) => {
-    const newVolume = e.value / 100;
-    audioRef.current.volume = newVolume;
-    setVolume(e.value);
   };
   return (
     <>
@@ -190,10 +233,16 @@ const AudioPlay = () => {
                 style={{ width: "70%" }}
               >
                 <div> {formatTime(currentTime)}</div>
-                <Slider
+                {/* <Slider
                   style={{ width: "80%" }}
                   value={currentTime}
                   max={duration}
+                /> */}
+                <Slider
+                  style={{ width: "80%" }}
+                  value={progress}
+                  onChange={onSliderChange}
+                  // onSlideEnd={() => dispatch(setSongState(!isPlaying))}
                 />
                 <div> {formatTime(audioRef?.current?.duration)}</div>
               </div>
