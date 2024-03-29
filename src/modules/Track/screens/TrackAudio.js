@@ -13,7 +13,10 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
   const [save, setSave] = useState(null);
   const [duration, setDuration] = useState(0);
   const allSong = useSelector((state) => state.allSong);
-
+  const [isReplay, setIsReplay] = useState(false);
+  const handleClickReplay = () => {
+    setIsReplay(!isReplay);
+  };
   const toggleAudio = () => {
     let newIsPlaying = isPlaying;
     dispatch(setSongState(!newIsPlaying));
@@ -46,7 +49,6 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
-
   useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => {
@@ -61,7 +63,24 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
       audio.removeEventListener("timeupdate", updateProgress);
     };
   }, []);
-
+  useEffect(() => {
+    if (
+      isReplay &&
+      audioRef.current?.currentTime == audioRef.current?.duration
+    ) {
+      handleClickAudio(); // Call the handleClickAudio function
+      toggleAudio();
+    }
+    if (isReplay && audioRef.current?.currentTime == 0) {
+      toggleAudio();
+    }
+    if (
+      !isReplay &&
+      audioRef.current?.currentTime == audioRef.current?.duration
+    ) {
+      toggleAudio();
+    }
+  }, [isReplay, audioRef.current?.currentTime]);
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
@@ -97,6 +116,7 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
   const handleNextSong = () => {};
 
   const handlePrevSong = () => {};
+  console.log(isReplay);
   return (
     <div className=" col-12 flex flex-column" style={{ margin: "0 auto" }}>
       <h3 className="text-center text-xl pb-2">
@@ -115,9 +135,9 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
       </div>
       <div
         className="flex flex-row "
-        style={{ margin: "0 auto", marginTop: "10px", position: "relative" }}
+        style={{ margin: "0 auto", marginTop: "2vh", position: "relative" }}
       >
-        <Button className="audio_button">
+        <Button className="audio_button mx-4">
           {isClicked ? (
             <span
               className="pi pi-heart-fill "
@@ -132,19 +152,19 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
             ></span>
           )}
         </Button>
-        <Button className="audio_button">
+        <Button className="audio_button mx-4">
           <span
             className="pi pi-sort-alt"
             style={{ transform: "rotate(90deg)" }}
           ></span>
         </Button>
         <Button
-          className="audio_button"
+          className="audio_button mx-4"
           icon="pi pi-step-backward-alt"
           onClick={handlePrevSong}
         />
 
-        <Button className="audio_button" onClick={toggleAudio}>
+        <Button className="audio_button mx-4" onClick={toggleAudio}>
           {isPlaying ? (
             <span className="pi pi-pause"></span>
           ) : (
@@ -152,15 +172,21 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
           )}
         </Button>
         <Button
-          className="audio_button"
+          className="audio_button mx-4"
           icon="pi pi-step-forward-alt"
           onClick={handleNextSong}
         />
 
-        <Button className="audio_button" onClick={handleClickAudio}>
-          <span className="pi pi pi-sync"></span>
-        </Button>
-        <Button className="audio_button" onClick={handleClickVolume}>
+        {isReplay ? (
+          <Button className="audio_button mx-4" onClick={handleClickReplay}>
+            <span className="pi pi-spin pi-sync "></span>
+          </Button>
+        ) : (
+          <Button className="audio_button mx-4" onClick={handleClickReplay}>
+            <span className="pi pi pi-sync"></span>
+          </Button>
+        )}
+        <Button className="audio_button mx-4" onClick={handleClickVolume}>
           {volumeSound ? (
             <span className="pi pi-volume-up"></span>
           ) : (
@@ -180,6 +206,13 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
           className="volume_bar"
         />
       </div>
+      {isReplay ? (
+        <div className="flex flex-row pt-4">
+          <span style={{ margin: "0 auto" }}>Bạn đang ở chế độ replay</span>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

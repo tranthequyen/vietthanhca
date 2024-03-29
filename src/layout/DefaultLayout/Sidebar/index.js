@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Link, useLocation } from "react-router-dom";
 import "../../style/index.css";
@@ -18,6 +18,7 @@ const Sidebar = (props) => {
     { name: "Yêu thích", route: "/favourite", icon: "pi pi-heart-fill" },
     { name: "Tải về", route: "/favourite", icon: "pi pi-heart-fill" },
   ];
+
   return (
     <div className={`${sidebarClass}`}>
       <div

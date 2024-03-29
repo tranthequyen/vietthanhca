@@ -1,16 +1,22 @@
+import { image } from "@/axios/image";
 import { test } from "@/axios/test";
-import { Carousel } from "primereact/carousel"
+import React from "react";
 
-function RelationBanner(){
-    const itemTemplate = (item) => {
-        return (
-              <img className='border-round-lg' src="https://picsum.photos/200/300" alt={item.alt} style={{ width: '90%', aspectRatio:'1.75',maxHeight:'350px',margin:'0 auto' }} />
-        );
-    }
-    return(
-        <div className="col-12 xl:col-9" style={{margin:'0 auto'}}>
-            <Carousel value={test.slice(0, 20).map(d => d.url)} numVisible={1} numScroll={1} itemTemplate={itemTemplate}></Carousel>
+function RelationBanner() {
+  return (
+    <div className="grid py-4 p-5 col-12">
+      {image.slice(0, 3).map((d) => (
+        <div className="col-4">
+          <img
+            src={d.url}
+            className="border-round-lg"
+            alt=""
+            style={{ aspectRatio: "1.8", width: "95%" }}
+          />
         </div>
-    )  
+      ))}
+    </div>
+  );
 }
-export default RelationBanner
+
+export default RelationBanner;

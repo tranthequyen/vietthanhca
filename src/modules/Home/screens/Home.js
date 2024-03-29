@@ -1,7 +1,6 @@
 import { clientApi } from "@/axios";
 import { test } from "@/axios/test";
-import Cardz from "@/components/Card";
-import Card from "@/components/Card";
+import Card, { Cardz } from "@/components/Card";
 import Title from "@/components/Title";
 import axios from "axios";
 

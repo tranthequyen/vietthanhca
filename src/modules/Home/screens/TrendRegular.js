@@ -2,7 +2,7 @@ import React from "react";
 import { test } from "@/axios/test";
 import { Link } from "react-router-dom";
 import anh1 from "../../../Image Thanh Ca/418426823_18405676804031112_8571678238867939356_n.jpg";
-import anh2 from "../../../Image Thanh Ca/421826174_1341861439848446_3497682106586253765_n.webp";
+import anh2 from "../../../Image Thanh Ca/421826174_1341861439848446_3497682106586253765_n.png";
 function TrendRegular() {
   return (
     <div className="trend_regular border-round-xl" style={{ paddingTop: "4%" }}>

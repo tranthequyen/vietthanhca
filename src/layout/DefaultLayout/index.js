@@ -19,6 +19,11 @@ function DefaultLayout({ children, status }) {
 
   const contentClass = sidebarOpen ? "content open" : "content";
   const headerClass = sidebarOpen ? "header open" : "header";
+  useEffect(() => {
+    if (location.pathname.includes("/song/detail")) {
+      setSideBarOpen(false);
+    }
+  }, [location]);
 
   // console.log(showz);
 
@@ -31,43 +36,60 @@ function DefaultLayout({ children, status }) {
     <>
       {isOverlayVisible ? <></> : <div className="over_lay"></div>}
       <div className="flex flex-column">
-        <div
-          style={{
-            position: "fixed",
-            top: "0",
-            left: "0",
-            zIndex: "1000",
-            height: "100%",
-          }}
-        >
-          <Sidebar
-            onClick={handleViewSidebar}
-            isOpen={sidebarOpen}
-            toggleSidebar={handleViewSidebar}
-            showButton={!show}
-          />
-        </div>
-        <div
-          style={{
-            position: "fixed",
-            top: "0",
-            left: "0",
-            zIndex: "999",
-          }}
-          className={headerClass}
-        >
-          <Header onClick={handleViewSidebar} showButton={show} />
-        </div>
-        <div
-          className={contentClass}
-          style={{
-            padding: "8rem 0 2rem 0",
-            background:
-              "linear-gradient(-240deg,#0e2f1b 0%,#111111 7%,#111111 100% )",
-          }}
-        >
-          {children}
-        </div>
+        {!location.pathname.includes("/song/detail") && (
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+              zIndex: "1000",
+              height: "100%",
+            }}
+          >
+            <Sidebar
+              onClick={handleViewSidebar}
+              isOpen={sidebarOpen}
+              toggleSidebar={handleViewSidebar}
+              showButton={!show}
+            />
+          </div>
+        )}
+        {!location.pathname.includes("/song/detail") && (
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+              zIndex: "999",
+            }}
+            className={headerClass}
+          >
+            <Header onClick={handleViewSidebar} showButton={show} />
+          </div>
+        )}
+        {location.pathname.includes("/song/detail") ? (
+          <div
+            className={contentClass}
+            style={{
+              padding: "1rem 0 2rem 0",
+              background:
+                "linear-gradient(-240deg,#0e2f1b 0%,#111111 7%,#111111 100% )",
+            }}
+          >
+            {children}
+          </div>
+        ) : (
+          <div
+            className={contentClass}
+            style={{
+              padding: "8rem 0 2rem 0",
+              background:
+                "linear-gradient(-240deg,#0e2f1b 0%,#111111 7%,#111111 100% )",
+            }}
+          >
+            {children}
+          </div>
+        )}
         <div>
           <Footer />
         </div>

@@ -1,57 +1,56 @@
-.audio_button{
-    background: none; 
-    border: none;
-    height:5vh;
+.audio_button {
+  background: none;
+  border: none;
+  height: 5vh;
 }
-.audio_button>span{
-    font-size: 2.8vh;
+.audio_button > span {
+  font-size: 3.2vh;
 }
 .volume_bar {
-    position: absolute;
-    top: -11.2rem;
-    right: 2.5vh;
-    transform: translateX(2s);
-    width: 1.5vh;
-    height: 10rem;
-    display: none;
-    z-index: 100;
-    transition: display 0s, opacity 0.5s;
-    transition-duration: 5s;
-    transition-delay: 2s;
-  }
-  
-  .audio_button:hover + .volume_bar,
-  .volume_bar:hover {
-    display: block;
-    opacity: 1;
-    transition-delay: 2s;
-    transition-delay: 2s;
-  }
-  .mobile_ver{
-    display: none;
-  }
+  position: absolute;
+  top: -11.2rem;
+  right: 5vh;
+  transform: translateX(2s);
+  width: 1.5vh;
+  height: 10rem;
+  display: none;
+  z-index: 100;
+  transition: display 0s, opacity 0.5s;
+  transition-duration: 5s;
+  transition-delay: 2s;
+}
+
+.audio_button:hover + .volume_bar,
+.volume_bar:hover {
+  display: block;
+  opacity: 1;
+  transition-delay: 2s;
+  transition-delay: 2s;
+}
+.mobile_ver {
+  display: none;
+}
 @media screen and (max-width: 1200px) {
-    .mobile_ver{
-        display: flex;
-    }
-    .audio_button{
-        height:4vh;
-    }
-    .audio_button>span{
-        font-size: 2.2vh;
-    }     
-      
+  .mobile_ver {
+    display: flex;
+  }
+  .audio_button {
+    height: 4vh;
+  }
+  .audio_button > span {
+    font-size: 2.2vh;
+  }
 }
 @media screen and (max-width: 768px) {
-    .audio_button{
-        height:3vh;
-    }
-    .audio_button>span{
-        font-size: 1.1vh;
-    }
-    .volume_bar{
-        width: 0.6vh;
-        top: -6.2rem;
-        height: 5rem;
-    } 
+  .audio_button {
+    height: 3vh;
+  }
+  .audio_button > span {
+    font-size: 1.1vh;
+  }
+  .volume_bar {
+    width: 0.6vh;
+    top: -6.2rem;
+    height: 5rem;
+  }
 }

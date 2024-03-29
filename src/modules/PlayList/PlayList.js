@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import Header from "./../../layout/DefaultLayout/Header/screens/index";
 import { test } from "@/axios/test";
 import { Link } from "react-router-dom";
-import Cardz from "@/components/Card";
 import banner from "../../Image Thanh Ca/z5196743261082_ccacac8a5c8693cb8abe95b58acf28b3.jpg";
 import anh from "../../Image Thanh Ca/420035607_733817608699894_3506576374518450027_n.png";
 import effect from "../../Image Thanh Ca/sideeffect.png";
@@ -19,6 +18,7 @@ import {
 import { useFetchAllSongs } from "@/getAPIredux/utils";
 import { useListSongHome } from "../Home/utils";
 import { setAllSongs } from "@/redux/allSong";
+import { Cards, Cardz } from "@/components/Card";
 
 function PlayList() {
   const dispatch = useDispatch();
@@ -259,7 +259,7 @@ function PlayList() {
           <div className="grid ">
             {test.slice(0, 6).map((d) => (
               <div className="col-6 md:col-4 lg:col-2 p-3 p-3">
-                <Cardz song="Cảm mến ân tình 2" src={anh} sing="Thế Quyền" />
+                <Cards song="Cảm mến ân tình 2" src={anh} sing="Thế Quyền" />
               </div>
             ))}
           </div>
@@ -272,7 +272,7 @@ function PlayList() {
           <div className="grid ">
             {test.slice(0, 6).map((d) => (
               <div className="col-6 md:col-4 lg:col-2 p-3 p-3 ">
-                <Cardz song="Cảm mến ân tình 2" src={anh} sing="Thế Quyền" />
+                <Cards song="Cảm mến ân tình 2" src={anh} sing="Thế Quyền" />
               </div>
             ))}
           </div>
