@@ -11,16 +11,21 @@ import {
 } from "@/redux/currentSong";
 
 const AudioPlay = () => {
-  const currentSong = useSelector((state) => state.currentSong.currentSong);
+  const currentSong = useSelector((state) => state?.currentSong?.currentSong);
   const isPlaying = useSelector((state) => state.currentSong.isPlaying);
   const isActive = useSelector((state) => state.currentSong.isActive);
   const allSong = useSelector((state) => state.allSong);
   const dispatch = useDispatch();
   const audioRef = useRef(null);
+  const [save, setSave] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(null);
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
+  const [isReplay, setIsReplay] = useState(false);
+  const handleClickReplay = () => {
+    setIsReplay(!isReplay);
+  };
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
@@ -31,25 +36,6 @@ const AudioPlay = () => {
     setCurrentTime(newTime);
   };
 
-  // useEffect(() => {
-  //   const audio = audioRef.current;
-  //   const updateProgress = () => {
-  //     const progress = (audio.currentTime / audio.duration) * 100;
-  //     setProgress(progress);
-  //     setCurrentTime(audio.currentTime);
-  //   };
-  //   const setAudioDuration = () => {
-  //     setDuration(audio.duration);
-  //   };
-
-  //   audio.addEventListener('timeupdate', updateProgress);
-  //   audio.addEventListener('loadedmetadata', setAudioDuration);
-
-  //   return () => {
-  //     audio.removeEventListener('timeupdate', updateProgress);
-  //     audio.removeEventListener('loadedmetadata', setAudioDuration);
-  //   };
-  // }, []);
   useEffect(() => {
     if (currentSong && isPlaying) {
       audioRef.current.play();
@@ -78,26 +64,55 @@ const AudioPlay = () => {
       };
     }
   }, [currentSong, isPlaying]);
-
-  const handleReplaySong = () => {};
+  const toggleAudio = () => {
+    let newIsPlaying = isPlaying;
+    dispatch(setSongState(!newIsPlaying));
+    setSave(audioRef?.current?.currentTime);
+    console.log(save);
+  };
+  const handleClickAudio = () => {
+    audioRef.current.currentTime = 0;
+  };
+  useEffect(() => {
+    if (
+      isReplay &&
+      audioRef.current?.currentTime === audioRef.current?.duration
+    ) {
+      handleClickAudio();
+      togglePlay();
+    }
+    if (
+      !isReplay &&
+      audioRef.current?.currentTime === audioRef.current?.duration
+    ) {
+      dispatch(setSongState(true));
+    }
+  }, [isReplay, audioRef.current?.currentTime]);
+  // useEffect(() => {
+  //   if (isReplay && audioRef.current?.currentTime == 0) {
+  //     togglePlay();
+  //   }
+  // }, [isReplay, audioRef.current?.currentTime]);
   const handleClickDetail = () => {
     navigate(`/song/detail/${currentSong._id}`);
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
     audioRef.current?.pause();
   };
   const [volume, setVolume] = useState(0);
-
   const [volumeSound, setVolumeSound] = useState(true);
   const [savedVolume, setSavedVolume] = useState(50);
+  // console.log(audioRef.current?.currentTime);
+  // console.log(isPlaying);
+  // console.log(isActive);
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume / 100;
     }
-  }, [audioRef.current?.volume]);
+  }, [volume, audioRef.current?.volume]);
 
   const handleClickVolume = () => {
     if (isPlaying) {
-      setVolume(50);
+      setVolume(0);
       setVolumeSound(!volumeSound);
       if (!volumeSound) {
         setVolume(savedVolume);
@@ -112,6 +127,11 @@ const AudioPlay = () => {
     const newVolume = e.value / 100;
     audioRef.current.volume = newVolume;
     setVolume(e.value);
+    setVolumeSound(true);
+    if (e.value === 0) {
+      setVolume(0);
+      setVolumeSound(false);
+    }
   };
 
   const handlePrevSong = () => {
@@ -144,6 +164,7 @@ const AudioPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
+  console.log(audioRef.current?.volume);
   return (
     <>
       {currentSong && (
@@ -270,12 +291,21 @@ const AudioPlay = () => {
                 style={{ background: "#03CE58", border: "none" }}
                 icon="pi pi-question-circle"
               />
-              <Button
-                rounded
-                style={{ background: "#03CE58", border: "none" }}
-                icon="pi pi-sync"
-                onClick={handleReplaySong}
-              />
+              {isReplay ? (
+                <Button
+                  rounded
+                  style={{ background: "#03CE58", border: "none" }}
+                  icon="pi pi-spin pi-sync"
+                  onClick={handleClickReplay}
+                />
+              ) : (
+                <Button
+                  rounded
+                  style={{ background: "#03CE58", border: "none" }}
+                  icon="pi pi-sync"
+                  onClick={handleClickReplay}
+                />
+              )}
               <Button
                 rounded
                 style={{ background: "#03CE58", border: "none" }}

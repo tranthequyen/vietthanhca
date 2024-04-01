@@ -1,7 +1,5 @@
 import { clientApi } from "@/axios";
 import { test } from "@/axios/test";
-import Cardz from "@/components/Card";
-import Card from "@/components/Card";
 import Title from "@/components/Title";
 import axios from "axios";
 
@@ -29,6 +27,7 @@ import { useGetParams } from "@/hook/useGetParams";
 import { useListSongHome } from "../utils";
 import { setAllSongs } from "@/redux/allSong";
 import { useFetchAllSongs } from "@/getAPIredux/utils";
+import { Cardz } from "@/components/Card";
 
 function Home() {
   const dispatch = useDispatch();
