@@ -20,37 +20,16 @@ const AudioPlay = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(null);
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(0);
   const togglePlay = () => {
-
     dispatch(setSongState(!isPlaying));
   };
-
+  const [progress, setProgress] = useState(0);
   const onSliderChange = (e) => {
     const newTime = (e.value / 100) * audioRef.current.duration;
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
 
-  // useEffect(() => {
-  //   const audio = audioRef.current;
-  //   const updateProgress = () => {
-  //     const progress = (audio.currentTime / audio.duration) * 100;
-  //     setProgress(progress);
-  //     setCurrentTime(audio.currentTime);
-  //   };
-  //   const setAudioDuration = () => {
-  //     setDuration(audio.duration);
-  //   };
-
-  //   audio.addEventListener('timeupdate', updateProgress);
-  //   audio.addEventListener('loadedmetadata', setAudioDuration);
-
-  //   return () => {
-  //     audio.removeEventListener('timeupdate', updateProgress);
-  //     audio.removeEventListener('loadedmetadata', setAudioDuration);
-  //   };
-  // }, []);
   useEffect(() => {
     if (currentSong && isPlaying) {
       audioRef.current.play();
@@ -81,15 +60,12 @@ const AudioPlay = () => {
   }, [currentSong, isPlaying]);
 
   const handleReplaySong = () => { };
-  const handleClickDetail = () => {
-    navigate(`/song/detail/${currentSong._id}`);
-    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
-    audioRef.current?.pause();
-  };
-  const [volume, setVolume] = useState(0);
+
 
   const [volumeSound, setVolumeSound] = useState(true);
   const [savedVolume, setSavedVolume] = useState(50);
+  const [volume, setVolume] = useState(0);
+
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume / 100;
@@ -97,18 +73,15 @@ const AudioPlay = () => {
   }, [audioRef.current?.volume]);
 
   const handleClickVolume = () => {
-    if (isPlaying) {
-      setVolume(50)
-      setVolumeSound(!volumeSound);
-      if (!volumeSound) {
-        setVolume(savedVolume);
-      } else {
-        setSavedVolume(volume);
-        setVolume(0);
-      }
+    setVolumeSound(!volumeSound);
+    if (!volumeSound) {
+      setVolume(savedVolume);
+    } else {
+      setSavedVolume(volume);
+      setVolume(0);
+
     }
   };
-
   const handleVolumeChange = (e) => {
     const newVolume = e.value / 100;
     audioRef.current.volume = newVolume;
@@ -117,6 +90,12 @@ const AudioPlay = () => {
 
 
 
+
+  const handleClickDetail = () => {
+    navigate(`/song/detail/${currentSong._id}`);
+    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
+    audioRef.current?.pause();
+  };
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
       (song) => song._id === currentSong._id
@@ -236,11 +215,6 @@ const AudioPlay = () => {
                 style={{ width: "70%" }}
               >
                 <div> {formatTime(currentTime)}</div>
-                {/* <Slider
-                  style={{ width: "80%" }}
-                  value={currentTime}
-                  max={duration}
-                /> */}
                 <Slider style={{ width: '80%' }}
                   value={progress}
                   onChange={onSliderChange}
