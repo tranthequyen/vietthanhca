@@ -8,6 +8,7 @@ import {
   setCurrentSong,
   setCurrentTimeSong,
   setSongState,
+  setVolumneSong,
 } from "@/redux/currentSong";
 
 const AudioPlay = () => {
@@ -99,6 +100,8 @@ const AudioPlay = () => {
   const handleClickDetail = () => {
     navigate(`/song/detail/${currentSong._id}`);
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
+    dispatch(setVolumneSong(volume));
+
     audioRef.current?.pause();
   };
   const handlePrevSong = () => {
@@ -131,7 +134,6 @@ const AudioPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
-
   return (
     <>
       {currentSong && (
@@ -243,7 +245,6 @@ const AudioPlay = () => {
                   style={{ width: "80%" }}
                   value={volume}
                   onChange={handleVolumeChange}
-                // showValue={false}
                 />
               </div>
             </div>

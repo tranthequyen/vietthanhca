@@ -5,34 +5,32 @@ import { Link } from "react-router-dom";
 import { Slider } from "primereact/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentSong, setSongState } from "@/redux/currentSong";
-function TrackAudio({ handleSpin, spin, data, currentTimeSong, }) {
+function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
   const audioRef = useRef();
   const dispatch = useDispatch();
   const isPlaying = useSelector((state) => state.currentSong.isPlaying);
   const [currentTime, setCurrentTime] = useState(0);
-  const [save, setSave] = useState(null);
   const [duration, setDuration] = useState(0);
-  const indexSong = useSelector((state) => state.currentSong.currentIndexSong);
-  const listSong = useSelector((state) => state.currentSong.listMySong);
-  // console.log(listSong);
+  const allSong = useSelector((state) => state.allSong);
+  const volumeSong = useSelector((state) => state.currentSong.volume);
   const toggleAudio = () => {
     let newIsPlaying = isPlaying;
     dispatch(setSongState(!newIsPlaying));
-    setSave(audioRef.current.currentTime);
   };
-  // useEffect(() => {
-  //   if (data && isPlaying) {
-  //     handleSpin(true);
-  //     audioRef.current.play();
-  //     setDuration(audioRef?.current?.duration);
-  //   } else if (data && !isPlaying) {
-  //     handleSpin(false);
-  //     audioRef.current?.pause();
-  //   }
-  // }, [data, isPlaying]);
+  useEffect(() => {
+    if (data && isPlaying) {
+      handleSpin(true);
+      audioRef.current.play();
+      setDuration(audioRef?.current?.duration);
+    } else if (data && !isPlaying) {
+      handleSpin(false);
+      audioRef.current?.pause();
+    }
+  }, [data, isPlaying]);
 
   useEffect(() => {
     audioRef.current.currentTime = currentTimeSong;
+    audioRef.current.currentTime = volumeSong / 100;
   }, [currentTimeSong]);
 
   const [progress, setProgress] = useState(0);
@@ -46,7 +44,6 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, }) {
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
-
   useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => {
@@ -93,7 +90,6 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, }) {
     audioRef.current.volume = newVolume;
     setVolume(e.value);
   };
-  // const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const handleNextSong = () => { };
 
   const handlePrevSong = () => { };
@@ -117,40 +113,24 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, }) {
         className="flex flex-row "
         style={{ margin: "0 auto", marginTop: "10px", position: "relative" }}
       >
-        <Button className="audio_button">
-          {isClicked ? (
-            <span
-              className="pi pi-heart-fill "
-              style={{ cursor: "pointer", color: "#03CE58" }}
-              onClick={handleClickHeart}
-            ></span>
-          ) : (
-            <span
-              className="pi pi-heart "
-              style={{ cursor: "pointer" }}
-              onClick={handleClickHeart}
-            ></span>
-          )}
-        </Button>
-        <Button className="audio_button">
-          <span
-            className="pi pi-sort-alt"
-            style={{ transform: "rotate(90deg)" }}
-          ></span>
-        </Button>
+        <Button className="audio_button " icon={isClicked ? "pi pi-heart-fill" :
+          "pi pi-heart"}
+          onClick={handleClickHeart}
+        />
+
+        <Button className="audio_button" icon="pi pi-sort-alt"
+          style={{ transform: "rotate(90deg)" }}
+
+        />
         <Button
           className="audio_button"
           icon="pi pi-step-backward-alt"
           onClick={handlePrevSong}
         />
 
-        <Button className="audio_button" onClick={toggleAudio}>
-          {isPlaying ? (
-            <span className="pi pi-pause"></span>
-          ) : (
-            <span className="pi pi-play"></span>
-          )}
-        </Button>
+        <Button className="audio_button" onClick={toggleAudio} icon={isPlaying ? " pi pi-pause" : "pi pi-play"} />
+
+
         <Button
           className="audio_button"
           icon="pi pi-step-forward-alt"
@@ -160,13 +140,7 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, }) {
         <Button className="audio_button" onClick={handleClickAudio}>
           <span className="pi pi pi-sync"></span>
         </Button>
-        <Button className="audio_button" onClick={handleClickVolume}>
-          {volumeSound ? (
-            <span className="pi pi-volume-up"></span>
-          ) : (
-            <span className="pi pi-volume-off"></span>
-          )}
-        </Button>
+        <Button className="audio_button" onClick={handleClickVolume} icon={volumeSound ? "pi pi-volume-up" : "pi pi-volume-off"} />
         <Slider
           style={{
             margin: "20px 0 0 2vh",
