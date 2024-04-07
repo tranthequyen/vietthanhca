@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setCurrentSong,
   setCurrentTimeSong,
+  setIsVolume,
   setSongState,
   setVolumneSong,
 } from "@/redux/currentSong";
@@ -101,6 +102,11 @@ const AudioPlay = () => {
     navigate(`/song/detail/${currentSong._id}`);
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
     dispatch(setVolumneSong(volume));
+    if (audioRef.current.volume === 0) {
+      dispatch(setIsVolume(false))
+    } else {
+      dispatch(setIsVolume(true))
+    }
 
     audioRef.current?.pause();
   };

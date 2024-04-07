@@ -4,19 +4,23 @@ import { ProgressBar } from "primereact/progressbar";
 import { Link } from "react-router-dom";
 import { Slider } from "primereact/slider";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentSong, setSongState } from "@/redux/currentSong";
-function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
+import { setCurrentSong, setIsVolume, setSongState } from "@/redux/currentSong";
+function TrackAudio({ handleSpin, spin, data, currentTimeSong, volumeSong }) {
   const audioRef = useRef();
   const dispatch = useDispatch();
   const isPlaying = useSelector((state) => state.currentSong.isPlaying);
+  const isVolume = useSelector((state) => state.currentSong.isVolume);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const allSong = useSelector((state) => state.allSong);
-  const volumeSong = useSelector((state) => state.currentSong.volume);
+  const [progress, setProgress] = useState(0);
+
   const toggleAudio = () => {
     let newIsPlaying = isPlaying;
     dispatch(setSongState(!newIsPlaying));
   };
+
+
   useEffect(() => {
     if (data && isPlaying) {
       handleSpin(true);
@@ -26,37 +30,49 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
       handleSpin(false);
       audioRef.current?.pause();
     }
-  }, [data, isPlaying]);
-
-  useEffect(() => {
-    audioRef.current.currentTime = currentTimeSong;
-    audioRef.current.currentTime = volumeSong / 100;
-  }, [currentTimeSong]);
-
-  const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(0);
-  const handleClickAudio = () => {
-    audioRef.current.currentTime = 0;
-  };
-
-  const onSliderChange = (e) => {
-    const newTime = (e.value / 100) * audioRef.current.duration;
-    audioRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-  useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => {
       const progress = (audio.currentTime / audio.duration) * 100;
       setProgress(progress);
       setCurrentTime(audio.currentTime);
     };
-
     audio.addEventListener("timeupdate", updateProgress);
-
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
     };
+  }, [data, isPlaying]);
+
+  useEffect(() => {
+    audioRef.current.currentTime = currentTimeSong;
+    audioRef.current.volume = volumeSong / 100
+  }, [currentTimeSong, volumeSong]);
+  const [volume, setVolume] = useState(volumeSong)
+  const [savedVolume, setSavedVolume] = useState()
+  const handleClickVolume = () => {
+    let newIsVolume = isVolume
+    setSavedVolume(audioRef.current.volume)
+    dispatch(setIsVolume(!newIsVolume))
+    if (!isVolume) {
+      setVolume(savedVolume);
+    } else {
+      setSavedVolume(volume);
+      setVolume(0);
+    }
+  };
+  useEffect(() => {
+
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
+  const handleClickAudio = () => {
+    audioRef.current.currentTime = 0;
+  };
+  const onSliderChange = (e) => {
+    const newTime = (e.value / 100) * audioRef.current.duration;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+  useEffect(() => {
+
   }, []);
 
   const formatTime = (timeInSeconds) => {
@@ -65,31 +81,16 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
   const [isClicked, setIsClicked] = useState(false);
-  const [volumeSound, setVolumeSound] = useState(true);
-  const [savedVolume, setSavedVolume] = useState(50);
+
   const handleClickHeart = () => {
     setIsClicked(!isClicked);
-  };
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume / 100;
-    }
-  }, [audioRef.current?.volume]);
-
-  const handleClickVolume = () => {
-    setVolumeSound(!volumeSound);
-    if (!volumeSound) {
-      setVolume(savedVolume);
-    } else {
-      setSavedVolume(volume);
-      setVolume(0);
-    }
   };
   const handleVolumeChange = (e) => {
     const newVolume = e.value / 100;
     audioRef.current.volume = newVolume;
     setVolume(e.value);
   };
+
   const handleNextSong = () => { };
 
   const handlePrevSong = () => { };
@@ -140,15 +141,15 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong }) {
         <Button className="audio_button" onClick={handleClickAudio}>
           <span className="pi pi pi-sync"></span>
         </Button>
-        <Button className="audio_button" onClick={handleClickVolume} icon={volumeSound ? "pi pi-volume-up" : "pi pi-volume-off"} />
+        <Button className="audio_button" onClick={handleClickVolume} icon={isVolume ? "pi pi-volume-up" : "pi pi-volume-off"} />
         <Slider
+          value={volume}
           style={{
             margin: "20px 0 0 2vh",
             aspectRatio: "2",
             position: "absolute",
           }}
           orientation="vertical"
-          value={volume}
           onChange={handleVolumeChange}
           showValue={false}
           className="volume_bar"
