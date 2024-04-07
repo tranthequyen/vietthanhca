@@ -11,6 +11,7 @@ function TrackAudio({
   data,
   currentTimeSong,
   currentVolume,
+  isVolume,
 }) {
   const audioRef = useRef();
   const dispatch = useDispatch();
@@ -41,17 +42,11 @@ function TrackAudio({
       audioRef.current?.pause();
     }
   }, [currentSong, isPlaying]);
-
-  useEffect(() => {
-    audioRef.current.currentTime = currentTimeSong;
-  }, [currentTimeSong]);
-
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(currentVolume * 100);
   const handleClickAudio = () => {
     audioRef.current.currentTime = 0;
   };
-
   const onSliderChange = (e) => {
     const newTime = (e.value / 100) * audioRef.current.duration;
     audioRef.current.currentTime = newTime;
@@ -95,11 +90,16 @@ function TrackAudio({
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
   const [isClicked, setIsClicked] = useState(false);
-  const [volumeSound, setVolumeSound] = useState(true);
-  const [savedVolume, setSavedVolume] = useState(50);
+  const [volumeSound, setVolumeSound] = useState(isVolume);
+  const [savedVolume, setSavedVolume] = useState(currentVolume * 100);
   const handleClickHeart = () => {
     setIsClicked(!isClicked);
   };
+  useEffect(() => {
+    audioRef.current.currentTime = currentTimeSong;
+    audioRef.current.currentVolume = currentVolume;
+  }, [currentTimeSong, currentVolume]);
+  console.log(volume);
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume / 100;

@@ -22,7 +22,8 @@ function Track() {
   const currentTimeSong = useSelector(
     (state) => state.currentSong.currentTimeSong
   );
-
+  const currentVolume = useSelector((state) => state.currentSong.currentVolume);
+  const isVolume = useSelector((state) => state.currentSong.isVolume);
   const [spin, setSpin] = useState(false);
   const handleSpin = (newSpin) => {
     setSpin(newSpin);
@@ -179,6 +180,8 @@ function Track() {
           handleSpin={handleSpin}
           spin={spin}
           currentTimeSong={currentTimeSong}
+          currentVolume={currentVolume}
+          isVolume={isVolume}
         />
       </div>
       {showMore ? (

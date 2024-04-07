@@ -8,6 +8,8 @@ import {
   setCurrentSong,
   setCurrentTimeSong,
   setSongState,
+  setCurrentVolume,
+  setIsVolume,
 } from "@/redux/currentSong";
 
 const AudioPlay = () => {
@@ -91,52 +93,42 @@ const AudioPlay = () => {
       dispatch(setSongState(true));
     }
   }, [isReplay, audioRef.current?.currentTime]);
-  // useEffect(() => {
-  //   if (isReplay && audioRef.current?.currentTime == 0) {
-  //     togglePlay();
-  //   }
-  // }, [isReplay, audioRef.current?.currentTime]);
-  const handleClickDetail = () => {
-    navigate(`/song/detail/${currentSong._id}`);
-    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
-    audioRef.current?.pause();
-  };
+
   const [volume, setVolume] = useState(50);
   const t = 0;
   const [volumeSound, setVolumeSound] = useState(true);
   const [savedVolume, setSavedVolume] = useState(50);
-  // console.log(audioRef.current?.currentTime);
-  // console.log(isPlaying);
-  // console.log(isActive);
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume / 100;
     }
   }, [volume, audioRef.current?.volume]);
-
+  const handleClickDetail = () => {
+    navigate(`/song/detail/${currentSong._id}`);
+    dispatch(setCurrentTimeSong(audioRef.current.currentTime));
+    dispatch(setCurrentVolume(audioRef.current.volume));
+    dispatch(setIsVolume(volumeSound));
+    audioRef.current?.pause();
+  };
   const handleVolumeChange = (e) => {
     const newVolume = e.value;
     setVolume(newVolume);
     audioRef.current.volume = newVolume / 100;
-    setVolumeSound(true); // Ensure volume sound is enabled when manually changing volume
+    setVolumeSound(true);
   };
-
   const handleClickVolume = () => {
     if (isPlaying) {
       if (volumeSound) {
-        // Mute the volume
-        setSavedVolume(volume); // Save the current volume before muting
+        setSavedVolume(volume);
         setVolume(0);
-        audioRef.current.volume = 0; // Mute immediately
+        audioRef.current.volume = 0;
       } else {
-        // Unmute the volume
-        setVolume(savedVolume); // Restore the saved volume
-        audioRef.current.volume = savedVolume / 100; // Set volume to saved volume
+        setVolume(savedVolume);
+        audioRef.current.volume = savedVolume / 100;
       }
-      setVolumeSound(!volumeSound); // Toggle volume sound state
+      setVolumeSound(!volumeSound);
     }
   };
-
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
       (song) => song._id === currentSong._id
@@ -167,9 +159,6 @@ const AudioPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
-  console.log(audioRef.current);
-  console.log(audioRef.current?.volume);
-  console.log(volume);
   return (
     <>
       {currentSong && (
@@ -182,7 +171,6 @@ const AudioPlay = () => {
             src={currentSong?.song}
             onLoadedMetadata={(e) => setDuration(e.target.duration)}
           />
-
           <div className="grid align-items-center">
             <div className="col-2 xl:col-3">
               <ul className="p-0 m-0   ">
@@ -226,13 +214,6 @@ const AudioPlay = () => {
                 </Link>
               </div>
               <div className="flex gap-3" style={{ margin: "0 auto" }}>
-                {/* <Button
-                                                icon="pi pi-heart"
-                                                className={isClicked ? '' : 'p-button-outlined'}
-                                                style={isClicked ? { background: '#03CE58', border: 'none', } : {}}
-                                                onClick={handleClickHeart}
-                                                rounded
-                                          /> */}
                 <Button
                   rounded
                   style={{ background: "#03CE58", border: "none" }}
@@ -259,16 +240,10 @@ const AudioPlay = () => {
                 style={{ width: "70%" }}
               >
                 <div> {formatTime(currentTime)}</div>
-                {/* <Slider
-                  style={{ width: "80%" }}
-                  value={currentTime}
-                  max={duration}
-                /> */}
                 <Slider
                   style={{ width: "80%" }}
                   value={progress}
                   onChange={onSliderChange}
-                  // onSlideEnd={() => dispatch(setSongState(!isPlaying))}
                 />
                 <div> {formatTime(audioRef?.current?.duration)}</div>
               </div>
