@@ -12,6 +12,7 @@ const songSlice = createSlice({
       },
       reducers: {
             setCurrentSong: (state, action) => {
+                  console.log('set song');
                   state.currentSong = action.payload;
             },
             setSongState: (state, action) => {

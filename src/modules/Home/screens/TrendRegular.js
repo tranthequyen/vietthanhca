@@ -6,13 +6,13 @@ import anh2 from "../../../Image Thanh Ca/421826174_1341861439848446_34976821065
 function TrendRegular() {
   return (
     <div className="trend_regular border-round-xl" style={{ paddingTop: "4%" }}>
-      <ul className="p-0 m-0 flex py-3 justify-content-center">
+      <ul className="p-0 m-0 flex py-3 justify-content-center" >
         <div className="flex  gap-2 flex-column p-2">
           <h2 className="mt-0 px-3" style={{ color: "#06b64f" }}>
             Album hot
           </h2>
-          {test.slice(0, 3).map((d) => (
-            <li className="flex align-items-center px-3">
+          {test.slice(0, 3).map((d, index) => (
+            <li className="flex align-items-center px-3" key={index} >
               <img
                 src={anh1}
                 alt=""
@@ -44,8 +44,8 @@ function TrendRegular() {
           <h2 className="px-3 m-0" style={{ color: "#06b64f" }}>
             Thịnh hành
           </h2>
-          {test.slice(0, 3).map((d) => (
-            <li className="flex align-items-center px-3">
+          {test.slice(0, 3).map((d, index) => (
+            <li className="flex align-items-center px-3" key={index}>
               <img
                 src={anh2}
                 alt=""

@@ -44,8 +44,8 @@ const Sidebar = (props) => {
         </div>
 
         <ul className="m-0 p-0 pt-3">
-          {detailSideBar.slice(0, 4).map((d) => (
-            <Link to={d.route}>
+          {detailSideBar.slice(0, 4).map((d, index) => (
+            <Link to={d.route} key={index}>
               {location === d.route ? (
                 <li
                   className="p-3 flex gap-3 text-xl text-white px-5"
@@ -81,8 +81,8 @@ const Sidebar = (props) => {
             </Link>
           ))}
           <Divider />
-          {detailSideBar.slice(4).map((d) => (
-            <Link to={d.route}>
+          {detailSideBar.slice(4).map((d, index) => (
+            <Link to={d.route} key={index}>
               {location === d.route ? (
                 <li
                   className="p-3 flex gap-3 text-xl text-white px-5"

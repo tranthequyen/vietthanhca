@@ -19,16 +19,22 @@ const AudioPlay = () => {
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(null);
+  const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
-  const [progress, setProgress] = useState(0);
+
+
+
   const onSliderChange = (e) => {
+    console.log(audioRef.current.currentTime);
     const newTime = (e.value / 100) * audioRef.current.duration;
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
+
 
   useEffect(() => {
     if (currentSong && isPlaying) {
@@ -61,16 +67,18 @@ const AudioPlay = () => {
 
   const handleReplaySong = () => { };
 
-
-  const [volumeSound, setVolumeSound] = useState(true);
+  const [volume, setVolume] = useState(50);
+  const [isClicked, setIsClicked] = useState(false);
+  const [volumeSound, setVolumeSound] = useState(true)
   const [savedVolume, setSavedVolume] = useState(50);
-  const [volume, setVolume] = useState(0);
-
+  const handleClickHeart = () => {
+    setIsClicked(!isClicked);
+  }
   useEffect(() => {
-    if (audioRef.current) {
+    if (currentSong) {
       audioRef.current.volume = volume / 100;
     }
-  }, [audioRef.current?.volume]);
+  }, [volume]);
 
   const handleClickVolume = () => {
     setVolumeSound(!volumeSound);
@@ -79,7 +87,6 @@ const AudioPlay = () => {
     } else {
       setSavedVolume(volume);
       setVolume(0);
-
     }
   };
   const handleVolumeChange = (e) => {
@@ -87,8 +94,6 @@ const AudioPlay = () => {
     audioRef.current.volume = newVolume;
     setVolume(e.value);
   };
-
-
 
 
   const handleClickDetail = () => {
@@ -126,6 +131,7 @@ const AudioPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
+
   return (
     <>
       {currentSong && (
@@ -220,6 +226,7 @@ const AudioPlay = () => {
                   onChange={onSliderChange}
                 // onSlideEnd={() => dispatch(setSongState(!isPlaying))}
                 />
+                {/* <input type="range" className="seekBar" onChange={onSliderChange} value={progress} style={{ width: "80%" }} /> */}
                 <div> {formatTime(audioRef?.current?.duration)}</div>
               </div>
               <div
@@ -236,7 +243,7 @@ const AudioPlay = () => {
                   style={{ width: "80%" }}
                   value={volume}
                   onChange={handleVolumeChange}
-                  showValue={false}
+                // showValue={false}
                 />
               </div>
             </div>

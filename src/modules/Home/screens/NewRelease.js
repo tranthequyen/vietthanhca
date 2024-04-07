@@ -14,8 +14,8 @@ function NewRelease() {
             subTitle="Xem thêm"
           />
           <div>
-            {test.slice(0, 3).map((d) => (
-              <div className="grid justify-content-center align-items-center text-center">
+            {test.slice(0, 3).map((d, index) => (
+              <div className="grid justify-content-center align-items-center text-center" key={index}>
                 <div className=" col-5 sm:col-3 md:col-2">
                   <img
                     src={d.url}

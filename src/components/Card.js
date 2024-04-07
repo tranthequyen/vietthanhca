@@ -5,14 +5,14 @@ import { Avatar } from "primereact/avatar";
 
 function Cardz({ src, song, sing, link }) {
   const header = (
-    <div class="container">
+    <div className="container">
       <img
         alt="Card"
         style={{ width: "95%" }}
         className=" image_overlay"
         src={src}
       />
-      <div class="overlay"></div>
+      <div className="overlay"></div>
       <div className="play child">
         {/* <Avatar
           className=""

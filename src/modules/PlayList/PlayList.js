@@ -28,7 +28,6 @@ function PlayList() {
     dispatch(setCurrentSong(song));
     dispatch(setSongState(true));
     dispatch(setSongActive(true));
-    console.log(song);
   };
   useFetchAllSongs();
   const data = useListSongHome();
@@ -144,7 +143,7 @@ function PlayList() {
             className="hidden lg:block p-4"
             style={{ backgroundColor: "transparent" }}
           >
-            <DataTablez
+            {/* <DataTablez
               value={data.slice(0, 5)}
               noAction
               onRowClick={(e) => handleSongClick(e.data)}
@@ -209,7 +208,7 @@ function PlayList() {
                   </li>
                 )}
               />
-            </DataTablez>
+            </DataTablez> */}
           </div>
           <div className="block lg:hidden">
             <DataTablez value={test.slice(0, 5)} noAction>

@@ -1,11 +1,7 @@
-import { clientApi } from "@/axios";
-import { test } from "@/axios/test";
 import Cardz from "@/components/Card";
-import Card from "@/components/Card";
 import Title from "@/components/Title";
-import axios from "axios";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Banner from "./Banner";
 import { musician } from "@/axios/musician";
 import TrendRegular from "./TrendRegular";
@@ -15,7 +11,7 @@ import NewRelease from "./NewRelease";
 import Images from "./Images";
 import Partner from "./Partner";
 import "../index.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import currentSong, {
   setCurrentIndexSong,
   setCurrentSong,
@@ -23,8 +19,7 @@ import currentSong, {
   setSongActive,
   setSongState,
 } from "@/redux/currentSong";
-import { useGetApi } from "@/hook/useGetApi";
-import { getlistSongHome } from "../api";
+
 import { useGetParams } from "@/hook/useGetParams";
 import { useListSongHome } from "../utils";
 import { setAllSongs } from "@/redux/allSong";
@@ -35,21 +30,16 @@ function Home() {
   const initParam = useGetParams();
   const [params, setParams] = useState(initParam);
   const data = useListSongHome();
+  const currentSong = useSelector((state) => state.currentSong.currentSong);
 
   const handleSongClick = (song) => {
     dispatch(setCurrentSong(song));
     dispatch(setSongState(true));
     dispatch(setSongActive(true));
     dispatch(setListMySong(data));
-    dispatch(setCurrentIndexSong(data.findIndex(d => d._id === song._id)));
-
-
+    dispatch(setCurrentIndexSong(data.findIndex(d => d._id === song._id)))
   };
 
-  useFetchAllSongs();
-  useEffect(() => {
-    dispatch(setAllSongs(data));
-  }, [data]);
   return (
     <>
       <div className="grid">
@@ -65,10 +55,11 @@ function Home() {
               subTitle="Xem thêm"
             />
             <div className="grid ">
-              {data.slice(0, 4).map((d) => (
+              {data.slice(0, 4).map((d, index) => (
                 <div
                   className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                   onClick={() => handleSongClick(d)}
+                  key={index}
                 >
                   <Cardz
                     song={d.name}
@@ -84,12 +75,15 @@ function Home() {
               title="Thịnh hành"
               icon="pi-angle-double-right"
               subTitle="Xem thêm"
+
             />
             <div className="grid ">
-              {data.slice(0, 8).map((d) => (
+              {data.slice(0, 8).map((d, index) => (
                 <div
                   className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                   onClick={() => handleSongClick(d)}
+                  key={index}
+
                 >
                   <Cardz
                     song={d.name}
@@ -107,8 +101,8 @@ function Home() {
               subTitle="Xem thêm"
             />
             <div className="grid justify-content-between  ">
-              {musician.slice(0, 6).map((d) => (
-                <div className="col-4 md:col-2">
+              {musician.slice(0, 6).map((d, index) => (
+                <div className="col-4 md:col-2" key={index}>
                   <img
                     src={d.url}
                     width="90%"
@@ -136,10 +130,11 @@ function Home() {
                 subTitle="Xem thêm"
               />
               <div className="grid">
-                {data.slice(0, 8).map((d) => (
+                {data.slice(0, 8).map((d, index) => (
                   <div
                     className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                     onClick={() => handleSongClick(d)}
+                    key={index}
                   >
                     <Cardz
                       song={d.name}
@@ -177,10 +172,12 @@ function Home() {
                 subTitle="Xem thêm"
               />
               <div className="grid">
-                {data.slice(0, 8).map((d) => (
+                {data.slice(0, 8).map((d, index) => (
                   <div
                     className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                     onClick={() => handleSongClick(d)}
+                    key={index}
+
                   >
                     <Cardz
                       song={d.name}
@@ -202,10 +199,11 @@ function Home() {
                 subTitle="Xem thêm"
               />
               <div className="grid">
-                {data.slice(0, 8).map((d) => (
+                {data.slice(0, 8).map((d, index) => (
                   <div
                     className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                     onClick={() => handleSongClick(d)}
+                    key={index}
                   >
                     <Cardz
                       song={d.name}
@@ -226,10 +224,11 @@ function Home() {
                 subTitle="Xem thêm"
               />
               <div className="grid">
-                {data.slice(0, 8).map((d) => (
+                {data.slice(0, 8).map((d, index) => (
                   <div
                     className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                     onClick={() => handleSongClick(d)}
+                    key={index}
                   >
                     <Cardz
                       song={d.name}
@@ -250,10 +249,11 @@ function Home() {
                 subTitle="Xem thêm"
               />
               <div className="grid">
-                {data.slice(0, 8).map((d) => (
+                {data.slice(0, 8).map((d, index) => (
                   <div
                     className="col-6 md:col-4 lg:col-3 p-3 p-3 "
                     onClick={() => handleSongClick(d)}
+                    key={index}
                   >
                     <Cardz
                       song={d.name}
