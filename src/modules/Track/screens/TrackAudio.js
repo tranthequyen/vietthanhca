@@ -47,7 +47,7 @@ function TrackAudio({
   }, [currentTimeSong]);
 
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(0);
+  const [volume, setVolume] = useState(50);
   const handleClickAudio = () => {
     audioRef.current.currentTime = 0;
   };
@@ -76,7 +76,7 @@ function TrackAudio({
       isReplay &&
       audioRef.current?.currentTime == audioRef.current?.duration
     ) {
-      handleClickAudio(); // Call the handleClickAudio function
+      handleClickAudio();
       toggleAudio();
     }
     if (isReplay && audioRef.current?.currentTime == 0) {
@@ -125,7 +125,6 @@ function TrackAudio({
       setVolumeSound(false);
     }
   };
-  // const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
       (song) => song._id === currentSong._id
@@ -148,7 +147,6 @@ function TrackAudio({
       dispatch(setCurrentSong(allSong[0]));
     }
   };
-  console.log(currentSong);
   return (
     <div className=" col-12 flex flex-column" style={{ margin: "0 auto" }}>
       <h3 className="text-center text-xl pb-2">

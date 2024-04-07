@@ -81,6 +81,9 @@ const AudioPlay = () => {
       handleClickAudio();
       togglePlay();
     }
+    if (isReplay && audioRef.current?.currentTime == 0) {
+      togglePlay();
+    }
     if (
       !isReplay &&
       audioRef.current?.currentTime === audioRef.current?.duration
@@ -98,7 +101,8 @@ const AudioPlay = () => {
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
     audioRef.current?.pause();
   };
-  const [volume, setVolume] = useState(0);
+  const [volume, setVolume] = useState(50);
+  const t = 0;
   const [volumeSound, setVolumeSound] = useState(true);
   const [savedVolume, setSavedVolume] = useState(50);
   // console.log(audioRef.current?.currentTime);
@@ -110,27 +114,26 @@ const AudioPlay = () => {
     }
   }, [volume, audioRef.current?.volume]);
 
-  const handleClickVolume = () => {
-    if (isPlaying) {
-      setVolume(0);
-      setVolumeSound(!volumeSound);
-      if (!volumeSound) {
-        setVolume(savedVolume);
-      } else {
-        setSavedVolume(volume);
-        setVolume(0);
-      }
-    }
+  const handleVolumeChange = (e) => {
+    const newVolume = e.value;
+    setVolume(newVolume);
+    audioRef.current.volume = newVolume / 100;
+    setVolumeSound(true); // Ensure volume sound is enabled when manually changing volume
   };
 
-  const handleVolumeChange = (e) => {
-    const newVolume = e.value / 100;
-    audioRef.current.volume = newVolume;
-    setVolume(e.value);
-    setVolumeSound(true);
-    if (e.value === 0) {
-      setVolume(0);
-      setVolumeSound(false);
+  const handleClickVolume = () => {
+    if (isPlaying) {
+      if (volumeSound) {
+        // Mute the volume
+        setSavedVolume(volume); // Save the current volume before muting
+        setVolume(0);
+        audioRef.current.volume = 0; // Mute immediately
+      } else {
+        // Unmute the volume
+        setVolume(savedVolume); // Restore the saved volume
+        audioRef.current.volume = savedVolume / 100; // Set volume to saved volume
+      }
+      setVolumeSound(!volumeSound); // Toggle volume sound state
     }
   };
 
@@ -164,7 +167,9 @@ const AudioPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
+  console.log(audioRef.current);
   console.log(audioRef.current?.volume);
+  console.log(volume);
   return (
     <>
       {currentSong && (

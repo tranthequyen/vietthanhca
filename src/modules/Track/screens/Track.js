@@ -31,7 +31,6 @@ function Track() {
   const handleClickShow = () => {
     setShowMore(!showMore);
   };
-  console.log(spin);
   return (
     <>
       <div className="flex flex-column">

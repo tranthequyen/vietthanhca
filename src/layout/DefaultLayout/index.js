@@ -5,8 +5,8 @@ import Partner from "@/modules/Home/screens/Partner";
 import Footer from "./footer/screens/Footer";
 import AudioPlay from "./AudioPlay/screens/AudioPlay";
 import { useLocation } from "react-router-dom";
-function DefaultLayout({ children, status }) {
-  const [sidebarOpen, setSideBarOpen] = useState(status);
+function DefaultLayout({ children }) {
+  const [sidebarOpen, setSideBarOpen] = useState(true);
   const [isOverlayVisible, setOverlayVisible] = useState(true);
   const [show, setShow] = useState(true);
   const [showz, setShowz] = useState(true);

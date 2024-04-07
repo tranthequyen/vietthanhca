@@ -153,16 +153,6 @@ a {
 .p-datatable .p-datatable-tbody > tr {
   background: gray;
 }
-@media screen and (min-width: 1400px) {
-  .is_mobile {
-    display: none;
-  }
-}
-@media screen and (max-width: 1400px) {
-  .is_pc {
-    display: none;
-  }
-}
 
 .col-3 {
   flex: 0 0 auto;
