@@ -5,8 +5,8 @@ import React from "react";
 function Images() {
   return (
     <div className="grid py-4 p-5 col-12 xl:col-9">
-      {image.slice(0, 3).map((d) => (
-        <div className="col-4">
+      {image.slice(0, 3).map((d, index) => (
+        <div className="col-4" key={index}>
           <img
             src={d.url}
             className="border-round-lg"

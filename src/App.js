@@ -54,8 +54,6 @@ function App() {
       <Toast ref={toast} />
 
       <Router>
-        {/* <AudioPlay /> */}
-
         <Routes>
           {[...publicRoutes, ...privateRoutes].map((route, index) => {
             const Layout =
@@ -74,6 +72,11 @@ function App() {
                     <Layout>
                       <Page />
                     </Layout>
+                    {/* <div className="is_mobile">
+                                        <Layout status={false}>
+                                            <Page />
+                                        </Layout>
+                                    </div> */}
                   </>
                 }
               />

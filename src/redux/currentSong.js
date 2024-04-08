@@ -9,11 +9,12 @@ const songSlice = createSlice({
     currentTimeSong: null,
     listMySong: [],
     currentIndexSong: 0,
-    currentVolume: null,
+    volume: null,
     isVolume: null,
   },
   reducers: {
     setCurrentSong: (state, action) => {
+      console.log("set song");
       state.currentSong = action.payload;
     },
     setSongState: (state, action) => {
@@ -31,8 +32,8 @@ const songSlice = createSlice({
     setCurrentIndexSong: (state, action) => {
       state.currentIndexSong = action.payload;
     },
-    setCurrentVolume: (state, action) => {
-      state.currentVolume = action.payload;
+    setVolumneSong: (state, action) => {
+      state.volume = action.payload;
     },
     setIsVolume: (state, action) => {
       state.isVolume = action.payload;
@@ -47,7 +48,7 @@ export const {
   setCurrentTimeSong,
   setListMySong,
   setCurrentIndexSong,
-  setCurrentVolume,
+  setVolumneSong,
   setIsVolume,
 } = songSlice.actions;
 

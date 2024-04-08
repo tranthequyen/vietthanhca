@@ -6,7 +6,7 @@ import banner1 from "../../../Image Thanh Ca/thanh-giuse.jpg";
 import React, { useEffect, useState } from "react";
 function Banner() {
   const itemTemplate = (item) => {
-    console.log(item);
+
     return (
       <div style={{ position: "relative" }}>
         <img

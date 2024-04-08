@@ -8,8 +8,8 @@ function Partner() {
         Các đối tác âm nhạc
       </h1>
       <div className="grid">
-        {test.slice(0, 12).map((d) => (
-          <div className="col-2">
+        {test.slice(0, 12).map((d, index) => (
+          <div className="col-2 " key={index}>
             <img
               src="https://media.licdn.com/dms/image/C5103AQFaAB0c8_8MXw/profile-displayphoto-shrink_800_800/0/1559875705898?e=2147483647&v=beta&t=mOnyjTECuOypsp8EOHODApAlQlCTbGBgFR19xpwx5QU"
               style={{

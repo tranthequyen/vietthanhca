@@ -7,32 +7,29 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setCurrentSong,
   setCurrentTimeSong,
-  setSongState,
-  setCurrentVolume,
   setIsVolume,
+  setSongState,
+  setVolumneSong,
 } from "@/redux/currentSong";
 
 const AudioPlay = () => {
-  const currentSong = useSelector((state) => state?.currentSong?.currentSong);
+  const currentSong = useSelector((state) => state.currentSong.currentSong);
   const isPlaying = useSelector((state) => state.currentSong.isPlaying);
   const isActive = useSelector((state) => state.currentSong.isActive);
   const allSong = useSelector((state) => state.allSong);
   const dispatch = useDispatch();
   const audioRef = useRef(null);
-  const [save, setSave] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(null);
-  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
-  const [isReplay, setIsReplay] = useState(false);
-  const handleClickReplay = () => {
-    setIsReplay(!isReplay);
-  };
+  const navigate = useNavigate();
+
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
 
   const onSliderChange = (e) => {
+    console.log(audioRef.current.currentTime);
     const newTime = (e.value / 100) * audioRef.current.duration;
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
@@ -66,68 +63,48 @@ const AudioPlay = () => {
       };
     }
   }, [currentSong, isPlaying]);
-  const toggleAudio = () => {
-    let newIsPlaying = isPlaying;
-    dispatch(setSongState(!newIsPlaying));
-    setSave(audioRef?.current?.currentTime);
-    console.log(save);
-  };
-  const handleClickAudio = () => {
-    audioRef.current.currentTime = 0;
-  };
-  useEffect(() => {
-    if (
-      isReplay &&
-      audioRef.current?.currentTime === audioRef.current?.duration
-    ) {
-      handleClickAudio();
-      togglePlay();
-    }
-    if (isReplay && audioRef.current?.currentTime == 0) {
-      togglePlay();
-    }
-    if (
-      !isReplay &&
-      audioRef.current?.currentTime === audioRef.current?.duration
-    ) {
-      dispatch(setSongState(true));
-    }
-  }, [isReplay, audioRef.current?.currentTime]);
+
+  const handleReplaySong = () => {};
 
   const [volume, setVolume] = useState(50);
-  const t = 0;
+  const [isClicked, setIsClicked] = useState(false);
   const [volumeSound, setVolumeSound] = useState(true);
   const [savedVolume, setSavedVolume] = useState(50);
+  const handleClickHeart = () => {
+    setIsClicked(!isClicked);
+  };
   useEffect(() => {
-    if (audioRef.current) {
+    if (currentSong) {
       audioRef.current.volume = volume / 100;
     }
-  }, [volume, audioRef.current?.volume]);
+  }, [volume]);
+
+  const handleClickVolume = () => {
+    setVolumeSound(!volumeSound);
+    if (!volumeSound) {
+      setVolume(savedVolume);
+    } else {
+      setSavedVolume(volume);
+      setVolume(0);
+    }
+  };
+  const handleVolumeChange = (e) => {
+    const newVolume = e.value / 100;
+    audioRef.current.volume = newVolume;
+    setVolume(e.value);
+  };
+
   const handleClickDetail = () => {
     navigate(`/song/detail/${currentSong._id}`);
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
-    dispatch(setCurrentVolume(audioRef.current.volume));
-    dispatch(setIsVolume(volumeSound));
-    audioRef.current?.pause();
-  };
-  const handleVolumeChange = (e) => {
-    const newVolume = e.value;
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume / 100;
-    setVolumeSound(true);
-  };
-  const handleClickVolume = () => {
-    if (isPlaying) {
-      if (volumeSound) {
-        setSavedVolume(volume);
-        setVolume(0);
-        audioRef.current.volume = 0;
-      } else {
-        setVolume(savedVolume);
-        audioRef.current.volume = savedVolume / 100;
-      }
-      setVolumeSound(!volumeSound);
+    dispatch(setVolumneSong(volume));
+    if (audioRef.current.volume === 0) {
+      dispatch(setIsVolume(false));
+    } else {
+      dispatch(setIsVolume(true));
     }
+
+    audioRef.current?.pause();
   };
   const handlePrevSong = () => {
     let currentIndex = allSong.findIndex(
@@ -171,6 +148,7 @@ const AudioPlay = () => {
             src={currentSong?.song}
             onLoadedMetadata={(e) => setDuration(e.target.duration)}
           />
+
           <div className="grid align-items-center">
             <div className="col-2 xl:col-3">
               <ul className="p-0 m-0   ">
@@ -214,6 +192,13 @@ const AudioPlay = () => {
                 </Link>
               </div>
               <div className="flex gap-3" style={{ margin: "0 auto" }}>
+                {/* <Button
+                                                icon="pi pi-heart"
+                                                className={isClicked ? '' : 'p-button-outlined'}
+                                                style={isClicked ? { background: '#03CE58', border: 'none', } : {}}
+                                                onClick={handleClickHeart}
+                                                rounded
+                                          /> */}
                 <Button
                   rounded
                   style={{ background: "#03CE58", border: "none" }}
@@ -244,7 +229,9 @@ const AudioPlay = () => {
                   style={{ width: "80%" }}
                   value={progress}
                   onChange={onSliderChange}
+                  // onSlideEnd={() => dispatch(setSongState(!isPlaying))}
                 />
+                {/* <input type="range" className="seekBar" onChange={onSliderChange} value={progress} style={{ width: "80%" }} /> */}
                 <div> {formatTime(audioRef?.current?.duration)}</div>
               </div>
               <div
@@ -261,7 +248,6 @@ const AudioPlay = () => {
                   style={{ width: "80%" }}
                   value={volume}
                   onChange={handleVolumeChange}
-                  showValue={false}
                 />
               </div>
             </div>
@@ -271,21 +257,12 @@ const AudioPlay = () => {
                 style={{ background: "#03CE58", border: "none" }}
                 icon="pi pi-question-circle"
               />
-              {isReplay ? (
-                <Button
-                  rounded
-                  style={{ background: "#03CE58", border: "none" }}
-                  icon="pi pi-spin pi-sync"
-                  onClick={handleClickReplay}
-                />
-              ) : (
-                <Button
-                  rounded
-                  style={{ background: "#03CE58", border: "none" }}
-                  icon="pi pi-sync"
-                  onClick={handleClickReplay}
-                />
-              )}
+              <Button
+                rounded
+                style={{ background: "#03CE58", border: "none" }}
+                icon="pi pi-sync"
+                onClick={handleReplaySong}
+              />
               <Button
                 rounded
                 style={{ background: "#03CE58", border: "none" }}
