@@ -182,21 +182,23 @@ a {
 .p-button {
   color: #ffffff;
 
-  /* border: none !important; */
+
 }
 .p-datatable .p-datatable-thead > tr > th {
   background-color: transparent;
   color: #ffffff;
 }
-/* Hiển thị đường kẻ ở hàng header đầu tiên */
+
 .p-datatable .p-datatable-thead > tr:first-child > th {
-  border-bottom: 1px solid #ffffff; /* Thay đổi màu sắc nếu cần */
+  border-bottom: 1px solid #ffffff; 
 }
 
-/* Ẩn đường kẻ ở các hàng header sau */
 .p-datatable .p-datatable-thead > tr:not(:first-child) > th {
   border: none !important;
 }
 .p-datatable .p-datatable-tbody > tr > td {
   padding: 0.5rem 0.5rem;
+}
+.bg-default{
+  background-color: #03ce58;
 }

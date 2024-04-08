@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
-import { ProgressBar } from "primereact/progressbar";
-import { Link } from "react-router-dom";
 import { Slider } from "primereact/slider";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentSong, setIsVolume, setSongState } from "@/redux/currentSong";
+import { setIsVolume, setSongState } from "@/redux/currentSong";
 function TrackAudio({ handleSpin, spin, data, currentTimeSong, volumeSong }) {
   const audioRef = useRef();
   const dispatch = useDispatch();
@@ -12,15 +10,13 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, volumeSong }) {
   const isVolume = useSelector((state) => state.currentSong.isVolume);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const allSong = useSelector((state) => state.allSong);
   const [progress, setProgress] = useState(0);
-
+  const [volume, setVolume] = useState(volumeSong ? volumeSong : 50)
+  const [savedVolume, setSavedVolume] = useState()
   const toggleAudio = () => {
     let newIsPlaying = isPlaying;
     dispatch(setSongState(!newIsPlaying));
   };
-
-
   useEffect(() => {
     if (data && isPlaying) {
       handleSpin(true);
@@ -46,8 +42,7 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, volumeSong }) {
     audioRef.current.currentTime = currentTimeSong;
     audioRef.current.volume = volumeSong / 100
   }, [currentTimeSong, volumeSong]);
-  const [volume, setVolume] = useState(volumeSong)
-  const [savedVolume, setSavedVolume] = useState()
+
   const handleClickVolume = () => {
     let newIsVolume = isVolume
     setSavedVolume(audioRef.current.volume)
@@ -71,9 +66,7 @@ function TrackAudio({ handleSpin, spin, data, currentTimeSong, volumeSong }) {
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
-  useEffect(() => {
 
-  }, []);
 
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);

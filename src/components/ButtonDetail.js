@@ -18,3 +18,9 @@ function ButtonDetail() {
 }
 
 export default ButtonDetail
+export const ButtonActionTrack = ({ icon }) => {
+      return (
+            <Button className='border-circle text-white border-2 border-white bg-black-alpha-90' icon={icon}
+            />
+      )
+}

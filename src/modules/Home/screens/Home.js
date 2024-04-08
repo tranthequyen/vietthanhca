@@ -147,19 +147,16 @@ function Home() {
             </div>
             <div className="xl:col-3 relative hidden xl:block p-0">
               <div className="bg-ads"></div>
-              <div className="bdd">
-                <img
-                  src={ads}
-                  width={"100%"}
-                  alt=""
-                  className=""
-                  style={{
-                    marginLeft: "10px",
-                    right: "0",
-                    top: "0",
-                  }}
-                />
-              </div>
+              <img
+                src={ads}
+                width={"100%"}
+                alt=""
+                className=""
+                style={{
+                  right: "0",
+                  top: "0",
+                }}
+              />
             </div>
           </div>
           <NewRelease />
