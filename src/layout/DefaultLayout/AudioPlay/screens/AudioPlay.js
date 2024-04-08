@@ -28,7 +28,10 @@ const AudioPlay = () => {
     dispatch(setSongState(!isPlaying));
   };
 
-
+  const handleSongEnded = () => {
+    // Bài hát hiện tại đã phát hết, thực hiện chuyển sang bài hát tiếp theo
+    handleNextSong();
+  };
 
   const onSliderChange = (e) => {
     console.log(audioRef.current.currentTime);
@@ -59,10 +62,13 @@ const AudioPlay = () => {
       };
       audio.addEventListener('timeupdate', updateProgress);
       audio.addEventListener('loadedmetadata', setAudioDuration);
+      audio.addEventListener('ended', handleSongEnded);
 
       return () => {
         audio.removeEventListener('timeupdate', updateProgress);
         audio.removeEventListener('loadedmetadata', setAudioDuration);
+        audio.removeEventListener('ended', handleSongEnded);
+
       };
     }
   }, [currentSong, isPlaying]);
@@ -99,9 +105,10 @@ const AudioPlay = () => {
 
 
   const handleClickDetail = () => {
-    navigate(`/song/detail/${currentSong._id}`);
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
     dispatch(setVolumneSong(volume));
+    dispatch(setCurrentSong(currentSong))
+    navigate(`/song/detail/${currentSong._id}`);
     if (audioRef.current.volume === 0) {
       dispatch(setIsVolume(false))
     } else {
