@@ -99,7 +99,6 @@ function TrackAudio({
     audioRef.current.currentTime = currentTimeSong;
     audioRef.current.currentVolume = currentVolume;
   }, [currentTimeSong, currentVolume]);
-  console.log(volume);
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume / 100;
