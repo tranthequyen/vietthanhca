@@ -35,7 +35,7 @@ function Track() {
 
   return (
     <>
-      <div className="flex flex-column">
+      <div className="xl:col-12 hidden xl:flex flex-column ">
         <div className="grid pt-3 justify-content-center">
           <div className=" lg:col-3 flex flex-column align-items-center gap-5 ">
             <div className="flex   gap-4">

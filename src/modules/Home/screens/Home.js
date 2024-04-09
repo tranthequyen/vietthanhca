@@ -1,4 +1,3 @@
-import Cardz from "@/components/Card";
 import Title from "@/components/Title";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -24,6 +23,7 @@ import { useGetParams } from "@/hook/useGetParams";
 import { useListSongHome } from "../utils";
 import { setAllSongs } from "@/redux/allSong";
 import { useFetchAllSongs } from "@/getAPIredux/utils";
+import { Cardz } from "../../../components/Card";
 
 function Home() {
   const dispatch = useDispatch();

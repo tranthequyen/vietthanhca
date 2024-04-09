@@ -2,6 +2,8 @@
   background: none;
   border: none;
   height: 5vh;
+  margin: 0 5vh 0 5vh;
+  padding: 0 2vh 0 2vh;
 }
 .audio_button > span {
   font-size: 3.2vh;
@@ -9,7 +11,7 @@
 .volume_bar {
   position: absolute;
   top: -11.2rem;
-  right: 5vh;
+  right: 6.5vh;
   transform: translateX(2s);
   width: 1.5vh;
   height: 10rem;

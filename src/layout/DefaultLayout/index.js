@@ -7,14 +7,14 @@ import AudioPlay from "./AudioPlay/screens/AudioPlay";
 import { useLocation } from "react-router-dom";
 function DefaultLayout({ children }) {
   const [sidebarOpen, setSideBarOpen] = useState(true);
-  const [isOverlayVisible, setOverlayVisible] = useState(true);
+  const [isOverlayVisible, setOverlayVisible] = useState(sidebarOpen);
   const [show, setShow] = useState(true);
   const [showz, setShowz] = useState(true);
   const location = useLocation();
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
     setShow(!show);
-    setOverlayVisible(!isOverlayVisible);
+    setOverlayVisible(sidebarOpen);
   };
 
   const contentClass = sidebarOpen ? "content open" : "content";
@@ -25,13 +25,10 @@ function DefaultLayout({ children }) {
     }
   }, [location]);
 
-  // console.log(showz);
-
   useEffect(() => {
     if (location.pathname.includes("/song/detail/")) setShowz(true);
     else setShowz(false);
   }, [location.pathname]);
-
   return (
     <>
       {isOverlayVisible ? <></> : <div className="over_lay"></div>}
