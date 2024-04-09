@@ -7,15 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setCurrentSong,
   setCurrentTimeSong,
+  setIsRandom,
+  setIsReplay,
   setIsVolume,
   setSongState,
   setVolumneSong,
 } from "@/redux/currentSong";
-
+import { ButtonAudio, ButtonRandom } from "@/components/ButtonDetail";
 const AudioPlay = () => {
   const currentSong = useSelector((state) => state.currentSong.currentSong);
   const isPlaying = useSelector((state) => state.currentSong.isPlaying);
   const isActive = useSelector((state) => state.currentSong.isActive);
+  const isReplay = useSelector((state) => state.currentSong.isReplay);
   const allSong = useSelector((state) => state.allSong);
   const dispatch = useDispatch();
   const audioRef = useRef(null);
@@ -23,24 +26,35 @@ const AudioPlay = () => {
   const [duration, setDuration] = useState(null);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+  const [volume, setVolume] = useState(50);
+  const [isClicked, setIsClicked] = useState(false);
+  const [volumeSound, setVolumeSound] = useState(true)
+  const [savedVolume, setSavedVolume] = useState(50);
+  const isRandom = useSelector((state) => state.currentSong.isRandom);
 
   const togglePlay = () => {
     dispatch(setSongState(!isPlaying));
   };
+  const handleRandom = () => {
+    let newRandom = !isRandom;
+    dispatch(setIsRandom(newRandom));
+    if (newRandom) {
+      let randomIndex = Math.floor(Math.random() * allSong.length);
+      dispatch(setCurrentSong(allSong[randomIndex]));
+    }
+  };
 
   const handleSongEnded = () => {
-    // Bài hát hiện tại đã phát hết, thực hiện chuyển sang bài hát tiếp theo
-    handleNextSong();
+    if (isReplay) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else if (isRandom) {
+      let randomIndex = Math.floor(Math.random() * allSong.length);
+      dispatch(setCurrentSong(allSong[randomIndex]));
+    } else {
+      handleNextSong();
+    }
   };
-
-  const onSliderChange = (e) => {
-    console.log(audioRef.current.currentTime);
-    const newTime = (e.value / 100) * audioRef.current.duration;
-    audioRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-
   useEffect(() => {
     if (currentSong && isPlaying) {
       audioRef.current.play();
@@ -73,12 +87,37 @@ const AudioPlay = () => {
     }
   }, [currentSong, isPlaying]);
 
-  const handleReplaySong = () => { };
+  const handleReplaySong = () => {
+    let newIsReplay = !isReplay;
+    dispatch(setIsReplay(newIsReplay));
+  };
+  const handleNextSong = () => {
+    let currentIndex = allSong.findIndex(
+      (song) => song._id === currentSong._id
+    );
+    if (currentIndex >= 0 && currentIndex < allSong.length - 1) {
+      dispatch(setCurrentSong(allSong[currentIndex + 1]));
+    } else if (currentIndex === allSong.length - 1) {
+      dispatch(setCurrentSong(allSong[0]));
+    }
+  };
+  const handlePrevSong = () => {
+    let currentIndex = allSong.findIndex(
+      (song) => song._id === currentSong._id
+    );
 
-  const [volume, setVolume] = useState(50);
-  const [isClicked, setIsClicked] = useState(false);
-  const [volumeSound, setVolumeSound] = useState(true)
-  const [savedVolume, setSavedVolume] = useState(50);
+    if (currentIndex > 0) {
+      dispatch(setCurrentSong(allSong[currentIndex - 1]));
+    } else if (currentIndex === 0) {
+      dispatch(setCurrentSong(allSong[allSong.length - 1]));
+    }
+  };
+
+  const onSliderChange = (e) => {
+    const newTime = (e.value / 100) * audioRef.current.duration;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
   const handleClickHeart = () => {
     setIsClicked(!isClicked);
   }
@@ -108,37 +147,15 @@ const AudioPlay = () => {
     dispatch(setCurrentTimeSong(audioRef.current.currentTime));
     dispatch(setVolumneSong(volume));
     dispatch(setCurrentSong(currentSong))
+    dispatch(setIsReplay(isReplay))
     navigate(`/song/detail/${currentSong._id}`);
     if (audioRef.current.volume === 0) {
       dispatch(setIsVolume(false))
     } else {
       dispatch(setIsVolume(true))
     }
-
     audioRef.current?.pause();
-  };
-  const handlePrevSong = () => {
-    let currentIndex = allSong.findIndex(
-      (song) => song._id === currentSong._id
-    );
-
-    if (currentIndex > 0) {
-      dispatch(setCurrentSong(allSong[currentIndex - 1]));
-    } else if (currentIndex === 0) {
-      dispatch(setCurrentSong(allSong[allSong.length - 1]));
-    }
-  };
-  const handleNextSong = () => {
-    let currentIndex = allSong.findIndex(
-      (song) => song._id === currentSong._id
-    );
-
-    if (currentIndex >= 0 && currentIndex < allSong.length - 1) {
-      dispatch(setCurrentSong(allSong[currentIndex + 1]));
-    } else if (currentIndex === allSong.length - 1) {
-      dispatch(setCurrentSong(allSong[0]));
-    }
-  };
+  }
   const formatTime = (seconds) => {
     seconds = Math.round(seconds);
     const minutes = Math.floor(seconds / 60);
@@ -210,21 +227,15 @@ const AudioPlay = () => {
                                                 onClick={handleClickHeart}
                                                 rounded
                                           /> */}
-                <Button
-                  rounded
-                  style={{ background: "#03CE58", border: "none" }}
+                <ButtonAudio
                   icon="pi pi-step-backward-alt"
                   onClick={handlePrevSong}
                 />
-                <Button
-                  rounded
-                  style={{ background: "#03CE58", border: "none" }}
+                <ButtonAudio
                   icon={isPlaying ? "pi pi-pause" : "pi pi-play"}
                   onClick={togglePlay}
                 />
-                <Button
-                  rounded
-                  style={{ background: "#03CE58", border: "none" }}
+                <ButtonAudio
                   icon="pi pi-step-forward-alt"
                   onClick={handleNextSong}
                 />
@@ -239,18 +250,16 @@ const AudioPlay = () => {
                 <Slider style={{ width: '80%' }}
                   value={progress}
                   onChange={onSliderChange}
-                // onSlideEnd={() => dispatch(setSongState(!isPlaying))}
                 />
-                {/* <input type="range" className="seekBar" onChange={onSliderChange} value={progress} style={{ width: "80%" }} /> */}
+
                 <div> {formatTime(audioRef?.current?.duration)}</div>
               </div>
               <div
                 className="flex align-items-center gap-3"
                 style={{ width: "30%" }}
               >
-                <Button
+                <ButtonAudio
                   rounded
-                  style={{ background: "#03CE58", border: "none" }}
                   icon={volumeSound ? "pi  pi-volume-up" : "pi pi-volume-off"}
                   onClick={handleClickVolume}
                 />
@@ -262,25 +271,21 @@ const AudioPlay = () => {
               </div>
             </div>
             <div className="xl:col-2 hidden xl:flex gap-3 justify-content-center">
-              <Button
-                rounded
-                style={{ background: "#03CE58", border: "none" }}
-                icon="pi pi-question-circle"
+              <ButtonRandom
+                className={isRandom ? "border-3 border-white active_replay" : 'border-none'}
+                onClick={handleRandom}
               />
               <Button
-                rounded
-                style={{ background: "#03CE58", border: "none" }}
-                icon="pi pi-sync"
+                className={isReplay ? "border-3 border-white active_replay" : 'border-none'}
+                icon={!isReplay ? "pi pi-sync" : "pi pi-sync pi-spin"}
                 onClick={handleReplaySong}
-              />
-              <Button
+                style={{ background: "#03CE58" }}
                 rounded
-                style={{ background: "#03CE58", border: "none" }}
+              />
+              <ButtonAudio
                 icon="pi pi-list"
               />
-              <Button
-                rounded
-                style={{ background: "#03CE58", border: "none" }}
+              <ButtonAudio
                 icon="pi pi-info-circle"
                 onClick={handleClickDetail}
               />

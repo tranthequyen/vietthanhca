@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import { Slider } from "primereact/slider";
 import { useDispatch, useSelector } from "react-redux";
-import currentSong, { setCurrentSong, setIsVolume, setSongState } from "@/redux/currentSong";
+import currentSong, { setCurrentSong, setIsReplay, setIsVolume, setSongState } from "@/redux/currentSong";
 import { useNavigate } from 'react-router-dom';
 import { useGetParams } from "@/hook/useGetParams";
 import { useLocation } from 'react-router-dom';
@@ -20,6 +20,7 @@ function TrackAudio({ handleSpin, data, currentTimeSong, volumeSong, indexSong, 
   const [volume, setVolume] = useState(volumeSong ? volumeSong : 50)
   const [savedVolume, setSavedVolume] = useState()
   const currentSong = useSelector((state) => state.currentSong.currentSong);
+  const isReplay = useSelector((state) => state.currentSong.isReplay);
 
   const toggleAudio = () => {
     let newIsPlaying = isPlaying;
@@ -32,8 +33,12 @@ function TrackAudio({ handleSpin, data, currentTimeSong, volumeSong, indexSong, 
   }, [data])
 
   const handleSongEnded = () => {
-    // Bài hát hiện tại đã phát hết, thực hiện chuyển sang bài hát tiếp theo
-    handleNextSong();
+    if (isReplay) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play();
+    } else {
+      handleNextSong();
+    }
   };
   useEffect(() => {
 
@@ -145,6 +150,10 @@ function TrackAudio({ handleSpin, data, currentTimeSong, volumeSong, indexSong, 
       dispatch(setCurrentSong(allSong[allSong.length - 1]));
     }
   };
+  const handleReplaySong = () => {
+    let newIsReplay = !isReplay;
+    dispatch(setIsReplay(newIsReplay));
+  }
   return (
     <div className=" col-12 flex flex-column" style={{ margin: "0 auto" }}>
       <h3 className="text-center text-xl pb-2">
@@ -184,10 +193,11 @@ function TrackAudio({ handleSpin, data, currentTimeSong, volumeSong, indexSong, 
           onClick={handleNextSong}
         />
 
-        <Button className="audio_button" onClick={handleClickAudio}>
-          <span className="pi pi pi-sync"></span>
-        </Button>
-        <Button className="audio_button" onClick={handleClickVolume} icon={isVolume != null ? (isVolume ? "pi pi-volume-up" : "pi pi-volume-off") : (isVolumeV2 ? "pi pi-volume-up" : "pi pi-volume-off")} />
+        <Button className={`audio_button ${isReplay ? 'is-replay' : ''}`} icon={!isReplay ? "pi pi-sync" : "pi pi-sync pi-spin"}
+
+          onClick={handleReplaySong} />
+
+        <Button className='audio_button' onClick={handleClickVolume} icon={isVolume != null ? (isVolume ? "pi pi-volume-up" : "pi pi-volume-off") : (isVolumeV2 ? "pi pi-volume-up" : "pi pi-volume-off")} />
         <Slider
           value={volume}
           style={{

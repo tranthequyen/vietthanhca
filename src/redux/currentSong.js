@@ -10,7 +10,10 @@ const songSlice = createSlice({
             listMySong: [],
             currentIndexSong: null,
             volume: null,
-            isVolume: null
+            isVolume: null,
+            isReplay: false,
+            isRandom: false
+
       },
       reducers: {
             setCurrentSong: (state, action) => {
@@ -37,11 +40,17 @@ const songSlice = createSlice({
             setIsVolume: (state, action) => {
                   state.isVolume = action.payload;
             },
+            setIsReplay: (state, action) => {
+                  state.isReplay = action.payload;
+            },
+            setIsRandom: (state, action) => {
+                  state.isRandom = action.payload;
+            },
 
 
       },
 });
 
-export const { setCurrentSong, setSongState, setSongActive, setCurrentTimeSong, setListMySong, setCurrentIndexSong, setVolumneSong, setIsVolume } = songSlice.actions;
+export const { setCurrentSong, setSongState, setSongActive, setCurrentTimeSong, setListMySong, setCurrentIndexSong, setVolumneSong, setIsVolume, setIsReplay, setIsRandom } = songSlice.actions;
 
 export default songSlice.reducer;

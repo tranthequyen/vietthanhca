@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import currentSong, {
   setCurrentIndexSong,
   setCurrentSong,
+  setIsRandom,
   setListMySong,
   setSongActive,
   setSongState,
