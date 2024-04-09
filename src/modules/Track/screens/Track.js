@@ -98,6 +98,8 @@ function Track() {
           spin={spin}
           currentTimeSong={currentTimeSong}
           volumeSong={volumeSong}
+          indexSong={indexSong}
+          allSong={allSong}
         />
       </div>
       {showMore ? (

@@ -8,13 +8,14 @@ const songSlice = createSlice({
     isActive: true,
     currentTimeSong: null,
     listMySong: [],
-    currentIndexSong: 0,
+    currentIndexSong: null,
     volume: null,
     isVolume: null,
+    isReplay: false,
+    isRandom: false,
   },
   reducers: {
     setCurrentSong: (state, action) => {
-      console.log("set song");
       state.currentSong = action.payload;
     },
     setSongState: (state, action) => {
@@ -38,6 +39,12 @@ const songSlice = createSlice({
     setIsVolume: (state, action) => {
       state.isVolume = action.payload;
     },
+    setIsReplay: (state, action) => {
+      state.isReplay = action.payload;
+    },
+    setIsRandom: (state, action) => {
+      state.isRandom = action.payload;
+    },
   },
 });
 
@@ -50,6 +57,8 @@ export const {
   setCurrentIndexSong,
   setVolumneSong,
   setIsVolume,
+  setIsReplay,
+  setIsRandom,
 } = songSlice.actions;
 
 export default songSlice.reducer;
