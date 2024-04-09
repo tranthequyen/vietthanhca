@@ -171,8 +171,6 @@ a {
 
 .p-button {
   color: #ffffff;
-
-
 }
 .p-datatable .p-datatable-thead > tr > th {
   background-color: transparent;
@@ -180,7 +178,7 @@ a {
 }
 
 .p-datatable .p-datatable-thead > tr:first-child > th {
-  border-bottom: 1px solid #ffffff; 
+  border-bottom: 1px solid #ffffff;
 }
 
 .p-datatable .p-datatable-thead > tr:not(:first-child) > th {
@@ -189,6 +187,35 @@ a {
 .p-datatable .p-datatable-tbody > tr > td {
   padding: 0.5rem 0.5rem;
 }
-.bg-default{
+.bg-default {
   background-color: #03ce58;
+}
+.p-menu .p-menuitem-link .p-menuitem-text {
+  color: white;
+  font-weight: 500;
+  margin-left: 0.5vh;
+}
+.p-menu .p-menuitem-link .p-menuitem-icon {
+  color: white;
+  margin-right: 0.5rem;
+}
+.p-menu .p-menuitem-link:hover {
+  background-color: #086b32;
+}
+.p-tabview .p-tabview-panels {
+  background-color: transparent !important;
+}
+.p-tabview .p-tabview-nav {
+  background: none;
+  border: none;
+}
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background: none;
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  color: white;
+  border-color: white;
+}
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  background-color: white;
 }

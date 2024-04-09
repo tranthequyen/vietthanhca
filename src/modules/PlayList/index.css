@@ -1,0 +1,22 @@
+.banner_auth {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  margin: 10px;
+  font-weight: 500;
+  color: white;
+  font-size: 2vh;
+  color: white;
+}
+.banner_name {
+  position: absolute;
+  left: 1.5vh;
+  margin: 1vh;
+  color: white;
+}
+.banner_button {
+  position: absolute;
+  /* bottom: 2.5vh;
+  left: 1.5vh; */
+  margin: 1vh;
+}
