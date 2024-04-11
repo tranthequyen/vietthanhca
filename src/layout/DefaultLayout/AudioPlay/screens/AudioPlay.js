@@ -5,17 +5,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Slider } from 'primereact/slider';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentSong, setCurrentTimeSong, setSongState } from '@/redux/currentSong';
+import { setReplayState } from '@/redux/replayState';
 
 const AudioPlay = () => {
       const currentSong = useSelector((state) => state.currentSong.currentSong);
       const isPlaying = useSelector((state) => state.currentSong.isPlaying);
       const isActive = useSelector((state) => state.currentSong.isActive);
+      const replayState = useSelector((state) => state.replay);
       const allSong = useSelector((state) => state.allSong);
       const dispatch = useDispatch()
       const audioRef = useRef(null);
       const [currentTime, setCurrentTime] = useState(0);
       const [duration, setDuration] = useState(null);
       const navigate = useNavigate()
+
+      console.log(replayState);
+
+
       const togglePlay = () => {
             dispatch(setSongState(!isPlaying));
       }
@@ -48,12 +54,11 @@ const AudioPlay = () => {
       useEffect(() => {
             if (currentSong && isPlaying) {
                   audioRef.current.play();
+                  audioRef.current.currentTime = 285
                   setDuration(audioRef?.current?.duration);
                   // dispatch(setSongState(!newIsActive));
                   // let newIsActive = isActive;
                   // console.log(isPlaying);
-
-
             } else {
                   audioRef.current?.pause();
                   let newIsActive = !isActive;
@@ -66,10 +71,15 @@ const AudioPlay = () => {
                   }, 1000);
                   return () => clearInterval(interval);
             }
+            if (replayState && audioRef.current.currentTime <= audioRef.current.duration) {
+                  console.log(1);
+                  setCurrentTime(0)
+            }
       }, [currentSong, isPlaying]);
 
-      const handleReplaySong = () => {
 
+      const handleReplaySong = () => {
+            if (isPlaying) dispatch(setReplayState(!replayState))
       };
 
 
