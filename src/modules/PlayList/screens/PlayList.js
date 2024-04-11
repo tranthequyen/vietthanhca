@@ -25,7 +25,6 @@ function PlayList() {
                 icon="pi-angle-double-right"
                 subTitle="Xem thêm"
               />
-
               <div className="grid ">
                 {test.slice(0, 6).map((d) => (
                   <div className="col-6 md:col-4 lg:col-2 p-3 p-3">
@@ -42,7 +41,6 @@ function PlayList() {
                 icon="pi-angle-double-right"
                 subTitle="Xem thêm"
               />
-
               <div className="grid ">
                 {test.slice(0, 6).map((d) => (
                   <div className="col-6 md:col-4 lg:col-2 p-3 p-3 ">

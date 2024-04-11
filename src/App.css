@@ -219,3 +219,27 @@ a {
 .p-tabview .p-tabview-nav .p-tabview-ink-bar {
   background-color: white;
 }
+.bg-default {
+  background-color: #03ce58;
+}
+.is-replay {
+  border: 3px solid #03ce58;
+}
+.button-random {
+  color: #ffffff;
+  background: #06b6d4;
+  border: 1px solid #06b6d4;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+}
+.button-random:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #a5f3fc;
+}
+.button-random:hover {
+  cursor: pointer;
+}
