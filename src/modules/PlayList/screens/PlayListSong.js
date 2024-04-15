@@ -13,7 +13,8 @@ import DataTablez, { Columnz } from "@/components/Datatablez";
 import { Link } from "react-router-dom";
 import Title from "@/components/Title";
 
-export const PlayListSong = () => {
+export const PlayListSong = (props) => {
+  const { handleAdd } = props;
   const dispatch = useDispatch();
   const initParam = useGetParams();
   const [params, setParams] = useState(initParam);
@@ -36,6 +37,8 @@ export const PlayListSong = () => {
             title="PLAYLIST"
             icon="pi-angle-double-right"
             subTitle="Xem thêm"
+            headicon="pi pi-plus-circle"
+            addFunction={handleAdd}
           />
           <div
             className="hidden lg:block p-4"

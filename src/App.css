@@ -243,3 +243,25 @@ a {
 .button-random:hover {
   cursor: pointer;
 }
+.custom-dialog .p-dialog-content {
+  background-color: #313131 !important;
+}
+.custom-dialog .p-dialog-header {
+  color: white;
+  background-color: #313131 !important;
+  padding: 2rem;
+}
+.custom-dialog .p-dialog-header .p-dialog-title {
+  font-size: 3vh;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: #f8d900;
+  background: #f8d900;
+}
+.p-radiobutton .p-radiobutton-box {
+  border: 2px solid #f8d900;
+  background: transparent;
+}
