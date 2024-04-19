@@ -1,18 +1,16 @@
-body{
-  background-image: linear-gradient(45deg, #000000 90%,#029D43 100%, #08FF6F 100%);
+body {
+  background-image: linear-gradient(45deg, #000000 90%, #000000 100%);
   /* background-color: #000000; */
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0px !important;
-  padding-bottom: 6rem;
 }
-ul{
+ul {
   list-style: none;
 }
 .p-checkbox .p-checkbox-box.p-highlight {
   background-color: #cfd0d1;
   border-color: #475569;
 }
-
 
 .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
   border-color: #475569;
@@ -21,20 +19,19 @@ ul{
   border-radius: 10px;
   padding: 0rem !important;
 }
-.p-card-body{
+.p-card-body {
   padding: 10px !important;
 }
-.element{
+.element {
   padding: 10px;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 .p-card-header img {
-  height: 250px !important;
+  aspect-ratio: 0.8 !important ;
   border-radius: 8px 8px 0 0 !important;
 }
 .grid {
-
-
   margin: 0 !important;
 }
 /* .p-button {
@@ -42,50 +39,52 @@ ul{
   border: none;
 } */
 
-
 .trend_regular {
   background-color: rgba(10, 144, 66, 0.14);
   box-shadow: inset 0 0 30px rgba(40, 245, 111, 1),
-              inset 0 0 12px rgba(48, 242, 116, 0.3),
-              inset 0 0 16px rgba(48, 242, 116, 0.1);
+    inset 0 0 12px rgba(48, 242, 116, 0.3),
+    inset 0 0 16px rgba(48, 242, 116, 0.1);
 }
-.p-card-title{
-    font-size: 1.2rem;
+.p-card-title {
+  font-size: 1.2rem;
 }
-.p-card-subtitle{
+.p-card-subtitle {
   font-size: 1rem;
 }
-.partner{
-  background: linear-gradient(to right, rgba(243, 243, 243, 0.3) 45%, rgba(215, 215, 215, 0.3) 55%);
-}
 
-.footer{
-  background-color: #0C4223;
+.footer {
+  background-image: linear-gradient(
+    90deg,
+    #0f3921 3%,
+    #0f321e 10%,
+    #000000 30%,
+    #0f321e 97%,
+    #0e341f 100%
+  );
 }
-a{
+a {
   text-decoration: none !important;
 }
 
 .p-slider .p-slider-range {
-  background-color: #03CE58 !important; 
-
+  background-color: #03ce58 !important;
 }
 .p-carousel-indicators {
-display: none !important;
+  display: none !important;
 }
 .p-slider:not(.p-disabled) .p-slider-handle:hover {
-  background-color: #03CE58 !important; 
+  background-color: #03ce58 !important;
 
-  border-color: #03CE58 !important;
+  border-color: #03ce58 !important;
 }
 .p-slider:not(.p-disabled) .p-slider-handle {
-  background-color: #03CE58 !important; 
+  background-color: #03ce58 !important;
 
-  border-color: #03CE58 !important;
+  border-color: #03ce58 !important;
 }
 .p-button.p-button-outlined {
   background-color: transparent;
-  color: #03CE58;
+  color: #03ce58;
   border: 1px solid;
 }
 .w-30rem {
@@ -95,7 +94,6 @@ display: none !important;
   background-color: #ffffff;
 }
 .p-toast .p-toast-message-warn {
-
   background-color: #ffffff;
 }
 .p-toast .p-toast-message-error {
@@ -107,34 +105,41 @@ display: none !important;
 .p-toast .p-toast-message {
   opacity: 1 !important;
 }
-.bg-ads::before ,.bg-ads::after {
-  content: '';
+.bg-ads::before,
+.bg-ads::after {
+  content: "";
   position: absolute;
-  background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
+  background-image: linear-gradient(
+    180deg,
+    rgba(2, 157, 67, 1) 0%,
+    rgba(255, 199, 0, 1) 100%
+  );
   border-radius: 50%;
   z-index: -1;
-  box-shadow:
-  rgb(13, 133, 7) 50px 22px 150px 130px;
+  box-shadow: rgb(13, 133, 7) 50px 22px 150px 130px;
   top: 300px;
   left: 120px;
 }
 .bg-adsv2 {
-  content: '';
+  height: 100px;
+  width: 100px;
+  content: "";
   position: absolute;
-top: 350px;
+  top: 350px;
   left: 70%;
-  background-image: linear-gradient(180deg, rgba(2, 157, 67, 1) 0%, rgba(255, 199, 0, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 157, 67, 1) 0%,
+    rgba(255, 199, 0, 1) 100%
+  );
   border-radius: 50%;
   z-index: -1;
-  box-shadow:
-  rgb(155, 209, 30) 50px 22px 130px 150px;
-
+  box-shadow: rgb(155, 209, 30) 50px 22px 130px 150px;
 }
 .p-datatable .p-datatable-tbody > tr:hover {
   background-color: #323232 !important;
   cursor: pointer;
 }
-
 
 .p-datatable .p-column-header-content {
   display: flex;
@@ -142,19 +147,19 @@ top: 350px;
   justify-content: space-evenly;
 }
 .p-datatable-tbody tr {
-  background: #000000 !important;
+  background: transparent !important;
 }
+
 .p-datatable .p-datatable-tbody > tr {
-  background: gray
+  background: gray;
 }
 @media screen and (min-width: 1400px) {
-  .is_mobile{
+  .is_mobile {
     display: none;
   }
-
 }
 @media screen and (max-width: 1400px) {
-  .is_pc{
+  .is_pc {
     display: none;
   }
 }
@@ -164,35 +169,56 @@ top: 350px;
   padding: 1.5rem;
   width: 25%;
 }
-.album{
-  background: linear-gradient(#077436 0%, #2EFA82 50%, #077436 100%);
-border-radius: 30px;
+.album {
+  background: linear-gradient(
+    #07622d 0%,
+    #2efa82 50%,
+    #077436 85%,
+    #086b32 100%
+  );
+  border-radius: 30px;
 }
 
-.bgr_playlist{
-  background-image: url('https://hinhconggiao.com/images/hinh-bua-tiec-ly/BTL-08.jpg') ;
-  background-size: auto;
-}
 .p-button {
   color: #ffffff;
 
-  /* border: none !important; */
- 
+
 }
 .p-datatable .p-datatable-thead > tr > th {
-  background-color: #000000;
+  background-color: transparent;
   color: #ffffff;
 }
-/* Hiển thị đường kẻ ở hàng header đầu tiên */
+
 .p-datatable .p-datatable-thead > tr:first-child > th {
-  border-bottom: 1px solid #ffffff; /* Thay đổi màu sắc nếu cần */
+  border-bottom: 1px solid #ffffff; 
 }
 
-/* Ẩn đường kẻ ở các hàng header sau */
 .p-datatable .p-datatable-thead > tr:not(:first-child) > th {
   border: none !important;
 }
 .p-datatable .p-datatable-tbody > tr > td {
- 
   padding: 0.5rem 0.5rem;
+}
+.bg-default{
+  background-color: #03ce58;
+}
+.is-replay{
+  border: 3px solid #03ce58;
+}
+.button-random{
+    color: #ffffff;
+    background: #06b6d4;
+    border: 1px solid #06b6d4;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+.button-random:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #a5f3fc;
+}
+.button-random:hover{
+  cursor: pointer;
 }

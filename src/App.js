@@ -50,7 +50,7 @@ function App() {
             <Toast ref={toast} />
 
             <Router>
-                {/* <AudioPlay /> */}
+
 
                 <Routes>
                     {[...publicRoutes, ...privateRoutes].map((route, index) => {
@@ -61,16 +61,14 @@ function App() {
                             path={route.path}
                             element={
                                 <>
-                                    <div className="is_pc">
-                                        <Layout status={true}>
-                                            <Page />
-                                        </Layout>
-                                    </div>
-                                    <div className="is_mobile">
+                                    <Layout >
+                                        <Page />
+                                    </Layout>
+                                    {/* <div className="is_mobile">
                                         <Layout status={false}>
                                             <Page />
                                         </Layout>
-                                    </div>
+                                    </div> */}
                                 </>
 
                             }
