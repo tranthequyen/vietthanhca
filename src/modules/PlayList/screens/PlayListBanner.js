@@ -3,11 +3,49 @@ import banner from "../../../Image Thanh Ca/z5196743261082_ccacac8a5c8693cb8abe9
 import { OptionPlayList } from "../../../components/Menu";
 import { useState } from "react";
 import "../index.css";
+import { listCreateType, listQuality } from "../../../constants/main";
+import { Dialogz } from "../../../components/Dialog";
 
 export const PlayListBanner = () => {
   const [openOption, setOpenOption] = useState(false);
   const handleOption = () => {
     setOpenOption(!openOption);
+  };
+  const [showAddPlaylist, setShowAddPlaylist] = useState(false);
+  const handleAdd = () => {
+    setShowAddPlaylist(true);
+    setOpenOption(!openOption);
+  };
+  const [showChangePlaylist, setShowChangePlaylist] = useState(false);
+  const handleAddChange = () => {
+    setShowChangePlaylist(true);
+    setOpenOption(!openOption);
+  };
+  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedQuality, setSelectedQuality] = useState(
+    listQuality[0].quality
+  );
+
+  const handleRadioButtonChange = (index) => {
+    setSelectedItem(index);
+    setSelectedQuality(listQuality[index].quality);
+  };
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleSwitchButtonChange = (index) => {
+    if (selectedItems.includes(index)) {
+      if (selectedItems.length == 2) {
+        if (index == 1) {
+          setSelectedItems([0]);
+        } else {
+          setSelectedItems([1]);
+        }
+      } else {
+        setSelectedItems([]);
+      }
+    } else {
+      setSelectedItems([...selectedItems, index]);
+    }
   };
   return (
     <>
@@ -90,8 +128,35 @@ export const PlayListBanner = () => {
               onClick={handleOption}
             ></span>
           </div>
-          {openOption && <OptionPlayList handleOption={handleOption} />}
+          {openOption && (
+            <OptionPlayList
+              handleOption={handleOption}
+              handleAdd={handleAdd}
+              handleAddChange={handleAddChange}
+            />
+          )}
         </div>
+        <Dialogz
+          header="Chất lượng tải"
+          show={showAddPlaylist}
+          setShow={setShowAddPlaylist}
+          item={listQuality}
+          selectedItem={selectedItem}
+          selectedQuality={selectedQuality}
+          handleRadioButtonChange={handleRadioButtonChange}
+          isquality={true}
+        />
+        <Dialogz
+          header="Chỉnh sửa playlist"
+          show={showChangePlaylist}
+          setShow={setShowChangePlaylist}
+          item={listCreateType}
+          selectedItem={selectedItems}
+          handleRadioButtonChange={handleSwitchButtonChange}
+          multiple={true}
+          buttonlabel="XÁC NHẬN"
+          input={true}
+        />
       </div>
     </>
   );

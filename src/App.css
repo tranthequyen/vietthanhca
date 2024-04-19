@@ -265,3 +265,6 @@ a {
   border: 2px solid #f8d900;
   background: transparent;
 }
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background-color: #f8d900;
+}

@@ -24,6 +24,16 @@ export const listQuality = [
     quality: 27.05,
   },
 ];
+export const listCreateType = [
+  {
+    name: "Công khai",
+    subname: "Mọi người có thể thấy playlist của bạn",
+  },
+  {
+    name: "Phát ngẫu nhiên",
+    subname: "Luôn phát ngẫu nhiên các bài hát",
+  },
+];
 export const PlaylistOptions = [
   {
     label: "Thêm vào danh sách phát",

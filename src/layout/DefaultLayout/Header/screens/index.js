@@ -100,6 +100,7 @@ const Header = (props) => {
                 <Menu
                   model={items}
                   popup
+                  style={{ backgroundColor: "grey" }}
                   ref={menuRight}
                   id="popup_menu_right"
                   popupAlignment="right"

@@ -1,21 +1,36 @@
 import Title from "@/components/Title";
 import React, { useEffect, useState } from "react";
 import { test } from "@/axios/test";
-import { Link } from "react-router-dom";
-import banner from "../../../Image Thanh Ca/z5196743261082_ccacac8a5c8693cb8abe95b58acf28b3.jpg";
 import anh from "../../../Image Thanh Ca/420035607_733817608699894_3506576374518450027_n.png";
 import { Cards, Cardz } from "@/components/Card";
 import { PlayListBanner } from "./PlayListBanner";
 import { TabPanel, TabView } from "primereact/tabview";
 import { PlayListSong } from "./PlayListSong";
-import { Dialog } from "primereact/dialog";
-import { Dialogz } from "@/components/Dialog";
 import { listQuality } from "@/constants/main";
+import { Dialogz } from "../../../components/Dialog";
+import { listCreateType } from "../../../constants/main";
 
 function PlayList() {
   const [showAddPlaylist, setShowAddPlaylist] = useState(false);
   const handleAdd = () => {
     setShowAddPlaylist(true);
+  };
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleRadioButtonChange = (index) => {
+    if (selectedItems.includes(index)) {
+      if (selectedItems.length == 2) {
+        if (index == 1) {
+          setSelectedItems([0]);
+        } else {
+          setSelectedItems([1]);
+        }
+      } else {
+        setSelectedItems([]);
+      }
+    } else {
+      setSelectedItems([...selectedItems, index]);
+    }
   };
   return (
     <>
@@ -53,15 +68,20 @@ function PlayList() {
               </div>
             </div>
           </div>
-          <Dialogz
-            header="Chất lượng tải"
-            show={showAddPlaylist}
-            setShow={setShowAddPlaylist}
-            item={listQuality}
-          ></Dialogz>
         </TabPanel>
         <TabPanel header="YÊU THÍCH"></TabPanel>
       </TabView>
+      <Dialogz
+        header="Tạo playlist mới"
+        show={showAddPlaylist}
+        setShow={setShowAddPlaylist}
+        item={listCreateType}
+        selectedItem={selectedItems}
+        handleRadioButtonChange={handleRadioButtonChange}
+        multiple={true}
+        buttonlabel="TẠO MỚI"
+        input={true}
+      />
     </>
   );
 }
